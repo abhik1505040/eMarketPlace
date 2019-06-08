@@ -1,4 +1,4 @@
-<header class="app-header"><a target="_blank" class="app-header__logo" href="{{route('admin.login')}}">{{$gs->website_title}}</a>
+<header class="app-header"><a target="_blank" class="app-header__logo" href="{{route('admin.loginForm')}}">{{$gs->website_title}}</a>
                                                                             {{-- have to change this link to the website homepage --}}
   <!-- Sidebar toggle button--><a style="padding-top: 14px;" class="app-sidebar__toggle fas fa-bars" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
   <!-- Navbar Right Menu-->

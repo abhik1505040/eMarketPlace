@@ -2,9 +2,9 @@
 <aside class="app-sidebar">
 
   <ul class="app-menu">
-    {{-- <li><a class="app-menu__item @if(request()->path() == 'admin/dashboard') active @endif" href="{{route('admin.dashboard')}}"><i class="app-menu__icon fas fa-tachometer-alt"></i><span class="app-menu__label">Dashboard</span></a></li>
+    <li><a class="app-menu__item @if(request()->path() == 'admin/dashboard') active @endif" href="{{route('admin.dashboard')}}"><i class="app-menu__icon fas fa-tachometer-alt"></i><span class="app-menu__label">Dashboard</span></a></li>
 
-    <li class="treeview
+    {{-- <li class="treeview
     @if(request()->path() == 'admin/generalSetting')
       is-expanded
     @elseif (request()->path() == 'admin/EmailSetting')
