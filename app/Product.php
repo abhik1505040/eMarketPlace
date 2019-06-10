@@ -9,39 +9,41 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public function vendor() {
-      return $this->belongsTo('App\Vendor');
-    }
+     /* Not yet complete..relation gula deya hoise sudhu. */
 
-    public function previewimages() {
-      return $this->hasMany('App\PreviewImage');
-    }
+    // public function vendor() {
+    //   return $this->belongsTo('App\Vendor');
+    // }
 
-    public function carts() {
-      return $this->hasMany('App\Cart');
-    }
+    // public function previewimages() {
+    //   return $this->hasMany('App\PreviewImage');
+    // }
 
-    public function category() {
-      return $this->belongsTo('App\Category');
-    }
+    // public function carts() {
+    //   return $this->hasMany('App\Cart');
+    // }
 
-    public function subcategory() {
-      return $this->belongsTo('App\Subcategory');
-    }
+    // public function category() {
+    //   return $this->belongsTo('App\Category');
+    // }
 
-    public function orderedproducts() {
-      return $this->hasMany('App\Orderedproduct');
-    }
+    // public function subcategory() {
+    //   return $this->belongsTo('App\Subcategory');
+    // }
 
-    public function productreviews() {
-      return $this->hasMany('App\ProductReview');
-    }
+    // public function orderedproducts() {
+    //   return $this->hasMany('App\Orderedproduct');
+    // }
 
-    public function users() {
-        return $this->belongsToMany('App\User', 'favorits');
-    }
+    // public function productreviews() {
+    //   return $this->hasMany('App\ProductReview');
+    // }
 
-    public function flashinterval() {
-      return $this->belongsTo('App\FlashInterval');
-    }
+    // public function users() {
+    //     return $this->belongsToMany('App\User', 'favorits');
+    // }
+
+    // public function flashinterval() {
+    //   return $this->belongsTo('App\FlashInterval');
+    // }
 }

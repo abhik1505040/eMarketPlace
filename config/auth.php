@@ -56,10 +56,10 @@ return [
         //     'provider' => 'admins',
         // ],
 
-        // 'vendor' => [
-        //     'driver' => 'session',
-        //     'provider' => 'vendors',
-        // ],
+        'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ],
 
         // 'vendor-api' => [
         //     'driver' => 'token',
@@ -95,10 +95,10 @@ return [
             'model' => App\Admin::class,
         ],
 
-        // 'vendors' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Vendor::class,
-        // ],
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => App\Vendor::class,
+        ],
     ],
 
     /*

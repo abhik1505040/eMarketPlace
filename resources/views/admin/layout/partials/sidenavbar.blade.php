@@ -33,7 +33,7 @@
 
     <li><a class="app-menu__item @if(request()->path() == 'admin/packages') active @endif" href="{{route('admin.package')}}"><i class="app-menu__icon fa fa-gift"></i><span class="app-menu__label">Packages</span></a></li> --}}
 
-{{--
+
       <li class="treeview
       @if(request()->path() == 'admin/vendors/all')
         is-expanded
@@ -51,7 +51,7 @@
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/accepted') active @endif" href="{{route('admin.vendors.accepted')}}"><i class="icon far fa-circle"></i> Accepted</a></li>
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/rejected') active @endif" href="{{route('admin.vendors.rejected')}}"><i class="icon far fa-circle"></i> Rejected</a></li>
         </ul>
-      </li> --}}
+      </li>
 
       {{-- <li class="treeview
       @if(request()->path() == 'admin/flashsale/times')
