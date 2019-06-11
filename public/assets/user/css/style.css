@@ -807,7 +807,7 @@ input:checked + .slider:before {
 /*-------------------------
     Preloader Css
 ---------------------------*/
-.preloader-inner {
+/* .preloader-inner {
   position: fixed;
   left: 0;
   top: 0;
@@ -959,7 +959,7 @@ input:checked + .slider:before {
   0%, 39%, 100% {
     opacity: 0; }
   40% {
-    opacity: 1; } }
+    opacity: 1; } } */
 
 /*====================
 ** Normalize
@@ -7315,7 +7315,7 @@ ul.home-subcategories li:last-child {
 }
 .single-new-collection-item .thumb .hover {
     border-top-left-radius: 10px;
-    border-top-right-radius: 10px;  
+    border-top-right-radius: 10px;
 }
 .thumb img {
     border-top-left-radius: 10px;

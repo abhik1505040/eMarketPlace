@@ -24,7 +24,7 @@ class ForgotPasswordController extends Controller
           $vendor = Vendor::where('email', $request->resetEmail)->where('approved', 1)->first();
           if ($vendor == null)
           {
-              return back()->with('email_not_available', 'Email Not Available');
+              return back()->with('email_not_available', 'No vendor account by this email.');
           }
           else
           {

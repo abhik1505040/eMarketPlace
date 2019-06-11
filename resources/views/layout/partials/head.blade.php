@@ -5,7 +5,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title> {{$gs->website_title}} | @yield('title') </title>
 <!-- favicon -->
-<link rel="shortcut icon" href="{{asset('assets/user/interfaceControl/logoIcon/icon.jpg')}}" type="image/x-icon">
+{{-- <link rel="shortcut icon" href="{{asset('assets/user/interfaceControl/logoIcon/icon.jpg')}}" type="image/x-icon"> --}}
 <!-- bootstrap -->
 <link rel="stylesheet" href="{{asset('assets/user/css/bootstrap.min.css')}}">
 <!-- icofont -->
