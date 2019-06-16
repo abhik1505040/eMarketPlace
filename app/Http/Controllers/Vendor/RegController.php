@@ -40,6 +40,6 @@ class RegController extends Controller
 
         $vendor->save();
 
-        return back()->with('message', 'Your informations will be reviewed by Admin. We will let you know about the update (after review) through Phone\Email once it\'s been checked!');
+        return back()->with('message', 'You will receive a mail after validation.');
     }
 }
