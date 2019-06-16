@@ -1,15 +1,14 @@
-@extends('layout.master')
+@extends('layout.profilemaster')
 
-@section('title', 'Change Password')
+@section('title', 'Change Passowrd')
 
 @section('headertxt', 'Change Password')
-
 
 @section('content')
 
   <!-- product upload area start -->
-  <div class="product-upload-area">
-      <div class="container">
+  {{-- <div class="product-upload-area"> --}}
+      {{-- <div class="container"> --}}
           <div class="row">
               <div class="col-lg-6 offset-lg-3">
                 <div class="card">
@@ -18,7 +17,7 @@
                   </div>
                   <div class="card-body">
                     <div class="product-upload-inner"><!-- product upload inner -->
-                        <form class="product-upload-form" method="post" action="{{route('vendor.updatePassword')}}">
+                        <form class="product-upload-form" method="post" action="{{route('user.updatePassword')}}">
                             {{csrf_field()}}
 
                             <div class="row">
@@ -74,8 +73,8 @@
 
               </div>
           </div>
-      </div>
-  </div>
+      {{-- </div> --}}
+  {{-- </div> --}}
   <!-- product upload area end -->
 
 

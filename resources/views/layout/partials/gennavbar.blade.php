@@ -89,11 +89,11 @@
                     <!-- navbar collapse start -->
                     <ul class="navbar-nav">
                         <!-- navbar- nav -->
-                        {{-- @if (!Auth::guard('vendor')->check())
+                        @if (!Auth::guard('vendor')->check() && Auth::check())
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('user.home')}}">Home</a>
                           </li>
-                        @endif --}}
+                        @endif
                         @auth ('vendor')
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('vendor.dashboard')}}">Dashboard</a>
@@ -128,8 +128,8 @@
                               </div>
                           </li>
                         @endauth
-                        {{-- @if (!Auth::guard('vendor')->check())
-                        <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
+                        @if (!Auth::guard('vendor')->check())
+                        {{-- <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
                             <a class="nav-link dropdown-toggle" href="{{route('user.search')}}" data-toggle="dropdown">Shop</a>
                             <div class="mega-menu-wrapper">
                                 <div class="container mega-menu-container">
@@ -157,25 +157,25 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('user.contact')}}">Contact</a>
-                        </li>
+                        </li> --}}
                         @if (!Auth::check() && !Auth::guard('vendor')->check())
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a class="nav-link" href="{{route('login')}}">Account</a>
-                          </li>
+                          </li> --}}
                         @elseif (Auth::check())
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->username}}</a>
                               <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('user.profile')}}">Profile</a>
-                                    <a class="dropdown-item" href="{{route('user.wishlist')}}">Wishlist</a>
+                                    {{-- <a class="dropdown-item" href="{{route('user.wishlist')}}">Wishlist</a>
                                     <a class="dropdown-item" href="{{route('user.orders')}}">Orders</a>
                                     <a class="dropdown-item" href="{{route('user.shipping')}}">Shipping Address</a>
-                                    <a class="dropdown-item" href="{{route('user.billing')}}">Billing Address</a>
+                                    <a class="dropdown-item" href="{{route('user.billing')}}">Billing Address</a> --}}
                                     <a class="dropdown-item" href="{{route('user.logout')}}">Logout</a>
                               </div>
                           </li>
                         @endif
-                        @endif --}}
+                        @endif
                     </ul>
                     <!-- /.navbar-nav -->
                 </div>

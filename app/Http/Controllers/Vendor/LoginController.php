@@ -22,8 +22,8 @@ class LoginController extends Controller
         }
 
         $vendor = Vendor::where('email', $request->email)->first();
-        if (!empty($vendor) && ($vendor->approved == 0 || $vendor->approved == -1)) {
-          return back()->with('missmatch', 'Username/Password didn\'t match!');
+        if (!empty($vendor) && ($vendor->approved <= 0)) {
+          return back()->with('missmatch', 'Account not yet approved!');
         }
 
         $validatedRequest = $request->validate([

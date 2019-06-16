@@ -1,6 +1,6 @@
 <!-- header area start -->
 <div class="hero-carousel owl-carousel owl-theme">
-  @foreach ($sliders as $key => $slider)
+  {{-- @foreach ($sliders as $key => $slider)
     <div class="header-area-three header-bg-four home-six" style="background-image: url('{{asset('assets/user/interfaceControl/sliders/'.$slider->image)}}');">
         <div class="container">
             <div class="row">
@@ -17,6 +17,6 @@
             </div>
         </div>
     </div>
-  @endforeach
+  @endforeach --}}
 </div>
 <!-- header area end -->

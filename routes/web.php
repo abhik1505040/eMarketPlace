@@ -76,3 +76,40 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
 
 
 });
+
+//*************User routes************* */
+Route::get('/home', 'User\PagesController@home')->name('user.home')->middleware('emailVerification', 'bannedUser');
+
+//dont need to send any parameters to the middleware
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('/login', 'User\LoginController@login')->name('login');
+    Route::post('/authenticate', 'User\LoginController@authenticate')->name('user.authenticate');
+
+    Route::get('/register', 'User\RegController@showregform')->name('user.showregform');
+    Route::post('/register', 'User\RegController@register')->name('user.register');
+
+    // Password Reset Routes
+    Route::get('/showEmailForm', 'User\ForgotPasswordController@showEmailForm')->name('user.showEmailForm');
+    Route::post('/sendResetPassMail', 'User\ForgotPasswordController@sendResetPassMail')->name('user.sendResetPassMail');
+    Route::get('/reset/{code}', 'User\ForgotPasswordController@resetPasswordForm')->name('user.resetPasswordForm');
+    Route::post('/resetPassword', 'User\ForgotPasswordController@resetPassword')->name('user.resetPassword');
+});
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/logout/{id?}', 'User\LoginController@logout')->name('user.logout');
+
+
+    // Verification Routes...
+    Route::get('/showEmailVerForm', 'User\VerificationController@showEmailVerForm')->name('user.showEmailVerForm');
+    Route::post('/checkEmailVerification', 'User\VerificationController@emailVerification')->name('user.checkEmailVerification');
+    Route::post('/sendVcode', 'User\VerificationController@sendVcode')->name('user.sendVcode');
+
+
+    // Profile routes
+    Route::get('/profile', 'User\ProfileController@profile')->name('user.profile')->middleware('emailVerification','bannedUser');
+    Route::post('/infoupdate', 'User\ProfileController@infoupdate')->name('user.information.update');
+    Route::get('/changepassword', 'User\ProfileController@changepassword')->name('user.changepassword')->middleware('emailVerification', 'bannedUser');
+    Route::post('/update/password', 'User\ProfileController@updatePassword')->name('user.updatePassword');
+
+});
+

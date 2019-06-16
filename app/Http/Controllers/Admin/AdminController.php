@@ -14,20 +14,6 @@ use App\Product;
 
 class AdminController extends Controller
 {
-    public function dashboard(){
-      $admin = Admin::find(Auth::guard('admin')->user()->id);
-      $sales =  Product::whereYear('created_at', '=', date('Y'))->get()->groupBy(function($d) {
-                return $d->created_at->format('F');
-             });
-       $sold = [];
-       $month = [];
-       foreach ($sales as $key => $value) {
-           $sold[] = count($value);
-           $month[] = $key;
-       }
-      return view('admin.dashboard', ['admin' => $admin, 'sold' => $sold, 'month' => $month]);
-    }
-
 
     public function changePass() {
       return view('admin.changepass');
@@ -94,4 +80,18 @@ class AdminController extends Controller
       session()->flash('message', 'Just Logged Out!');
       return redirect()->route('admin.loginForm');
     }
+
+    public function dashboard(){
+        $admin = Admin::find(Auth::guard('admin')->user()->id);
+        $sales =  Product::whereYear('created_at', '=', date('Y'))->get()->groupBy(function($d) {
+                  return $d->created_at->format('F');
+               });
+         $sold = [];
+         $month = [];
+         foreach ($sales as $key => $value) {
+             $sold[] = count($value);
+             $month[] = $key;
+         }
+        return view('admin.dashboard', ['admin' => $admin, 'sold' => $sold, 'month' => $month]);
+      }
 }
