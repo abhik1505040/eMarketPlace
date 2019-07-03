@@ -78,12 +78,12 @@ if (! function_exists('send_email')) {
 
 // }
 
-// if(!function_exists('product_code')) {
-//   function product_code($limit)
-//   {
-//     return substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit);
-//   }
-// }
+if(!function_exists('product_code')) {
+  function product_code($limit)
+  {
+    return substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit);
+  }
+}
 
 // // For Paytm
 // if(!function_exists("encrypt_e")) {

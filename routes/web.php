@@ -44,7 +44,20 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth:vendor']], function (
 
 	// Settings Routes
 	Route::get('/settings', 'Vendor\SettingController@settings')->name('vendor.setting')->middleware('bannedVendor');
-	Route::post('/settings/update', 'Vendor\SettingController@update')->name('vendor.setting.update');
+    Route::post('/settings/update', 'Vendor\SettingController@update')->name('vendor.setting.update');
+
+    // Product Routes
+	Route::get('/product/create', 'Vendor\ProductController@create')->name('vendor.product.create')->middleware('bannedVendor');
+	Route::post('/product/store', 'Vendor\ProductController@store')->name('vendor.product.store');
+	Route::get('/product/getsubcategories', 'Vendor\ProductController@getsubcats')->name('vendor.product.getsubcats');
+	Route::get('/product/getattributes', 'Vendor\ProductController@getattributes')->name('vendor.product.getattributes');
+	Route::get('/product/manage', 'Vendor\ProductController@manage')->name('vendor.product.manage')->middleware('bannedVendor');
+	Route::get('/product/{id}/edit', 'Vendor\ProductController@edit')->name('vendor.product.edit')->middleware('bannedVendor');
+	Route::post('/product/update', 'Vendor\ProductController@update')->name('vendor.product.update');
+	Route::get('/product/{id}/getimgs', 'Vendor\ProductController@getimgs')->name('vendor.product.getimgs');
+    Route::post('/delete', 'Vendor\ProductController@delete')->name('vendor.product.delete');
+    Route::get('/product/manage/{id}', 'Vendor\ProductController@individualproductshow')->name('vendor.product.individualproductshow')->middleware('bannedVendor');
+
 
 });
 
@@ -72,7 +85,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
 	Route::get('/vendors/accepted', 'Admin\VendorController@accepted')->name('admin.vendors.accepted');
 	Route::get('/vendors/rejected', 'Admin\VendorController@rejected')->name('admin.vendors.rejected');
 	Route::post('/vendors/accept', 'Admin\VendorController@accept')->name('admin.vendors.accept');
-	Route::post('/vendors/reject', 'Admin\VendorController@reject')->name('admin.vendors.reject');
+    Route::post('/vendors/reject', 'Admin\VendorController@reject')->name('admin.vendors.reject');
+
+    // Category Management...
+    Route::get('/category/index', 'Admin\CategoryController@index')->name('admin.category.index');
+    Route::post('/category/store', 'Admin\CategoryController@store')->name('admin.category.store');
+    Route::post('/category/update', 'Admin\CategoryController@update')->name('admin.category.update');
+
+	// Subcategory Management...
+    Route::get('/subcategory/{id}/index', 'Admin\SubcategoryController@index')->name('admin.subcategory.index');
+    Route::post('/subcategory/store', 'Admin\SubcategoryController@store')->name('admin.subcategory.store');
+    Route::post('/subcategory/update', 'Admin\SubcategoryController@update')->name('admin.subcategory.update');
+
+    // Product Attribute Management...
+	Route::get('/productattr/index', 'Admin\ProductattrController@index')->name('admin.productattr.index');
+	Route::post('/productattr/store', 'Admin\ProductattrController@store')->name('admin.productattr.store');
+	Route::post('/productattr/update', 'Admin\ProductattrController@update')->name('admin.productattr.update');
+
+
+
 
 
 });

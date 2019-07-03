@@ -68,9 +68,9 @@
     <nav class="navbar navbar-area navbar-expand-lg navbar-light bg-light-blue home-6">
             <div class="container nav-container">
                 <div class="logo-wrapper navbar-brand ">
-                    <a href="index.html" class="logo main-logo mobile-logo">
+                    {{-- <a href="index.html" class="logo main-logo mobile-logo">
                         <img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
-                    </a>
+                    </a> --}}
                     {{-- @if (!Auth::guard('vendor')->check())
                     <div class="form-element has-icon">
                         <select class="category selectpicker" onchange="categoryChange(this.value)">

@@ -36,7 +36,7 @@
                                       {!! $gs->user_register_text !!}
 
                                   </div>
-                                  <p>Already have account? <a style="color:red;font-weight:bold;" href="{{route('login')}}">Click here</a> to login</p>
+                                  <p>Already have an account? <a style="color:red;font-weight:bold;" href="{{route('login')}}">Click here</a> to login</p>
                               </div>
                           </div>
                           <div class="col-lg-6">
@@ -76,13 +76,13 @@
                                           </div>
                                           <div class="btn-wrapper">
                                               <button type="submit" class="submit-btn">signup</button>
-                                              <a href="{{route('login')}}" class="link">Already have account?</a>
+                                              <a href="{{route('login')}}" class="link">Already have an account?</a>
                                           </div>
-                                          @if (\App\Provider::find(1)->status == 1)
+                                          {{-- @if (\App\Provider::find(1)->status == 1)
                                             <div class="block-link mt-4">
                                                 <a href="{{ url('auth/facebook') }}" class="facebook">join with with facebook</a>
                                             </div>
-                                          @endif
+                                          @endif --}}
                                       </form>
                                   </div>
                               </div>

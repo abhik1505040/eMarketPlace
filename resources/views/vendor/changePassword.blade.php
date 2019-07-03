@@ -59,7 +59,7 @@
                               <div class="col-md-12">
                                 <div class="form-element margin-bottom-20">
                                     <label>Confirm Password <span>**</span></label>
-                                    <input name="password_confirmation" type="text" class="input-field" placeholder="Confirm Password">
+                                    <input name="password_confirmation" type="password" class="input-field" placeholder="Confirm Password">
                                 </div>
                               </div>
                             </div>

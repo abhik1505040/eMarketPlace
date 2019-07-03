@@ -34,15 +34,16 @@
                                       <div class="counterup"><span class="count">{{count(\App\Orderedproduct::join('orders', 'orders.id', '=', 'orderedproducts.order_id')->select('order_id', DB::raw('count(order_id) as total'))->where('vendor_id', Auth::guard('vendor')->user()->id)->whereIn('orders.approve', [0, 1])->groupBy('order_id')->get())}}</span></div>
                                   </a>
                               </div> --}}
-                              {{-- <div class="col-lg-4 col-md-6">
+                              <div class="col-lg-4 col-md-6">
                                   <a href="{{route('vendor.product.manage')}}" class="single-mini-card-item bg-light-gray">
                                       <div class="bg-icon">
                                           <i class="fab fa-product-hunt"></i>
                                       </div>
                                       <h4 class="title">Products</h4>
-                                      <div class="counterup"><span class="count">{{\App\Product::where('vendor_id', Auth::guard('vendor')->user()->id)->count()}}</span></div>
+                                      <div class="counterup"><span class="count">{{\App\Product::where('deleted', 0)
+                                                                                     ->where('vendor_id', Auth::guard('vendor')->user()->id)->count()}}</span></div>
                                   </a>
-                              </div> --}}
+                              </div>
                           </div>
                       </div>
                       {{-- <div class="panel-wrapper">

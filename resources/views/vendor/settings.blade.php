@@ -39,7 +39,7 @@
                                             <input name="logo" type="file" value="">
                                         </span>
                                         <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
-                                        <label style="display:inline-block;" for=""><span>**</span></label>
+                                        <label style="display:inline-block;" for=""><span></span></label>
                                     </div>
                                 </div>
                                 @if ($errors->has('shop_name'))
