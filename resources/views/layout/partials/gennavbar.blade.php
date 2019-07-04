@@ -129,7 +129,7 @@
                           </li>
                         @endauth
                         @if (!Auth::guard('vendor')->check())
-                        {{-- <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
+                        <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
                             <a class="nav-link dropdown-toggle" href="{{route('user.search')}}" data-toggle="dropdown">Shop</a>
                             <div class="mega-menu-wrapper">
                                 <div class="container mega-menu-container">
@@ -151,7 +151,7 @@
                                   </div>
                             </div>
                         </li><!-- mega menu end -->
-                        <li class="nav-item">
+                {{--    <li class="nav-item">
                             <a class="nav-link" href="{{route('user.bestsellers')}}">Best Sellers</a>
                         </li>
 
@@ -160,7 +160,7 @@
                         </li> --}}
                         @if (!Auth::check() && !Auth::guard('vendor')->check())
                            <li class="nav-item">
-                              <a class="nav-link" href="{{route('login')}}">Account</a>
+                              <a class="nav-link" href="{{route('login')}}">Login</a>
                           </li>
                         @elseif (Auth::check())
                           <li class="nav-item dropdown">

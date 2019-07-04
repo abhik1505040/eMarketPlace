@@ -110,7 +110,7 @@
                               </div>
                            </div>
 
-                           @if (Request::route('subcategory'))
+                          {{-- @if (Request::route('subcategory'))
                              @if (\App\Subcategory::find(Request::route('subcategory'))->attributes != '[]')
                                @php
                                  $attrs = \App\Subcategory::find(Request::route('subcategory'))->attributes;
@@ -130,7 +130,7 @@
                                  @endforeach
                                @endforeach
                              @endif
-                          @endif
+                          @endif--}}
 
 
                            <div class="text-right pt-2">
@@ -142,7 +142,7 @@
 
 
                   <div class="banner-img">
-                      {{--{!! show_ad(3) !!}--}}
+                
                   </div>
               </div>
               <div class="col-lg-9">
@@ -165,7 +165,7 @@
                                             <input type="hidden" name="minprice" value="{{request()->input('minprice')}}">
                                             <input type="hidden" name="maxprice" value="{{request()->input('maxprice')}}">
                                             <input type="hidden" name="type" value="{{request()->input('type')}}">
-                                            @if (Request::route('subcategory'))
+                           {{--               @if (Request::route('subcategory'))
                                               @if (\App\Subcategory::find(Request::route('subcategory'))->attributes != '[]')
                                                 @php
                                                   $attrs = \App\Subcategory::find(Request::route('subcategory'))->attributes;
@@ -184,7 +184,7 @@
                                                   @endforeach
                                                 @endforeach
                                               @endif
-                                            @endif
+                                            @endif--}}
                                             <select name="sort_by" class="selectpicker input-field select" onchange="document.getElementById('sortForm').submit()">
                                                 <option value="" selected disabled>sort by</option>
                                                 <option value="date_desc" {{$sortby == 'date_desc' ? 'selected' : ''}}>Date: Newest on top</option>
@@ -222,7 +222,7 @@
                                       </div>
                                       <div class="content">
                                           <span class="category">{{\App\Category::find($product->category_id)->name}}</span>
-                                          <a href="{{route('user.product.details', [$product->slug,$product->id])}}"><h4 class="title">{{strlen($product->title) > 25 ? substr($product->title, 0, 25) . '...' : $product->title}}</h4></a>
+                                        <a href="{{route('user.product.details', [$product->slug,$product->id])}}"><h4 class="title">{{strlen($product->title) > 25 ? substr($product->title, 0, 25) . '...' : $product->title}}</h4></a>
                                           @if (empty($product->current_price))
                                             <div class="price"><span class="sprice">{{$gs->base_curr_symbol}} {{$product->price}}</span></div>
                                           @else

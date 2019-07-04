@@ -84,7 +84,7 @@ class SearchController extends Controller
       // return $products;
       // return count($reqattrs);
 
-      foreach ($products as $key => $product) {
+     /* foreach ($products as $key => $product) {
         $proattrs = json_decode($product->attributes, true);
         $count = 0;
 
@@ -101,7 +101,7 @@ class SearchController extends Controller
         if ($count == count($reqattrs)) {
           $productids[] = $product->id;
         }
-      }
+      }*/
 
       // return $productids;
 
