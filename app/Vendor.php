@@ -26,9 +26,9 @@ class Vendor extends Authenticatable
             'password', 'remember_token',
         ];
 
-        // public function products() {
-        //   return $this->hasMany('App\Product');
-        // }
+        public function products() {
+           return $this->hasMany('App\Product');
+        }
 
         // public function orderedproducts() {
         //   return $this->hasMany('App\Orderedproduct');

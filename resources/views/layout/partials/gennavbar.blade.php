@@ -3,15 +3,15 @@
 
 
     <!-- support bar area two start -->
-    {{-- <div class="support-bar-two bg-white home-6">
+    <div class="support-bar-two bg-white home-6">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="left-content">
+                <div class="col-lg-8">
+                    {{--<div class="left-content">
                         <a href="{{route('user.home')}}" class="logo main-logo">
-                            <img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
+                            {{--<img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="right-content">
                         <ul>
 
@@ -34,7 +34,7 @@
                                 </div>
                             </li>
 
-                            <li>
+                            {{--<li>
                                 <div class="single-support-info-item">
                                     <div class="icon">
                                             <i class="fas fa-envelope"></i>
@@ -55,14 +55,14 @@
                                         <span class="details">{{$gs->support_phone}}</span>
                                     </div>
                                 </div>
-                            </li>
+                            </li>--}}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- support bar area two end --> --}}
+    <!-- support bar area two end -->
 
     <!-- navbar area start -->
     <nav class="navbar navbar-area navbar-expand-lg navbar-light bg-light-blue home-6">
@@ -71,7 +71,7 @@
                     {{-- <a href="index.html" class="logo main-logo mobile-logo">
                         <img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
                     </a> --}}
-                    {{-- @if (!Auth::guard('vendor')->check())
+                    @if (!Auth::guard('vendor')->check())
                     <div class="form-element has-icon">
                         <select class="category selectpicker" onchange="categoryChange(this.value)">
                           <option value="" selected disabled>Categories</option>
@@ -83,7 +83,7 @@
                                 <i class="fas fa-plus"></i>
                         </span>
                     </div>
-                    @endif --}}
+                    @endif
                 </div>
                 <div class="collapse navbar-collapse" id="mirex">
                     <!-- navbar collapse start -->
@@ -159,9 +159,9 @@
                             <a class="nav-link" href="{{route('user.contact')}}">Contact</a>
                         </li> --}}
                         @if (!Auth::check() && !Auth::guard('vendor')->check())
-                          {{-- <li class="nav-item">
+                           <li class="nav-item">
                               <a class="nav-link" href="{{route('login')}}">Account</a>
-                          </li> --}}
+                          </li>
                         @elseif (Auth::check())
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->username}}</a>
