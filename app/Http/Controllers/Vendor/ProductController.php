@@ -27,7 +27,6 @@ use Session;
 class ProductController extends Controller
 {
 
-
     public function individualproductshow($id) {
 
         $data['product'] = Product::find($id);
@@ -36,7 +35,7 @@ class ProductController extends Controller
         }
         $data['imgs'] = PreviewImage::where('product_id',$id)->get();
         return view('vendor.product.individualproductshow', $data);
-      }
+    }
 
     public function create() {
     //   $data['flashints'] = FlashInterval::all();
@@ -128,6 +127,33 @@ class ProductController extends Controller
         'offer_amount.required_if' => 'Offer amount field is required'
       ];
 
+      if ($request->has('subcategory')) {
+        $subcat = Subcategory::find($request->subcategory);
+        $attrjson = json_decode($subcat->attributes, true);
+
+        if (!array_key_exists('attributes', $attrjson)) {
+          $errproattr = '';
+        }
+        // if subcategory contains no proattr
+        else {
+          $attrarrs = $attrjson['attributes'];
+          $errproattr = [];
+          foreach ($attrarrs as $key => $attrarr) {
+            $proattr = ProductAttribute::find($attrarr);
+            if (!$request->has("$proattr->attrname")) {
+              $errproattr["$proattr->attrname"] = "$proattr->name is required";
+            }
+          }
+          // if proattr has no error
+          if (empty($errproattr)) {
+            $errproattr = '';
+          }
+        }
+      }
+      // if there is no subcat given
+      else {
+        $errproattr = '';
+      }
 
 
       $validator = Validator::make($request->all(), $rules, $messages);
@@ -172,6 +198,8 @@ class ProductController extends Controller
       } else {
         $in['product_code'] = product_code(8);
       }
+      $in['attributes'] = json_encode($request->except('_token','cat_helper','subcat_helper','images','title','price','category','subcategory','product_code','description', 'quantity', 'offer', 'offer_type', 'offer_amount'));
+
 
       $product = Product::create($in);
 
@@ -345,6 +373,33 @@ class ProductController extends Controller
 
       ];
 
+      if ($request->has('subcategory')) {
+        $subcat = Subcategory::find($request->subcategory);
+        $attrjson = json_decode($subcat->attributes, true);
+
+        if (!array_key_exists('attributes', $attrjson)) {
+          $errproattr = '';
+        }
+        // if subcategory contains no proattr
+        else {
+          $attrarrs = $attrjson['attributes'];
+          $errproattr = [];
+          foreach ($attrarrs as $key => $attrarr) {
+            $proattr = ProductAttribute::find($attrarr);
+            if (!$request->has("$proattr->attrname")) {
+              $errproattr["$proattr->attrname"] = "$proattr->name is required";
+            }
+          }
+          // if proattr has no error
+          if (empty($errproattr)) {
+            $errproattr = '';
+          }
+        }
+      }
+      // if there is no subcat given
+      else {
+        $errproattr = '';
+      }
 
       $validator = Validator::make($request->all(), $rules);
       if ($validator->fails() || !empty($errproattr)) {
@@ -385,6 +440,8 @@ class ProductController extends Controller
       } else {
         $in['product_code'] = product_code(8);
       }
+
+      $in['attributes'] = json_encode($request->except('_token','cat_helper','subcat_helper','images','imgsdb','title','price','category','subcategory','product_code','description','quantity','imgs_helper','product_id', 'offer', 'offer_type', 'offer_amount'));
 
       $product = Product::find($request->product_id);
       $product->fill($in)->save();

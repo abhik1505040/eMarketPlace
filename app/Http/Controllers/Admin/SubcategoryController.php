@@ -14,7 +14,7 @@ class SubcategoryController extends Controller
     public function index($id) {
       $data['category'] = Category::find($id);
       $data['subcats'] = Subcategory::where('category_id', $id)->get();
-     // $data['pas'] = ProductAttribute::where('status', 1)->get();
+      $data['pas'] = ProductAttribute::where('status', 1)->get();
       return view('admin.subcategory.index', $data);
     }
 
@@ -27,7 +27,7 @@ class SubcategoryController extends Controller
       $subcat = new Subcategory;
       $subcat->category_id = $request->category_id;
       $subcat->name = $request->name;
-      //$subcat->attributes = $attributes;
+      $subcat->attributes = $attributes;
       $subcat->save();
 
       Session::flash('success', 'Subcategory stored successfully');
@@ -42,7 +42,7 @@ class SubcategoryController extends Controller
       $attributes = json_encode($request->except('_token', 'name', 'status', 'statusId'));
       $subcat = Subcategory::find($request->statusId);
       $subcat->name = $request->name;
-      //$subcat->attributes = $attributes;
+      $subcat->attributes = $attributes;
       $subcat->status = $request->status;
       $subcat->save();
 

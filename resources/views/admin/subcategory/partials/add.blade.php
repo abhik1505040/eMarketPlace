@@ -20,7 +20,7 @@
                       <input type="text" value="{{old('name')}}" class="form-control" id="name" name="name" placeholder="Enter Subcategory Name" >
                     </div>
                   </div>
-                  {{-- <div class="col-md-12">
+                  <div class="col-md-12">
                     <div class="form-group">
                       <strong>Attributes (Optional)</strong>
                       <div class="">
@@ -32,7 +32,7 @@
                         @endforeach
                       </div>
                     </div>
-                  </div> --}}
+                  </div>
                 </div>
               </div>
           </div>
