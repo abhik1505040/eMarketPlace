@@ -100,7 +100,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
     // Product Attribute Management...
 	Route::get('/productattr/index', 'Admin\ProductattrController@index')->name('admin.productattr.index');
 	Route::post('/productattr/store', 'Admin\ProductattrController@store')->name('admin.productattr.store');
-	Route::post('/productattr/update', 'Admin\ProductattrController@update')->name('admin.productattr.update');
+    Route::post('/productattr/update', 'Admin\ProductattrController@update')->name('admin.productattr.update');
+
+    // Attribute Value Management...
+	Route::get('/options/{id}/index', 'Admin\OptionController@index')->name('admin.options.index');
+	Route::post('/options/store', 'Admin\OptionController@store')->name('admin.options.store');
+	Route::post('/options/update', 'Admin\OptionController@update')->name('admin.options.update');
+
 
 
 

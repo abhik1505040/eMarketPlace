@@ -111,7 +111,7 @@
                             </div>
                           </div>
 
-                    {{--    <div id="proattrsid">
+                       <div id="proattrsid">
                             @if (array_key_exists('attributes', $attrs))
                               @foreach ($attrs['attributes'] as $attr)
                                 @php
@@ -162,7 +162,7 @@
                               @endforeach
                             @endif
 
-                          </div>--}}
+                          </div>
 
                           <div class="form-element margin-bottom-20">
                              <label>Description <span>**</span></label>

@@ -50,10 +50,10 @@
 
       <li><a class="app-menu__item @if(request()->path() == 'admin/category/index' || request()->is('admin/subcategory/*')) active @endif" href="{{route('admin.category.index')}}"><i class="app-menu__icon fab fa-buromobelexperte"></i><span class="app-menu__label">Category Management</span></a></li>
 
-      {{-- <li><a class="app-menu__item
-        @if(request()->path() == 'admin/productattr/index') active
+      <li><a class="app-menu__item"
+        {{--@if(request()->path() == 'admin/productattr/index') active
         @elseif (request()->is('admin/options/*/index')) active
-        @endif" href="{{route('admin.productattr.index')}}"><i class="app-menu__icon fab fa-product-hunt"></i><span class="app-menu__label">Product Attributes</span></a></li> --}}
+        @endif--}} href="{{route('admin.productattr.index')}}"><i class="app-menu__icon fab fa-product-hunt"></i><span class="app-menu__label">Product Attributes</span></a></li>
 
 
 

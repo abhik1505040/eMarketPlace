@@ -12,9 +12,9 @@
            <div class="tile">
               <h3 class="tile-title float-left">All Product Attributes</h3>
               <div class="float-right icon-btn">
-                <a class="btn btn-info" data-toggle="modal" data-target="#addModal">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal">
                   <i class="fa fa-plus"></i> Add Product Attribute
-                </a>
+                </button>
               </div>
               <p style="clear:both;margin:0px;"></p>
               <div class="col-md-12">
@@ -38,7 +38,7 @@
                            <th scope="col">SL</th>
                            <th scope="col">Name</th>
                            <th scope="col">Status</th>
-                           <th>All Options</th>
+                           <th scope="col">All Attribute Values</th>
                            <th scope="col">Action</th>
                         </tr>
                      </thead>
@@ -58,7 +58,7 @@
                                  <a class="btn btn-primary" href="{{route('admin.options.index', $pa->id)}}"><i class="fa fa-eye"></i> View</a>
                                </td>
                                <td>
-                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSub{{$pa->id}}">Add Option</button>
+                                 {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSub{{$pa->id}}">Add Option</button> --}}
                                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{$pa->id}}">Edit</button>
                                </td>
                             </tr>
