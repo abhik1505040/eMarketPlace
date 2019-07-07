@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use App\GeneralSetting as GS;
+use App\Category;
+use App\Product;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $gs = GS::first();
-        // $categories = Category::where('status', 1)->get();
+        $categories = Category::where('status', 1)->get();
         // $menus = Menu::all();
         // $socials = Social::all();
 
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         }
         Schema::defaultStringLength(191);
         View::share('gs', $gs);
-        // View::share('categories', $categories);
+        View::share('categories', $categories);
         // View::share('menus', $menus);
         // View::share('socials', $socials);
     }

@@ -10,7 +10,7 @@
   @includeif('layout.partials.headerarea')
 @endsection
 
-{{-- @section('content')
+@section('content')
   <div id="home">
     <div class="body-overlay" id="body-overlay"></div>
     <div class="search-popup" id="search-popup">
@@ -23,7 +23,7 @@
     </div>
 
     <!-- feature area home 6 start -->
-    <div class="feature-area-home-6">
+    {{-- <div class="feature-area-home-6">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -362,9 +362,9 @@
       </div>
   </div>
   <!-- brand logo carousel area one end -->
+ --}}
 
-
-@endsection --}}
+@endsection
 
 
   {{-- @section('js-scripts')

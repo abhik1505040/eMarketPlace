@@ -94,7 +94,7 @@
                                     <li>Stock:  <span class="right text-danger" id="stock">Out of stock </span></li>
                                   @endif
 
-                                  @php
+                                  {{--@php
                                     $attrs = json_decode($product->attributes, true);
                                   @endphp
 
@@ -114,7 +114,7 @@
                                         <span class="mr-2"><input type="radio" name="{{$key}}[]" value="{{$value}}"> {{$value}}</span>
                                       @endforeach
                                     </li>
-                                  @endforeach
+                                  @endforeach--}}
                                   <li>Shop Name:  <span class="right"><a href="{{route('vendor.shoppage', $product->vendor->id)}}" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li>
                                   <p class="text-danger" id="errattr"></p>
                               </ul>
@@ -142,9 +142,9 @@
                                       <li><a href="{{route('login')}}"><i id="heart" class="fas fa-heart"></i></a></li>
                                     @endif
 
-                                      <li><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}"><i class="fab fa-facebook-f"></i></a></li>
+                                      {{--<li><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}"><i class="fab fa-facebook-f"></i></a></li>
                                       <li><a href="https://twitter.com/intent/tweet?text=my share text&amp;url={{urlencode(url()->current()) }}"><i class="fab fa-twitter"></i></a></li>
-                                      <li><a href="https://plus.google.com/share?url={{urlencode(url()->current()) }}"><i class="fab fa-google-plus-g"></i></a></li>
+                                      <li><a href="https://plus.google.com/share?url={{urlencode(url()->current()) }}"><i class="fab fa-google-plus-g"></i></a></li>--}}
                                   </ul>
                                   @if (!Auth::guard('vendor')->check())
                                     <div class="btn-wrapper">
@@ -169,13 +169,13 @@
                                     <a class="nav-link {{session('success')=='Reviewed successfully'?'active':''}}" id="item-review-tab" data-toggle="tab" href="#item_review" role="tab" aria-controls="item_review" aria-selected="true">item review</a>
                                   </li>
                                   @auth
-                                    @if (\App\ProductReview::where('user_id', Auth::user()->id)->where('product_id', $product->id)->count() == 0)
+                                    {{--@if (\App\ProductReview::where('user_id', Auth::user()->id)->where('product_id', $product->id)->count() == 0)
                                       @if (\App\Orderedproduct::where('user_id', Auth::user()->id)->where('product_id', $product->id)->where('shipping_status', 2)->count() > 0)
                                         <li class="nav-item">
                                           <a class="nav-link" id="write-tab" data-toggle="tab" href="#write" role="tab" aria-controls="write" aria-selected="false">Write Reviews</a>
                                         </li>
                                       @endif
-                                    @endif
+                                    @endif--}}
                                   @endauth
                                   <li class="nav-item">
                                     <a class="nav-link" id="item-review-tab" data-toggle="tab" href="#vendor_info" role="tab" aria-controls="item_review" aria-selected="true">Vendor Information</a>
@@ -194,7 +194,7 @@
                                 </div>
                               </div>
                               @auth
-                                @if (\App\ProductReview::where('user_id', Auth::user()->id)->where('product_id', $product->id)->count() == 0)
+                                {{--@if (\App\ProductReview::where('user_id', Auth::user()->id)->where('product_id', $product->id)->count() == 0)
                                   @if (\App\Orderedproduct::where('user_id', Auth::user()->id)->where('product_id', $product->id)->where('shipping_status', 2)->count() > 0)
                                     <div class="tab-pane fade" id="write" role="tabpanel" aria-labelledby="write-tab">
                                         <div class="more-feature-content">
@@ -202,7 +202,7 @@
                                         </div>
                                     </div>
                                   @endif
-                                @endif
+                                @endif--}}
                               @endauth
                               <div class="tab-pane fade" id="vendor_info" role="tabpanel" aria-labelledby="item-review-tab">
                                 <div class="descr-tab-content">
@@ -318,7 +318,7 @@
     }
   </script>
 
-  <script>
+  {{--<script>
     var globalrating;
 
     $(function () {
@@ -331,7 +331,7 @@
       });
     });
 
-    function reviewsubmit(e) {
+    /*function reviewsubmit(e) {
       e.preventDefault();
       // console.log(globalrating);
       var form = document.getElementById('reviewform');
@@ -360,7 +360,7 @@
           }
         }
       });
-    }
+    }*/
 
     $(document).ready(function() {
       var pid = {{$product->id}};
@@ -372,6 +372,6 @@
         });
       });
     });
-  </script>
+  </script>--}}
 
 @endpush

@@ -1,5 +1,5 @@
 <div class="comments">
-  @if ($product->productreviews()->count() == 0)
+  {{--@if ($product->productreviews()->count() == 0)
     <div class="card">
       <div class="card-body">
         <h3 class="text-center base-txt">No Review Given Yet</h3>
@@ -36,11 +36,11 @@
     </div>
 
 
-  @endif
+  @endif--}}
 
 </div>
 
-@push('scripts')
+{{--@push('scripts')
 <script>
   $(document).ready(function() {
     $.get("{{route('user.productratings', $product->id)}}", function(data){
@@ -56,4 +56,4 @@
     });
   });
 </script>
-@endpush
+@endpush--}}

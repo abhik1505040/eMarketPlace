@@ -3,15 +3,15 @@
 
 
     <!-- support bar area two start -->
-    {{-- <div class="support-bar-two bg-white home-6">
+    <div class="support-bar-two bg-white home-6">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="left-content">
+                <div class="col-lg-8">
+                    {{--<div class="left-content">
                         <a href="{{route('user.home')}}" class="logo main-logo">
-                            <img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
+                            {{--<img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="right-content">
                         <ul>
 
@@ -20,21 +20,21 @@
                                     <form action="{{url('/').'/shop'.'/'.Request::route('category').'/'.Request::route('subcategory')}}" class="search-form">
                                         <div class="form-element has-icon" action="{{route('user.search')}}">
                                           <input name="term" type="text" class="input-field" placeholder="Search your keyword" value="{{request()->input('term')}}">
-                                          <div class="the-icon">
+                                          {{--<div class="the-icon">
                                               <select class="category select selectpicker" onchange="categoryChange(this.value)">
                                                   <option value="" selected disabled>Category</option>
                                                   @foreach ($categories as $key => $category)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                                   @endforeach
                                               </select>
-                                          </div>
+                                          </div>--}}
                                           <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
                                         </div>
                                     </form>
                                 </div>
                             </li>
 
-                            <li>
+                            {{--<li>
                                 <div class="single-support-info-item">
                                     <div class="icon">
                                             <i class="fas fa-envelope"></i>
@@ -55,14 +55,14 @@
                                         <span class="details">{{$gs->support_phone}}</span>
                                     </div>
                                 </div>
-                            </li>
+                            </li>--}}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- support bar area two end --> --}}
+    <!-- support bar area two end -->
 
     <!-- navbar area start -->
     <nav class="navbar navbar-area navbar-expand-lg navbar-light bg-light-blue home-6">
@@ -71,7 +71,7 @@
                     {{-- <a href="index.html" class="logo main-logo mobile-logo">
                         <img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
                     </a> --}}
-                    {{-- @if (!Auth::guard('vendor')->check())
+                    @if (!Auth::guard('vendor')->check())
                     <div class="form-element has-icon">
                         <select class="category selectpicker" onchange="categoryChange(this.value)">
                           <option value="" selected disabled>Categories</option>
@@ -83,7 +83,7 @@
                                 <i class="fas fa-plus"></i>
                         </span>
                     </div>
-                    @endif --}}
+                    @endif
                 </div>
                 <div class="collapse navbar-collapse" id="mirex">
                     <!-- navbar collapse start -->
@@ -129,7 +129,7 @@
                           </li>
                         @endauth
                         @if (!Auth::guard('vendor')->check())
-                        {{-- <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
+                        <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
                             <a class="nav-link dropdown-toggle" href="{{route('user.search')}}" data-toggle="dropdown">Shop</a>
                             <div class="mega-menu-wrapper">
                                 <div class="container mega-menu-container">
@@ -137,7 +137,7 @@
                                       @foreach ($categories as $key => $cat)
                                           <div class="col-lg-2 col-sm-12">
                                             <div class="mega-menu-columns">
-                                                <h6 class="title">{{$cat->name}}</h6>
+                                                <h6 class="title"><a href="{{route('user.search', [$cat->id])}}">{{$cat->name}}</a></h6>
                                                 <ul class="menga-menu-page-links">
                                                   @foreach ($cat->subcategories()->where('status', 1)->get() as $key => $subcat)
                                                     <li><a href="{{route('user.search', [$cat->id, $subcat->id])}}">{{$subcat->name}}</a></li>
@@ -151,7 +151,7 @@
                                   </div>
                             </div>
                         </li><!-- mega menu end -->
-                        <li class="nav-item">
+                {{--    <li class="nav-item">
                             <a class="nav-link" href="{{route('user.bestsellers')}}">Best Sellers</a>
                         </li>
 
@@ -159,9 +159,9 @@
                             <a class="nav-link" href="{{route('user.contact')}}">Contact</a>
                         </li> --}}
                         @if (!Auth::check() && !Auth::guard('vendor')->check())
-                          {{-- <li class="nav-item">
-                              <a class="nav-link" href="{{route('login')}}">Account</a>
-                          </li> --}}
+                           <li class="nav-item">
+                              <a class="nav-link" href="{{route('login')}}">Login</a>
+                          </li>
                         @elseif (Auth::check())
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->username}}</a>
