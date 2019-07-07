@@ -20,14 +20,14 @@
                                     <form action="{{url('/').'/shop'.'/'.Request::route('category').'/'.Request::route('subcategory')}}" class="search-form">
                                         <div class="form-element has-icon" action="{{route('user.search')}}">
                                           <input name="term" type="text" class="input-field" placeholder="Search your keyword" value="{{request()->input('term')}}">
-                                          <div class="the-icon">
+                                          {{--<div class="the-icon">
                                               <select class="category select selectpicker" onchange="categoryChange(this.value)">
                                                   <option value="" selected disabled>Category</option>
                                                   @foreach ($categories as $key => $category)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                                   @endforeach
                                               </select>
-                                          </div>
+                                          </div>--}}
                                           <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
                                         </div>
                                     </form>
