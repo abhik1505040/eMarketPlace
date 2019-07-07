@@ -137,7 +137,7 @@
                                       @foreach ($categories as $key => $cat)
                                           <div class="col-lg-2 col-sm-12">
                                             <div class="mega-menu-columns">
-                                                <h6 class="title">{{$cat->name}}</h6>
+                                                <h6 class="title"><a href="{{route('user.search', [$cat->id])}}">{{$cat->name}}</a></h6>
                                                 <ul class="menga-menu-page-links">
                                                   @foreach ($cat->subcategories()->where('status', 1)->get() as $key => $subcat)
                                                     <li><a href="{{route('user.search', [$cat->id, $subcat->id])}}">{{$subcat->name}}</a></li>
