@@ -11,7 +11,7 @@
           </div>
         </div>
 
-        <div class="card bg-light py-3 px-3">
+        {{--<div class="card bg-light py-3 px-3">
            <div class="row">
              <div class="col-md-4 text-center">
                  <div class="card">
@@ -27,7 +27,7 @@
                            <i class="fa fa-check-circle base-txt"></i> Cash on delivery charge - <strong>{{$gs->in_cash_on_delivery}} {{$gs->base_curr_text}}</strong>
                          </li>
                          <li>
-                      {{--    <i class="fa fa-check-circle base-txt"></i> If you pay advance then delivery charge - <strong>{{$gs->in_advanced}} {{$gs->base_curr_text}}</strong>--}}
+                         <i class="fa fa-check-circle base-txt"></i> If you pay advance then delivery charge - <strong>{{$gs->in_advanced}} {{$gs->base_curr_text}}</strong>
                          </li>
                        </ul> 
                      </div>
@@ -47,8 +47,7 @@
                            <i class="fa fa-check-circle base-txt"></i> Cash on delivery charge - <strong>{{$gs->around_cash_on_delivery}} {{$gs->base_curr_text}}</strong>
                          </li>
                          <li>
-                         {{--  <i class="fa fa-check-circle base-txt"></i> If you pay advance then delivery charge - <strong>{{$gs->around_advanced}} {{$gs->base_curr_text}}</strong>--}}
-                         </li>
+                         <i class="fa fa-check-circle base-txt"></i> If you pay advance then delivery charge - <strong>{{$gs->around_advanced}} {{$gs->base_curr_text}}</strong>                         </li>
                        </ul> 
                      </div>
                  </div>
@@ -67,7 +66,7 @@
                            <i class="fa fa-check-circle base-txt"></i> Cash on delivery charge - <strong>{{$gs->world_cash_on_delivery}} {{$gs->base_curr_text}}</strong>
                          </li>
                          <li>
-                         {{--     <i class="fa fa-check-circle base-txt"></i> If you pay advance then delivery charge - <strong>{{$gs->world_advanced}} {{$gs->base_curr_text}}</strong>--}}
+                         <i class="fa fa-check-circle base-txt"></i> If you pay advance then delivery charge - <strong>{{$gs->world_advanced}} {{$gs->base_curr_text}}</strong>
                          </li>
                        </ul>
 
@@ -76,7 +75,7 @@
                  
              </div>
            </div>
-        </div>
+        </div>--}}
 
      {{--      <div class="row refund_policy">
             <div class="col-md-12">

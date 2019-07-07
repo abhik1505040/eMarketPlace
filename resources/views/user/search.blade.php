@@ -78,7 +78,7 @@
                             </li>
                             @foreach ($categories as $key => $category)
                               <li>
-                                <a href="#" class="category-btn {{Request::route('category') == $category->id ? 'base-txt' : '' }}">{{$category->name}} <span class="right"><i class="fa fa-caret-down"></i></span></a>
+                               <a href="{{route('user.search', [$category->id])}}" class="{{Request::route('category') == $category->id ? 'base-txt' : '' }}">{{$category->name}} <span class="right"><i class="fa fa-caret-down"></i></span></a>
                                 <ul class="subcategories {{Request::route('category') == $category->id ? 'open' : '' }}">
                                   @foreach ($category->subcategories()->where('status', 1)->get() as $key => $subcategory)
                                     <li><a href="{{route('user.search', [$category->id, $subcategory->id])}}" class="{{Request::route('subcategory') == $subcategory->id ? 'base-txt' : '' }}">{{$subcategory->name}}</a></li>
@@ -110,7 +110,7 @@
                               </div>
                            </div>
 
-                          {{-- @if (Request::route('subcategory'))
+                           @if (Request::route('subcategory'))
                              @if (\App\Subcategory::find(Request::route('subcategory'))->attributes != '[]')
                                @php
                                  $attrs = \App\Subcategory::find(Request::route('subcategory'))->attributes;
@@ -130,7 +130,7 @@
                                  @endforeach
                                @endforeach
                              @endif
-                          @endif--}}
+                          @endif
 
 
                            <div class="text-right pt-2">
@@ -165,7 +165,7 @@
                                             <input type="hidden" name="minprice" value="{{request()->input('minprice')}}">
                                             <input type="hidden" name="maxprice" value="{{request()->input('maxprice')}}">
                                             <input type="hidden" name="type" value="{{request()->input('type')}}">
-                           {{--               @if (Request::route('subcategory'))
+                                        @if (Request::route('subcategory'))
                                               @if (\App\Subcategory::find(Request::route('subcategory'))->attributes != '[]')
                                                 @php
                                                   $attrs = \App\Subcategory::find(Request::route('subcategory'))->attributes;
@@ -184,7 +184,7 @@
                                                   @endforeach
                                                 @endforeach
                                               @endif
-                                            @endif--}}
+                                            @endif
                                             <select name="sort_by" class="selectpicker input-field select" onchange="document.getElementById('sortForm').submit()">
                                                 <option value="" selected disabled>sort by</option>
                                                 <option value="date_desc" {{$sortby == 'date_desc' ? 'selected' : ''}}>Date: Newest on top</option>

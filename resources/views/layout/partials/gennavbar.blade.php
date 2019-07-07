@@ -20,14 +20,14 @@
                                     <form action="{{url('/').'/shop'.'/'.Request::route('category').'/'.Request::route('subcategory')}}" class="search-form">
                                         <div class="form-element has-icon" action="{{route('user.search')}}">
                                           <input name="term" type="text" class="input-field" placeholder="Search your keyword" value="{{request()->input('term')}}">
-                                          <div class="the-icon">
+                                          {{--<div class="the-icon">
                                               <select class="category select selectpicker" onchange="categoryChange(this.value)">
                                                   <option value="" selected disabled>Category</option>
                                                   @foreach ($categories as $key => $category)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                                   @endforeach
                                               </select>
-                                          </div>
+                                          </div>--}}
                                           <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
                                         </div>
                                     </form>
@@ -137,7 +137,7 @@
                                       @foreach ($categories as $key => $cat)
                                           <div class="col-lg-2 col-sm-12">
                                             <div class="mega-menu-columns">
-                                                <h6 class="title">{{$cat->name}}</h6>
+                                                <h6 class="title"><a href="{{route('user.search', [$cat->id])}}">{{$cat->name}}</a></h6>
                                                 <ul class="menga-menu-page-links">
                                                   @foreach ($cat->subcategories()->where('status', 1)->get() as $key => $subcat)
                                                     <li><a href="{{route('user.search', [$cat->id, $subcat->id])}}">{{$subcat->name}}</a></li>

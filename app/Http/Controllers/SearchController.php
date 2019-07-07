@@ -10,7 +10,7 @@ use App\Subcategory;
 use Carbon\Carbon;
 //use App\Ad;
 use DB;
-
+use Debugbar;
 
 class SearchController extends Controller
 {
