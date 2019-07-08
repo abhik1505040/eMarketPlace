@@ -10,7 +10,7 @@
     @section('headertxt')
     {{\App\Category::find(Request::route('category'))->name}} @if(!empty(Request::route('subcategory'))) <i class="fa fa-arrow-right mx-1"></i> {{\App\Subcategory::find(Request::route('subcategory'))->name}} @endif
     @endsection
-@elseif(empty(Request::route('category')) && !empty(request()->input('term')))  
+@elseif(empty(Request::route('category')) && !empty(request()->input('term')))
     @section('headertxt')
     Search Over Shop
     @endsection
@@ -142,7 +142,7 @@
 
 
                   <div class="banner-img">
-                
+
                   </div>
               </div>
               <div class="col-lg-9">
@@ -158,7 +158,7 @@
                             </div>
 
                           <div class="right-content">
-                              <ul>
+                             <ul>
                                   <li>
                                       <div class="form-element has-icon">
                                           <form id="sortForm" action="{{url('/').'/shop'.'/'.Request::route('category').'/'.Request::route('subcategory')}}">
@@ -187,10 +187,10 @@
                                             @endif
                                             <select name="sort_by" class="selectpicker input-field select" onchange="document.getElementById('sortForm').submit()">
                                                 <option value="" selected disabled>sort by</option>
-                                                <option value="date_desc" {{$sortby == 'date_desc' ? 'selected' : ''}}>Date: Newest on top</option>
-                                                <option value="date_asc" {{$sortby == 'date_asc' ? 'selected' : ''}}>Date: Oldest on top</option>
-                                                <option value="price_desc" {{$sortby == 'price_desc' ? 'selected' : ''}}>Price: High to low</option>
-                                                <option value="price_asc" {{$sortby == 'price_asc' ? 'selected' : ''}}>Price: Low to high</option>
+                                                <option value="date_desc" {{$sortby == 'date_desc' ? 'selected' : ''}}>Date: Newest First</option>
+                                                <option value="date_asc" {{$sortby == 'date_asc' ? 'selected' : ''}}>Date: Oldest First</option>
+                                                <option value="price_desc" {{$sortby == 'price_desc' ? 'selected' : ''}}>Price: Decreasing</option>
+                                                <option value="price_asc" {{$sortby == 'price_asc' ? 'selected' : ''}}>Price: Increasing</option>
                                                 <option value="sales_desc" {{$sortby == 'sales_desc' ? 'selected' : ''}}>Top Sales</option>
                                                 <option value="rate_desc" {{$sortby == 'rate_desc' ? 'selected' : ''}}>Top Rated</option>
                                             </select>

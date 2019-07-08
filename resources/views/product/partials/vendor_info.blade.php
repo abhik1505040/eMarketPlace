@@ -19,16 +19,16 @@
                 <span class="details">{{$product->vendor->address}}</span>
             </div>
         </li>
-        <li>
+        {{-- <li>
             <div class="single-spec"><!-- single specification -->
                 <span class="heading">Zip Code</span>
                 <span class="details">{{$product->vendor->zip_code}}</span>
             </div>
-        </li>
+        </li> --}}
         <li>
             <div class="single-spec"><!-- single specification -->
                 <span class="heading">Total Products</span>
-                <span class="details">{{$product->vendor->products()->where('deleted', 0)->count()}}</span>
+                <span class="details">{{$product->vendor->products()->where('deleted', 0)->count()}} &nbsp; &nbsp; <a href="#" class="btn btn-outline-success " role="button" aria-pressed="true">Visit shop</a></span>
             </div>
         </li>
     </ul><!-- //.product specification -->

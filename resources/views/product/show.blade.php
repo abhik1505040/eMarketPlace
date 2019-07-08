@@ -115,7 +115,10 @@
                                       @endforeach
                                     </li>
                                   @endforeach--}}
-                                  <li>Shop Name:  <span class="right"><a href="{{route('vendor.shoppage', $product->vendor->id)}}" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li>
+
+                                  <li>Shop Name:  <span class="right"><a href="#" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li>
+
+                                  {{-- <li>Shop Name:  <span class="right"><a href="{{route('vendor.shoppage', $product->vendor->id)}}" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li> --}}
                                   <p class="text-danger" id="errattr"></p>
                               </ul>
 
@@ -134,12 +137,16 @@
                                         $count = \App\Favorit::where('user_id', Auth::user()->id)->where('product_id', $product->id)->count();
                                       @endphp
                                       @if ($count == 0)
-                                        <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart"></i></a></li>
+                                        <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li>
+                                        {{-- <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart"></i></a></li> --}}
                                       @else
-                                        <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart red"></i></a></li>
+                                        <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li>
+                                        {{-- <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart red"></i></a></li> --}}
                                       @endif
                                     @else
-                                      <li><a href="{{route('login')}}"><i id="heart" class="fas fa-heart"></i></a></li>
+                                        <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li>
+
+                                      {{-- <li><a href="{{route('login')}}"><i id="heart" class="fas fa-heart"></i></a></li> --}}
                                     @endif
 
                                       {{--<li><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}"><i class="fab fa-facebook-f"></i></a></li>

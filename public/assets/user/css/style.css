@@ -1214,7 +1214,7 @@ ul {
     .navbar-area.bg-orange .right-btn-wrapper ul li.cart .badge {
       background-color: #232b37; }
   .navbar-area.nav-fixed {
-    position: fixed;
+    /*position: fixed;*/
     left: 0;
     top: 0px;
     width: 100%;
@@ -1979,7 +1979,7 @@ ul {
               font-family: "Rubik", sans-serif;
               cursor: pointer; }
           .support-bar-two .right-content ul li .support-search-area .search-form .form-element .input-field {
-            width: 414px;
+            width: 350px;
             height: 40px;
             background-color: transparent;
             color: #ffd3c8;
@@ -4504,7 +4504,7 @@ ul {
           margin-right: 0; }
         .category-content-area .right-content-area .top-content .right-content ul li .form-element {
           display: inline-block;
-          width: 160px; }
+          width: 105%; }
           .category-content-area .right-content-area .top-content .right-content ul li .form-element .select2-container--default .select2-selection--single {
             height: 50px;
             border-radius: 30px;
@@ -4515,6 +4515,7 @@ ul {
               line-height: 50px;
               text-align: center;
               text-transform: uppercase;
+              padding: 0px 12px;
               color: #b1b6bd;
               font-size: 14px;
               font-weight: 700; }

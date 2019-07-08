@@ -130,7 +130,7 @@
                         @endauth
                         @if (!Auth::guard('vendor')->check())
                         <li class="nav-item dropdown mega-menu"><!-- mega menu start -->
-                            <a class="nav-link dropdown-toggle" href="{{route('user.search')}}" data-toggle="dropdown">Shop</a>
+                            <a class="nav-link dropdown-toggle" href="{{route('user.search')}}" data-toggle="dropdown">Browse Items</a>
                             <div class="mega-menu-wrapper">
                                 <div class="container mega-menu-container">
                                     <div class="row">
