@@ -84,24 +84,25 @@ class SearchController extends Controller
       // return $products;
       // return count($reqattrs);
 
-     /* foreach ($products as $key => $product) {
+      foreach ($products as $key => $product) {
         $proattrs = json_decode($product->attributes, true);
         $count = 0;
 
-        foreach ($proattrs as $key => $proattr) {
-          // return $proattrs[$key]; //Array[3] 0:"M" 1:"L" 2:"XL"
-
-          if (!empty($reqattrs[$key])) {
-            if (!empty(array_intersect($reqattrs[$key] ,$proattrs[$key]))) {
-              $count++;
-            }
-          }
+        if($proattrs!= null){
+            foreach ($proattrs as $key => $proattr) {
+                if (!empty($reqattrs[$key])) {
+                  if (!empty(array_intersect($reqattrs[$key] ,$proattrs[$key]))) {
+                    $count++;
+                  }
+                }
+              }
         }
+
 
         if ($count == count($reqattrs)) {
           $productids[] = $product->id;
         }
-      }*/
+      }
 
       // return $productids;
 

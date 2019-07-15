@@ -12,7 +12,7 @@
     @endsection
 @elseif(empty(Request::route('category')) && !empty(request()->input('term')))
     @section('headertxt')
-    Search Over Shop
+    Search Results
     @endsection
 @else
     @section('headertxt')

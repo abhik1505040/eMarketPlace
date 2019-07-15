@@ -91,10 +91,10 @@ class ProfileController extends Controller
     //   return view('user.shipping', $data);
     // }
 
-    // public function wishlist() {
-    //   $data['user'] = User::find(Auth::user()->id);
-    //   return view('user.wishlist', $data);
-    // }
+    public function wishlist() {
+      $data['user'] = User::find(Auth::user()->id);
+      return view('user.wishlist', $data);
+    }
 
     // public function orders(Request $request) {
     //   // return $request;

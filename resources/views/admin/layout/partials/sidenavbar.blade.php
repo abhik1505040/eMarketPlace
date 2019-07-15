@@ -39,7 +39,10 @@
       @elseif(request()->path() == 'admin/vendors/rejected')
           is-expanded
       @endif">
-        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-industry"></i><span class="app-menu__label">Vendor Requests</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+      @php
+        $count = \App\Vendor::where('approved', 0)->count();
+      @endphp
+        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-industry"></i><span class="app-menu__label">Vendor Requests @if($count > 0) <span class="badge badge-danger">{{$count}}</span> @endif </span><i class="treeview-indicator fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/all') active @endif" href="{{route('admin.vendors.all')}}"><i class="icon far fa-circle"></i> All</a></li>
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/pending') active @endif" href="{{route('admin.vendors.pending')}}"><i class="icon far fa-circle"></i> Pending</a></li>
@@ -50,17 +53,10 @@
 
       <li><a class="app-menu__item @if(request()->path() == 'admin/category/index' || request()->is('admin/subcategory/*')) active @endif" href="{{route('admin.category.index')}}"><i class="app-menu__icon fab fa-buromobelexperte"></i><span class="app-menu__label">Category Management</span></a></li>
 
-<<<<<<< HEAD
       <li><a class="app-menu__item
         @if(request()->path() == 'admin/productattr/index') active
         @elseif (request()->is('admin/options/*/index')) active
         @endif" href="{{route('admin.productattr.index')}}"><i class="app-menu__icon fab fa-product-hunt"></i><span class="app-menu__label">Product Attributes</span></a></li>
-=======
-      <li><a class="app-menu__item"
-        @if(request()->path() == 'admin/productattr/index') active
-        @elseif (request()->is('admin/options/*/index')) active
-        @endif href="{{route('admin.productattr.index')}}"><i class="app-menu__icon fab fa-product-hunt"></i><span class="app-menu__label">Product Attributes</span></a></li>
->>>>>>> Bishal_Prova_BugfixInSearch
 
 
 

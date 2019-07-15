@@ -38,6 +38,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="{{asset('assets/admin/css/fontawesome-5.css')}}">
+
 @stack('styles')
 {{-- NICedit CDN --}}
 @stack('nicedit-scripts')

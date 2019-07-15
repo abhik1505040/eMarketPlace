@@ -113,11 +113,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
 
 
 });
-
+//***********************ROutes without any auth needed */
 Route::get('/shop/{category?}/{subcategory?}', 'SearchController@search')->name('user.search');
 Route::get('/product/{slug}/{id}', 'ProductController@show')->name('user.product.details');
 Route::get('/shop_page/{vendor}/{category?}/{subcategory?}', 'Vendor\VendorController@shoppage')->name('vendor.shoppage');
 Route::post('review/submit', 'ProductController@reviewsubmit')->name('user.review.submit');
+Route::post('/cart/getproductdetails', 'CartController@getproductdetails')->name('user.cart.getproductdetails');
+Route::get('/cart/getcart', 'CartController@getcart')->name('cart.getcart');
+Route::get('/cart/clearcart', 'CartController@clearcart')->name('cart.clearcart');
+Route::get('/cart/remove', 'CartController@remove')->name('cart.remove');
+Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::post('/stock/check', 'CartController@stockcheck')->name('stock.check');
+Route::post('/cart/update', 'CartController@update')->name('cart.update');
+Route::get('/cart/getTotal', 'CartController@getTotal')->name('cart.getTotal');
+Route::get('/{id}/productratings', 'ProductController@productratings')->name('user.productratings');
+Route::get('/{id}/avgrating', 'ProductController@avgrating')->name('user.avgrating');
+Route::get('/shop_page/{vendor}/{category?}/{subcategory?}', 'Vendor\VendorController@shoppage')->name('vendor.shoppage');
 
 //*************User routes************* */
 Route::get('/home', 'User\PagesController@home')->name('user.home')->middleware('emailVerification', 'bannedUser');
@@ -153,7 +164,16 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/changepassword', 'User\ProfileController@changepassword')->name('user.changepassword')->middleware('emailVerification', 'bannedUser');
     Route::post('/update/password', 'User\ProfileController@updatePassword')->name('user.updatePassword');
 
-    Route::post('/favorit', 'ProductController@favorit')->name('user.favorit');
+    // Checkout Routes
+	Route::get('/checkout', 'User\CheckoutController@index')->name('user.checkout.index')->middleware('emailVerification', 'bannedUser');
+	Route::post('/coupon/apply', 'User\CheckoutController@applycoupon')->name('user.checkout.applycoupon');
+	Route::post('/placeorder', 'User\CheckoutController@placeorder')->name('user.checkout.placeorder');
+	Route::get('/checkout/success', 'User\CheckoutController@success')->name('user.checkout.success')->middleware('emailVerification', 'bannedUser');
+
+
+	// favorit
+	Route::get('/wishlist', 'User\ProfileController@wishlist')->name('user.wishlist')->middleware('emailVerification', 'bannedUser');
+	Route::post('/favorit', 'ProductController@favorit')->name('user.favorit');
 
 });
 

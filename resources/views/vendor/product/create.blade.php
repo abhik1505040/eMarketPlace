@@ -219,11 +219,24 @@
               // if offer type is Percentage...
               let offer = (offeramount*price)/100;
               let total = price - offer;
-              $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr +'<br/><strong>Offer: </strong>'+offer + ' ' + curr +'<br/><strong>Total: </strong>' + total + ' ' + curr);
+             if(total < 0){
+                $("#calcTotal").html('<strong>Invalid offer amount.</strong>');
+                $("#calcTotal").addClass('text-danger');
+              } else {
+                $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr +'<br/><strong>Offer: </strong>'+offer + ' ' + curr +'<br/><strong>Total: </strong>' + total + ' ' + curr);
+                $("#calcTotal").removeClass('text-danger');
+              }
+            //   $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr +'<br/><strong>Offer: </strong>'+offer + ' ' + curr +'<br/><strong>Total: </strong>' + total + ' ' + curr);
             } else {
               // if offer type is Fixed...
               let total = price - offeramount;
-              $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr + '<br/><strong>Offer: </strong>'+offeramount + ' ' + curr+'<br/><strong>Total: </strong>' + total + ' ' + curr);
+              if(total > 0){
+                $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr + '<br/><strong>Offer: </strong>'+offeramount + ' ' + curr+'<br/><strong>Total: </strong>' + total + ' ' + curr);
+                $("#calcTotal").removeClass('text-danger');
+              } else {
+                $("#calcTotal").html('<strong>Invalid offer amount.</strong>');
+                $("#calcTotal").addClass('text-danger');
+              }
             }
             console.log(offeramount);
           } else {
@@ -247,12 +260,23 @@
               // if offer type is Percentage...
               let offer = (offeramount*price)/100;
               let total = price - offer;
-              $("#calcTotal").html('<strong>Price: </strong>'+price+'<br/><strong>Offer: </strong>'+offer+'<br/><strong>Total: </strong>' + total);
+              if(total < 0){
+                $("#calcTotal").html('<strong>Invalid offer amount.</strong>');
+                $("#calcTotal").addClass('text-danger');
+              } else {
+                $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr +'<br/><strong>Offer: </strong>'+offer + ' ' + curr +'<br/><strong>Total: </strong>' + total + ' ' + curr);
+                $("#calcTotal").removeClass('text-danger');
+              }
             } else {
               // if offer type is Fixed...
               let total = price - offeramount;
-              $("#calcTotal").html('<strong>Price: </strong>'+price+'<br/><strong>Offer: </strong>'+offeramount+'<br/><strong>Total: </strong>' + total);
-            }
+              if(total > 0){
+                $("#calcTotal").html('<strong>Price: </strong>'+price + ' ' + curr + '<br/><strong>Offer: </strong>'+offeramount + ' ' + curr+'<br/><strong>Total: </strong>' + total + ' ' + curr);
+                $("#calcTotal").removeClass('text-danger');
+              } else {
+                $("#calcTotal").html('<strong>Invalid offer amount.</strong>');
+                $("#calcTotal").addClass('text-danger');
+              }            }
             console.log(offeramount);
           } else {
             $("#calcTotal").html('Enter price first');

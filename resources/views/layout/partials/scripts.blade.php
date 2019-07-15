@@ -28,6 +28,23 @@
 <script src="{{ asset('assets/user/js/owl.carousel2.thumbs.js') }}" type="text/javascript"></script>
 <!-- main -->
 <script src="{{asset('assets/user/js/main.js')}}"></script>
+{{-- <script>
+    $(document).ready(function() {
+
+  $(window).scroll(function () {
+      //if you hard code, then use console
+      //.log to determine when you want the
+      //nav bar to stick.
+      console.log($(window).scrollTop())
+    if ($(window).scrollTop() > 280) {
+      $('.navbar-area').addClass('navbar-fixed');
+    }
+    if ($(window).scrollTop() < 281) {
+      $('.navbar-area').removeClass('navbar-fixed');
+    }
+  });
+});
+</script> --}}
 
 {{-- Tostr options --}}
 <script type="text/javascript">
@@ -134,9 +151,118 @@
       basecurrsym: '{{$gs->base_curr_symbol}}'
     },
     mounted() {
-
+      this.precartlen = {{Auth::check() ? \App\Cart::where('cart_id', Auth::user()->id)->count() : \App\Cart::where('cart_id', session('browserid'))->count()}};
+      this.cartQuantity = {{Auth::check() ? \App\Cart::where('cart_id', Auth::user()->id)->sum('quantity') : \App\Cart::where('cart_id', session('browserid'))->sum('quantity')}};
+      this.itemsCount = this.cartQuantity;
+      if (this.precartlen > 0) {
+        this.noproduct = false;
+        this.checkoutbtn = true;
+      }
     },
     methods: {
+        addtocart(productid, quantity) {
+        console.log(productid, quantity);
+        var fd = new FormData(document.getElementById('attrform'));
+        fd.append('productid', productid);
+        fd.append('quantity', quantity);
+        fd.append('attribute_helper', '');
+        $.ajax({
+          url: '{{route('user.cart.getproductdetails')}}',
+          type: 'POST',
+          data: fd,
+          contentType: false,
+          processData: false,
+          success: (data) => {
+            console.log(data);
+
+            document.getElementById('errattr').innerHTML = '';
+            if(typeof data.error != 'undefined') {
+              if (typeof data.attribute_helper != 'undefined') {
+                document.getElementById('errattr').innerHTML = data.attribute_helper[0];
+              }
+            }
+            if (data.status == 'productadded') {
+              // console.log(data.product.cartattr);
+              this.products.push(data.product);
+              this.itemsCount = parseInt(this.itemsCount) + parseInt(data.quantity);
+              if ((this.precartlen + this.products.length) > 0) {
+                this.noproduct = false;
+                this.checkoutbtn = true;
+              }
+              if (data.stock == 0) {
+                $("#stock").html("Out of stock");
+                $("#stock").removeClass("base-color");
+                $("#stock").addClass("text-danger");
+              }
+              // Fire toastr
+              toastr["success"]("<strong>Success!</strong> Added to cart!");
+            } else if (data.status == 'shortage') {
+              toastr["error"]("<strong>Sorry!</strong> Vendor has "+ data.quantity +" items left for this product!");
+            } else if (data.status == 'removed') {
+              toastr["error"]("<strong>Sorry!</strong> Vendor has removed this product!");
+            } else if (data.status == 'quantityincr') {
+              $("#quantity"+data.product.cart_id).html('('+data.quantity+')');
+              if (!data.product.current_price) {
+                var price = parseFloat(data.product.price)*parseFloat(data.quantity);
+                console.log(price);
+                $("#price"+data.product.cart_id).html(this.basecurrsym + ' ' + price);
+              } else {
+                var offered_price = parseFloat(data.product.current_price)*parseFloat(data.quantity);
+                var prev_price = parseFloat(data.product.price)*parseFloat(data.quantity);
+                console.log(offered_price, prev_price);
+                $("#price"+data.product.cart_id).html(this.basecurrsym + ' ' + offered_price);
+                $("#delprice"+data.product.cart_id).html(this.basecurrsym + ' ' + prev_price);
+              }
+              this.itemsCount = parseInt(this.itemsCount) + parseInt(data.product.quantity);
+              toastr["success"]("<strong>Success!</strong> Added to cart!");
+            }
+          }
+        });
+
+      },
+
+      removeproduct(cartid) {
+        console.log(cartid);
+        $.get(
+          '{{route('cart.remove')}}',
+          {
+            cartid: cartid
+          },
+          (data) => {
+            console.log(data);
+            $("#singleitem"+cartid).remove();
+            @if (request()->path() == 'cart')
+              $("#tr"+cartid).remove();
+              // Change total and subtotal in DOM
+              $("#subtotal").html(curr + " " + data.subtotal);
+              $("#total").html(curr + " " + data.total);
+            @endif
+            @if (request()->path() == 'checkout')
+              $("#li"+cartid).remove();
+              // Change total and subtotal in DOM
+              $("#subtotal").html(curr + " " + data.subtotal);
+              $("#total").html(curr + " " + data.total);
+            @endif
+            if (data.status == "removed") {
+              $("#itemsCountJquery").removeClass('d-block');
+              $("#itemsCountJquery").addClass('d-none');
+              $("#itemsCountVue").removeClass('d-none');
+              $("#itemsCountVue").addClass('d-block');
+              this.itemsCount = data.quantity;
+              if ((this.precartlen + this.products.length) == 0) {
+                this.noproduct = true;
+                this.checkoutbtn = false;
+              }
+              if (data.stock > 0) {
+                $("#stock").html("In stock");
+                $("#stock").removeClass("text-danger");
+                $("#stock").addClass("base-color");
+              }
+            }
+          }
+        );
+      },
+
 
       showsubcats: function() {
         console.log(this.catid);

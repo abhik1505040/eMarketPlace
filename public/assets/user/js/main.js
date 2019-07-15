@@ -409,17 +409,19 @@
        /*--------------------------
         sticky menu activation
        -------------------------*/
+    //    navbar navbar-area navbar-expand-lg navbar-light bg-light-blue home-6
         var st = $(this).scrollTop();
-        var mainMenuTop = $('.navbar-area');
-        if ($(window).scrollTop() > 1000) {
-            if (st > lastScrollTop) {
-                // hide sticky menu on scrolldown
-                mainMenuTop.removeClass('nav-fixed');
+        var mainMenuTop = $('.navbar.navbar-area.navbar-expand-lg.navbar-light.bg-light-blue.home-6');
+        if ($(window).scrollTop() > 100) {
+            // if (st > lastScrollTop) {
+            //     // hide sticky menu on scrolldown
+            //     mainMenuTop.removeClass('nav-fixed');
 
-            } else {
-                // active sticky menu on scrollup
-                mainMenuTop.addClass('nav-fixed');
-            }
+            // } else {
+            //     // active sticky menu on scrollup
+            //     mainMenuTop.addClass('nav-fixed');
+            // }
+            mainMenuTop.addClass('nav-fixed');
 
         } else {
             mainMenuTop.removeClass('nav-fixed ');

@@ -138,15 +138,15 @@ if(!function_exists('product_code')) {
 // }
 
 
-// if(!function_exists("checkString_e")) {
-//     function checkString_e($value) {
-//         $myvalue = ltrim($value);
-//         $myvalue = rtrim($myvalue);
-//         if ($myvalue == 'null')
-//             $myvalue = '';
-//         return $myvalue;
-//     }
-// }
+if(!function_exists("checkString_e")) {
+    function checkString_e($value) {
+        $myvalue = ltrim($value);
+        $myvalue = rtrim($myvalue);
+        if ($myvalue == 'null')
+            $myvalue = '';
+        return $myvalue;
+    }
+}
 
 // if(!function_exists("getChecksumFromArray")) {
 //     function getChecksumFromArray($arrayList, $key, $sort = 1) {
@@ -280,38 +280,38 @@ if(!function_exists('product_code')) {
 //     }
 // }
 
-// if(!function_exists("sanitizedParam")) {
-//     function sanitizedParam($param) {
-//         $pattern[0]     = "%,%";
-//         $pattern[1]     = "%#%";
-//         $pattern[2]     = "%\(%";
-//         $pattern[3]     = "%\)%";
-//         $pattern[4]     = "%\{%";
-//         $pattern[5]     = "%\}%";
-//         $pattern[6]     = "%<%";
-//         $pattern[7]     = "%>%";
-//         $pattern[8]     = "%`%";
-//         $pattern[9]     = "%!%";
-//         $pattern[10]    = "%\\$%";
-//         $pattern[11]    = "%\%%";
-//         $pattern[12]    = "%\^%";
-//         $pattern[13]    = "%=%";
-//         $pattern[14]    = "%\+%";
-//         $pattern[15]    = "%\|%";
-//         $pattern[16]    = "%\\\%";
-//         $pattern[17]    = "%:%";
-//         $pattern[18]    = "%'%";
-//         $pattern[19]    = "%\"%";
-//         $pattern[20]    = "%;%";
-//         $pattern[21]    = "%~%";
-//         $pattern[22]    = "%\[%";
-//         $pattern[23]    = "%\]%";
-//         $pattern[24]    = "%\*%";
-//         $pattern[25]    = "%&%";
-//         $sanitizedParam = preg_replace($pattern, "", $param);
-//         return $sanitizedParam;
-//     }
-// }
+if(!function_exists("sanitizedParam")) {
+    function sanitizedParam($param) {
+        $pattern[0]     = "%,%";
+        $pattern[1]     = "%#%";
+        $pattern[2]     = "%\(%";
+        $pattern[3]     = "%\)%";
+        $pattern[4]     = "%\{%";
+        $pattern[5]     = "%\}%";
+        $pattern[6]     = "%<%";
+        $pattern[7]     = "%>%";
+        $pattern[8]     = "%`%";
+        $pattern[9]     = "%!%";
+        $pattern[10]    = "%\\$%";
+        $pattern[11]    = "%\%%";
+        $pattern[12]    = "%\^%";
+        $pattern[13]    = "%=%";
+        $pattern[14]    = "%\+%";
+        $pattern[15]    = "%\|%";
+        $pattern[16]    = "%\\\%";
+        $pattern[17]    = "%:%";
+        $pattern[18]    = "%'%";
+        $pattern[19]    = "%\"%";
+        $pattern[20]    = "%;%";
+        $pattern[21]    = "%~%";
+        $pattern[22]    = "%\[%";
+        $pattern[23]    = "%\]%";
+        $pattern[24]    = "%\*%";
+        $pattern[25]    = "%&%";
+        $sanitizedParam = preg_replace($pattern, "", $param);
+        return $sanitizedParam;
+    }
+}
 
 // if(!function_exists("callNewAPI")) {
 //     function callNewAPI($apiURL, $requestParamList) {
@@ -336,82 +336,82 @@ if(!function_exists('product_code')) {
 // }
 // // For Paytm
 
-// if(!function_exists("getPriceSum")) {
-//   function getPriceSum($cartid, $productid) {
-//     $cart = Cart::where('cart_id', $cartid)->where('product_id', $productid)->first();
-//     $priceSum = $cart->price*$cart->quantity;
-//     return $priceSum;
-//   }
-// }
+if(!function_exists("getPriceSum")) {
+  function getPriceSum($cartid, $productid) {
+    $cart = Cart::where('cart_id', $cartid)->where('product_id', $productid)->first();
+    $priceSum = $cart->price*$cart->quantity;
+    return $priceSum;
+  }
+}
 
-// if(!function_exists("getSubTotal")) {
-//   function getSubTotal($cartid) {
+if(!function_exists("getSubTotal")) {
+  function getSubTotal($cartid) {
 
-//     $cartItems = Cart::where('cart_id', $cartid)->get();
-//     $amo = 0;
-//     foreach ($cartItems as $item) {
-//       if (!empty($item->current_price)) {
-//         $amo += $item->current_price*$item->quantity;
-//       } else {
-//         $amo += $item->price*$item->quantity;
-//       }
-//     }
+    $cartItems = Cart::where('cart_id', $cartid)->get();
+    $amo = 0;
+    foreach ($cartItems as $item) {
+      if (!empty($item->current_price)) {
+        $amo += $item->current_price*$item->quantity;
+      } else {
+        $amo += $item->price*$item->quantity;
+      }
+    }
 
-//     $char = 0;
-//     $coupon = Session::get('coupon_code');
-//     if(session()->has('coupon_code') && Coupon::where('coupon_code', $coupon)->count() == 1){
-//       $cdetails = Coupon::where('coupon_code', $coupon)->latest()->first();
-//       if ($cdetails->coupon_type == 'percentage'){
-//         $char = ($amo*$cdetails->coupon_amount)/100;
-//       }else{
-//         if($cdetails->coupon_min_amount <= $amo){
-//           $char = $cdetails->coupon_amount;
-//         }
-//       }
-//     }
-//     $subtotal = $amo - $char;
+    // $char = 0;
+    // $coupon = Session::get('coupon_code');
+    // if(session()->has('coupon_code') && Coupon::where('coupon_code', $coupon)->count() == 1){
+    //   $cdetails = Coupon::where('coupon_code', $coupon)->latest()->first();
+    //   if ($cdetails->coupon_type == 'percentage'){
+    //     $char = ($amo*$cdetails->coupon_amount)/100;
+    //   }else{
+    //     if($cdetails->coupon_min_amount <= $amo){
+    //       $char = $cdetails->coupon_amount;
+    //     }
+    //   }
+    // }
+    // $subtotal = $amo - $char;
 
-//     return round($subtotal, 2);
-//   }
-// }
+    return round($amo, 2);
+  }
+}
 
-// if(!function_exists("getTotal")) {
-//   function getTotal($cartid) {
-//     $subtotal = getSubTotal($cartid);
-//     $gs = GS::first();
+if(!function_exists("getTotal")) {
+  function getTotal($cartid) {
+    $subtotal = getSubTotal($cartid);
+    $gs = GS::first();
 
-//     if (PlacePayment::where('cart_id', $cartid)->count() > 0) {
-//       $pm = PlacePayment::where('cart_id', $cartid)->first()->payment;
-//       $place = PlacePayment::where('cart_id', $cartid)->first()->place;
+    // if (PlacePayment::where('cart_id', $cartid)->count() > 0) {
+    //   $pm = PlacePayment::where('cart_id', $cartid)->first()->payment;
+    //   $place = PlacePayment::where('cart_id', $cartid)->first()->place;
 
-//       // if payment method is cash on delivery
-//       if ($pm == 1) {
-//         if ($place == 'in') {
-//           $scharge = $gs->in_cash_on_delivery;
-//         } elseif ($place == 'around') {
-//           $scharge = $gs->around_cash_on_delivery;
-//         } else {
-//           $scharge = $gs->world_cash_on_delivery;
-//         }
-//       }
-//       // if payment method is cash on advance
-//       else {
-//         if ($place == 'in') {
-//           $scharge = $gs->in_advanced;
-//         } elseif ($place == 'around') {
-//           $scharge = $gs->around_advanced;
-//         } else {
-//           $scharge = $gs->world_advanced;
-//         }
-//       }
-//     } else {
-//       $scharge = 0;
-//     }
+    //   // if payment method is cash on delivery
+    //   if ($pm == 1) {
+    //     if ($place == 'in') {
+    //       $scharge = $gs->in_cash_on_delivery;
+    //     } elseif ($place == 'around') {
+    //       $scharge = $gs->around_cash_on_delivery;
+    //     } else {
+    //       $scharge = $gs->world_cash_on_delivery;
+    //     }
+    //   }
+    //   // if payment method is cash on advance
+    //   else {
+    //     if ($place == 'in') {
+    //       $scharge = $gs->in_advanced;
+    //     } elseif ($place == 'around') {
+    //       $scharge = $gs->around_advanced;
+    //     } else {
+    //       $scharge = $gs->world_advanced;
+    //     }
+    //   }
+    // } else {
+    //   $scharge = 0;
+    // }
 
 
-//     $total =  $subtotal + (($gs->tax*$subtotal)/100);
-//     $total = $total+$scharge;
+    $total =  $subtotal + (($gs->tax*$subtotal)/100);
+    $total = $total+$gs->shipping_charge;
 
-//     return round($total, 2);
-//   }
-// }
+    return round($total, 2);
+  }
+}

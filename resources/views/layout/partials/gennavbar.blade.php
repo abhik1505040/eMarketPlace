@@ -7,11 +7,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    {{--<div class="left-content">
+                    <div class="left-content">
+                        {{-- <a href="{{route('user.home')}}" class="logo main-logo">
+                            <img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
+                        </a> --}}
                         <a href="{{route('user.home')}}" class="logo main-logo">
-                            {{--<img src="{{asset('assets/user/interfaceControl/logoIcon/logo.jpg')}}" alt="logo">
+                                <b>eMarketPlace</b>
                         </a>
-                    </div> --}}
+                    </div>
                     <div class="right-content">
                         <ul>
 
@@ -89,7 +92,7 @@
                     <!-- navbar collapse start -->
                     <ul class="navbar-nav">
                         <!-- navbar- nav -->
-                        @if (!Auth::guard('vendor')->check() && Auth::check())
+                        @if (!Auth::guard('vendor')->check())
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('user.home')}}">Home</a>
                           </li>
@@ -167,8 +170,8 @@
                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->username}}</a>
                               <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('user.profile')}}">Profile</a>
-                                    {{-- <a class="dropdown-item" href="{{route('user.wishlist')}}">Wishlist</a>
-                                    <a class="dropdown-item" href="{{route('user.orders')}}">Orders</a>
+                                    <a class="dropdown-item" href="{{route('user.wishlist')}}">Wishlist</a>
+                                    {{-- <a class="dropdown-item" href="{{route('user.orders')}}">Orders</a>
                                     <a class="dropdown-item" href="{{route('user.shipping')}}">Shipping Address</a>
                                     <a class="dropdown-item" href="{{route('user.billing')}}">Billing Address</a> --}}
                                     <a class="dropdown-item" href="{{route('user.logout')}}">Logout</a>
@@ -188,18 +191,18 @@
                 </div>
                 <!-- navbar collapse end -->
 
-                {{-- @if (!Auth::guard('vendor')->check())
+                @if (!Auth::guard('vendor')->check())
                 <div class="right-btn-wrapper">
                    <ul>
                        @if (!Auth::guard('vendor')->check() || request()->is('product/*/details') || request()->is('cart'))
-                       <li class="cart" id="cart"><i class="fas fa-shopping-bag"></i>
+                       <li class="cart" id="cart"><i class="fas fa-shopping-cart"></i>
                         <span class="badge d-block" id="itemsCountVue">@{{itemsCount}}</span>
                         <span class="badge d-none" id="itemsCountJquery"></span>
                        </li>
                        @endif
                    </ul>
                 </div>
-                @endif --}}
+                @endif
 
 
             </div>
@@ -214,7 +217,7 @@
             </div>
             <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
         </form>
-    </div>
+    </div> --}}
     <!-- slide sidebar area start -->
     <div class="slide-sidebar-area" id="slide-sidebar-area">
         <div class="top-content"><!-- top content -->
@@ -224,14 +227,15 @@
             <span class="side-sidebar-close-btn" id="side-sidebar-close-btn"><i class="fas fa-times"></i></span>
         </div><!-- //. top content -->
     </div>
-    <!-- slide sidebar area end --> --}}
+    <!-- slide sidebar area end -->
 
-    {{-- @if (!Auth::guard('vendor')->check() || request()->is('product/*/details') || request()->is('cart'))
+    @if (!Auth::guard('vendor')->check() || request()->is('product/*/details') || request()->is('cart'))
       <!-- cart sidebar area start -->
       <div class="cart-sidebar-area" id="cart-sidebar-area">
           <div class="top-content"><!-- top content -->
               <a href="{{route('user.home')}}" class="logo">
-                  <img src="{{asset('assets/user/interfaceControl/logoIcon/footer_logo.jpg')}}" alt="footer-logo">
+                  {{-- <img src="{{asset('assets/user/interfaceControl/logoIcon/footer_logo.jpg')}}" alt="footer-logo"> --}}
+                  <h1>eMarketPlace</h1>
               </a>
               <span class="side-sidebar-close-btn" ><i class="fas fa-times"></i></span>
           </div><!-- //. top content -->
@@ -301,7 +305,7 @@
                             <img :src="'{{url('/assets/user/img/products/')}}'+'/'+product.preimg" alt="recent review">
                         </div>
                         <div class="content">
-                            <a :href="'{{url('/')}}/product/' + product.slug + '/' + product.id"><h4 class="title">@{{product.title.length > 18 ? product.title.substring(0, 18) + '...' : product.title.substring}}</h4></a>
+                            <a :href="'{{url('/')}}/product/' + product.slug + '/' + product.id"><h4 class="title">@{{product.title.length > 18 ? product.title.substring(0, 18) + '...' : product.title}}</h4></a>
                             <div style="font-size:12px;" class="price" v-if="!product.current_price"><span class="pprice" :id="'price'+product.cart_id">{{$gs->base_curr_symbol}} @{{product.price * product.quantity}}</span> <span :id="'quantity'+product.cart_id">(@{{product.quantity}})</span></div>
                             <div style="font-size:12px;" class="price" v-if="product.current_price"><span class="pprice" :id="'price'+product.cart_id">{{$gs->base_curr_symbol}} @{{product.current_price * product.quantity}}</span> <del class="dprice" :id="'delprice'+product.cart_id">{{$gs->base_curr_symbol}} @{{product.price * product.quantity}}</del> <span :id="'quantity'+product.cart_id">(@{{product.quantity}})</span></div>
                             <div style="font-size:12px;" v-if="product.countattr > 0">
@@ -327,4 +331,4 @@
           </div><!-- //. bottom content -->
       </div>
       <!-- cart sidebar area end -->
-    @endif --}}
+    @endif

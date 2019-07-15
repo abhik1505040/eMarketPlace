@@ -85,7 +85,7 @@ class ProductController extends Controller
       return $reviews;
     }
 
-    /*public function reviewsubmit(Request $request) {
+    public function reviewsubmit(Request $request) {
 
       $validator = Validator::make($request->all(), [
         'rating' => [
@@ -117,7 +117,7 @@ class ProductController extends Controller
       Session::flash('success', 'Reviewed successfully');
 
       return "success";
-    }*/
+    }
 
 
     // add to cart...
@@ -135,7 +135,7 @@ class ProductController extends Controller
 
 
       // if this product is already in the cart then just update the quantity...
-      /*if (Cart::where('cart_id', $sessionid)->where('product_id', $product->id)->count() > 0) {
+      if (Cart::where('cart_id', $sessionid)->where('product_id', $product->id)->count() > 0) {
         $cart = Cart::where('cart_id', $sessionid)->where('product_id', $product->id)->first();
         $cart->quantity = $cart->quantity + 1;
         $cart->save();
@@ -150,7 +150,7 @@ class ProductController extends Controller
       $cart->title = $product->title;
       $cart->price = $product->price;
       $cart->quantity = $request->quantity;
-      $cart->save();*/
+      $cart->save();
 
       $product['quantity'] = $request->quantity;
       return response()->json(['status'=>'productadded', 'product'=>$product, 'quantity'=>$product['quantity']]);

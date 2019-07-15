@@ -94,10 +94,11 @@
                                     <li>Stock:  <span class="right text-danger" id="stock">Out of stock </span></li>
                                   @endif
 
-                                  {{--@php
+                                  @php
                                     $attrs = json_decode($product->attributes, true);
                                   @endphp
 
+                                @if($attrs != null)
                                   @foreach ($attrs as $key => $attr)
                                     @php
                                       $pieces = explode("_", $key);
@@ -114,7 +115,8 @@
                                         <span class="mr-2"><input type="radio" name="{{$key}}[]" value="{{$value}}"> {{$value}}</span>
                                       @endforeach
                                     </li>
-                                  @endforeach--}}
+                                  @endforeach
+                                @endif
 
                                   <li>Shop Name:  <span class="right"><a href="#" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li>
 
@@ -137,16 +139,15 @@
                                         $count = \App\Favorit::where('user_id', Auth::user()->id)->where('product_id', $product->id)->count();
                                       @endphp
                                       @if ($count == 0)
-                                        <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li>
-                                        {{-- <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart"></i></a></li> --}}
+                                        {{-- <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li> --}}
+                                        <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart"></i></a></li>
                                       @else
-                                        <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li>
-                                        {{-- <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart red"></i></a></li> --}}
+                                        {{-- <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li> --}}
+                                        <li><a href="#" onclick="favorit(event, {{$product->id}})"><i id="heart" class="fas fa-heart red"></i></a></li>
                                       @endif
                                     @else
-                                        <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li>
-
-                                      {{-- <li><a href="{{route('login')}}"><i id="heart" class="fas fa-heart"></i></a></li> --}}
+                                        {{-- <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li> --}}
+                                      <li><a href="{{route('login')}}"><i id="heart" class="fas fa-heart"></i></a></li>
                                     @endif
 
                                       {{--<li><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}"><i class="fab fa-facebook-f"></i></a></li>
@@ -306,6 +307,7 @@
             $("#heart").addClass('red');
           } else if (data == "unfavorit") {
             $("#heart").removeClass('red');
+            toastr["error"]("Removed from wishlist!");
           }
         }
       })

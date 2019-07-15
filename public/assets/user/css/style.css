@@ -97,6 +97,9 @@
     @Typography
 -----------------*/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Poppins:300,400,500,600,700|Rubik:300,400,500,700");
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
+@import url(https://fonts.googleapis.com/css?family=Niconne);
+
 /*---------------------------
 ** Global Scss
 ---------------------------*/
@@ -1069,6 +1072,13 @@ ul {
 .dropdown:hover > .dropdown-menu {
   display: block; }
 
+.navbar-fixed {
+    top: 0;
+    z-index: 100;
+  position: fixed;
+    width: 100%;
+}
+
 .navbar-area {
   -webkit-transition: 0.5s ease-in;
   -moz-transition: 0.5s ease-in;
@@ -1214,7 +1224,7 @@ ul {
     .navbar-area.bg-orange .right-btn-wrapper ul li.cart .badge {
       background-color: #232b37; }
   .navbar-area.nav-fixed {
-    /*position: fixed;*/
+    position: fixed;
     left: 0;
     top: 0px;
     width: 100%;
@@ -1238,11 +1248,11 @@ ul {
       -moz-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
       transition: all 0.3s ease-in;
-      top: 100%; }
+      top: 50%; }
     .navbar-area.nav-fixed .logo-wrapper.navbar-brand .mobile-logo {
       display: block; }
     .navbar-area.nav-fixed .logo-wrapper.navbar-brand .form-element {
-      display: none; }
+      display: inline-block; }
   .navbar-area .right-btn-wrapper ul li {
     display: inline-block;
     margin: 0 10px;
@@ -1874,9 +1884,10 @@ ul {
 
 .support-bar-two {
   border-bottom: 1px solid #f6795b;
-  padding: 25px 0 17px 0; }
+  padding: 35px 0 0px 0; }
   .support-bar-two.bg-white {
-    border-bottom: none; }
+    border-bottom: none;
+ }
     .support-bar-two.bg-white.home-4 {
       margin-bottom: 13px; }
   .support-bar-two.home-6 {
@@ -1923,8 +1934,9 @@ ul {
         color: #a2aab6;
         font-weight: 400; }
   .support-bar-two .left-content {
-    display: inline-block;
-    margin-top: 6px; }
+    margin-top: 10px;
+    display: ruby-text;
+ }
   .support-bar-two .right-content {
     display: inline-block;
     float: right; }
@@ -3300,6 +3312,19 @@ ul {
 /*---------------------------
     Brand Logo Carousel
 -----------------------------*/
+
+.logo-mine {
+    margin-bottom: 40px;
+    font-family: "Niconne";
+    color: #fff;
+}
+
+.logo-mine h1 {
+    font-size: 52px;
+    font-weight: 400;
+}
+
+
 .brand-logo-carousel-area-one {
   margin: 0 30px 30px 30px;
   border: 2px solid #e5e5e5;
@@ -4607,7 +4632,8 @@ ul {
                 outline: none; }
   .cart-content-area .cart-content-inner .bottom-content {
     font-family: "Rubik", sans-serif;
-    margin-top: 40px; }
+    margin-top: 40px;
+     }
     .cart-content-area .cart-content-inner .bottom-content .left-content-area {
       display: inline-block;
       width: 450px; }
@@ -4672,7 +4698,8 @@ ul {
           margin-right: 0; }
       .cart-content-area .cart-content-inner .bottom-content .right-content-area .cart-total {
         float: right;
-        margin-top: 32px; }
+        margin-top: 32px;
+        width: 350px; }
         .cart-content-area .cart-content-inner .bottom-content .right-content-area .cart-total .title {
           font-size: 30px;
           line-height: 40px;
@@ -7085,6 +7112,10 @@ a.view-all-products:hover {
     font-size: 30px;
 }
 
+.cart i.fas.fa-shopping-cart {
+    font-size: 32px;
+}
+
 .navbar-area.bg-light-blue .right-btn-wrapper ul li.cart .badge {
     background-color: #000;
     color: #fff;
@@ -7325,7 +7356,31 @@ ul.home-subcategories li:last-child {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
-.footer-logo img, .logo img {
+.footer-logo img, .logo img, .logo b {
     max-width: 190px;
     max-height: 50px;
+    font-size: 47px;
+    font-weight: 400;
+    font-family: "Niconne";
+    color: #813772;
+
 }
+
+.logo h1{
+    max-width: 190px;
+    max-height: 50px;
+    margin-bottom: 40px;
+    font-family: "Niconne";
+    color: #00fff6;
+    font-size: 47px;
+    font-weight: 400;
+}
+
+.logo-extra h5{
+    font-family: "Niconne";
+    color: #2f00ff;
+    font-size: 47px;
+
+}
+
+
