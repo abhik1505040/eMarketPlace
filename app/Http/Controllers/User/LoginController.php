@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 // use Laravel\Socialite\Facades\Socialite;
-// use App\Cart;
+use App\Cart;
 // use App\PlacePayment;
 use Validator;
 use Session;
@@ -47,23 +47,23 @@ class LoginController extends Controller
             $userId = Auth::user()->id;
 
             // if the guest Cart is containg any product...
-            // if (Cart::where('cart_id', session()->get('browserid'))->count() > 0) {
-            //   foreach (Cart::where('cart_id', session()->get('browserid'))->get() as $guestcart) {
-            //     // if the guest cart is containing a product which is already in the logged in user's Cart...
-            //     if (Cart::where('cart_id', $userId)->where('product_id', $guestcart->product_id)->where('attributes', '[]')->count() > 0) {
-            //       // increase the product quantity in logged in user's cart...
-            //       $authcart = Cart::where('cart_id', $userId)->where('product_id', $guestcart->product_id)->first();
-            //       $authcart->quantity = $authcart->quantity + $guestcart->quantity;
-            //       $authcart->save();
-            //     } else {
-            //       // replacing the the guest cart's cart_id with logged in users ID...
-            //       $guestcart->cart_id = $userId;
-            //       $guestcart->save();
-            //     }
-            //   }
-            //   // clear browser cart
-            //   Cart::where('cart_id', session()->get('browserid'))->delete();
-            // }
+            if (Cart::where('cart_id', session()->get('browserid'))->count() > 0) {
+              foreach (Cart::where('cart_id', session()->get('browserid'))->get() as $guestcart) {
+                // if the guest cart is containing a product which is already in the logged in user's Cart...
+                if (Cart::where('cart_id', $userId)->where('product_id', $guestcart->product_id)->where('attributes', '[]')->count() > 0) {
+                  // increase the product quantity in logged in user's cart...
+                  $authcart = Cart::where('cart_id', $userId)->where('product_id', $guestcart->product_id)->first();
+                  $authcart->quantity = $authcart->quantity + $guestcart->quantity;
+                  $authcart->save();
+                } else {
+                  // replacing the the guest cart's cart_id with logged in users ID...
+                  $guestcart->cart_id = $userId;
+                  $guestcart->save();
+                }
+              }
+              // clear browser cart
+              Cart::where('cart_id', session()->get('browserid'))->delete();
+            }
 
             // $guestpp = PlacePayment::where('cart_id', session()->get('browserid'));
             // $authpp = PlacePayment::where('cart_id', $userId);

@@ -173,7 +173,14 @@ Route::group(['middleware' => 'auth'], function() {
 
 	// favorit
 	Route::get('/wishlist', 'User\ProfileController@wishlist')->name('user.wishlist')->middleware('emailVerification', 'bannedUser');
-	Route::post('/favorit', 'ProductController@favorit')->name('user.favorit');
+    Route::post('/favorit', 'ProductController@favorit')->name('user.favorit');
+    Route::get('/product/{slug}/{id}/hearts', 'ProductController@showHearts')->name('user.product.detailsHearts')->middleware('emailVerification', 'bannedUser');
+
+    // orders
+    Route::get('/orders', 'User\ProfileController@orders')->name('user.orders')->middleware('emailVerification', 'bannedUser');
+    Route::get('/{orderid}/orderdetails', 'User\ProfileController@orderdetails')->name('user.orderdetails')->middleware('emailVerification','bannedUser');
+    Route::post('/complain', 'User\ProfileController@complain')->name('user.complain');
+    Route::post('/refund', 'User\ProfileController@refund')->name('user.refund');
 
 });
 

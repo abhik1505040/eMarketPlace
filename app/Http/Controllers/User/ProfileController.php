@@ -5,9 +5,9 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-// use App\Favorit;
-// use App\Order;
-// use App\Orderedproduct;
+use App\Favorit;
+use App\Order;
+use App\Orderedproduct;
 // use App\Refund;
 use Auth;
 use Hash;
@@ -34,6 +34,14 @@ class ProfileController extends Controller
 
       $in = $request->except('_token');
       $user = User::find(Auth::user()->id);
+      $in['first_name'] = $request->first_name;
+      $in['last_name'] = $request->last_name;
+      $in['gender'] = $request->gender;
+      $in['date_of_birth'] = $request->date_of_birth;
+      $in['phone'] = $request->phone;
+      $in['city'] = $request->city;
+      $in['zip_code'] = $request->zip_code;
+      $in['address'] = $request->address;
     //   if (empty($user->shipping_first_name)) {
     //     $in['shipping_first_name'] = $request->first_name;
     //   }
@@ -96,43 +104,43 @@ class ProfileController extends Controller
       return view('user.wishlist', $data);
     }
 
-    // public function orders(Request $request) {
-    //   // return $request;
-    //   if ($request->order_number) {
-    //     $data['on'] = $request->order_number;
-    //     $data['orders'] = Order::orderBy('id', 'DESC')->where('unique_id', $request->order_number)->paginate(10);
-    //   } else {
-    //     $data['on'] = '';
-    //     $data['orders'] = Order::orderBy('id', 'DESC')->paginate(10);
-    //   }
+    public function orders(Request $request) {
+      // return $request;
+      if ($request->order_number) {
+        $data['on'] = $request->order_number;
+        $data['orders'] = Order::orderBy('id', 'DESC')->where('unique_id', $request->order_number)->paginate(10);
+      } else {
+        $data['on'] = '';
+        $data['orders'] = Order::orderBy('id', 'DESC')->paginate(10);
+      }
 
-    //   return view('user.order.orders', $data);
-    // }
+      return view('user.order.orders', $data);
+    }
 
-    // public function orderdetails($orderid) {
-    //   $data['order'] = Order::find($orderid);
-    //   $data['orderedproducts'] = Orderedproduct::where('order_id', $orderid)->get();
-    //   $data['subtotal'] = 0;
-    //   $data['ccharge'] = 0;
-    //   foreach ($data['orderedproducts'] as $op) {
-    //     $data['ccharge'] += $op->coupon_amount;
-    //   }
-    //   return view('user.order.details', $data);
-    // }
+    public function orderdetails($orderid) {
+      $data['order'] = Order::find($orderid);
+      $data['orderedproducts'] = Orderedproduct::where('order_id', $orderid)->get();
+      $data['subtotal'] = 0;
+      $data['ccharge'] = 0;
+      foreach ($data['orderedproducts'] as $op) {
+        $data['ccharge'] += $op->coupon_amount;
+      }
+      return view('user.order.details', $data);
+    }
 
-    // public function complain(Request $request) {
-    //   $request->validate([
-    //     'comment_type' => 'required',
-    //     'comment' => 'required'
-    //   ]);
+    public function complain(Request $request) {
+      $request->validate([
+        'comment_type' => 'required',
+        'comment' => 'required'
+      ]);
 
-    //   $op = Orderedproduct::find($request->opid);
-    //   $op->comment_type = $request->comment_type;
-    //   $op->comment = $request->comment;
-    //   $op->save();
-    //   Session::flash('success', 'Complained successfully');
-    //   return "success";
-    // }
+      $op = Orderedproduct::find($request->opid);
+      $op->comment_type = $request->comment_type;
+      $op->comment = $request->comment;
+      $op->save();
+      Session::flash('success', 'Complained successfully');
+      return "success";
+    }
 
     // public function refund(Request $request) {
     //   $request->validate([

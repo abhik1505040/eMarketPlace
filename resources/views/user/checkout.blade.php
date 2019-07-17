@@ -18,7 +18,7 @@
                             <div class="col-lg-6">
                                 <div class="form-element">
                                     <label>First name <span class="base-color">**</span></label>
-                                    <input name="first_name" type="text" class="input-field" placeholder="First name..." value="{{$user->shipping_first_name}}">
+                                    <input name="first_name" type="text" class="input-field" placeholder="First name..." value="{{$user->first_name}}">
                                     @if ($errors->has('first_name'))
                                       <p class="text-danger">{{$errors->first('first_name')}}</p>
                                     @endif
@@ -27,7 +27,7 @@
                             <div class="col-lg-6">
                                 <div class="form-element">
                                     <label>Last Name <span class="base-color">**</span></label>
-                                    <input name="last_name" type="text" class="input-field" placeholder="Last name..." value="{{$user->shipping_last_name}}">
+                                    <input name="last_name" type="text" class="input-field" placeholder="Last name..." value="{{$user->last_name}}">
                                     @if ($errors->has('last_name'))
                                       <p class="text-danger">{{$errors->first('last_name')}}</p>
                                     @endif
@@ -38,7 +38,7 @@
                             <div class="col-lg-6">
                                 <div class="form-element">
                                     <label>Phone <span class="base-color">**</span></label>
-                                    <input name="phone" type="text" class="input-field" placeholder="Phone Number..." value="{{$user->shipping_phone}}">
+                                    <input name="phone" type="text" class="input-field" placeholder="Phone Number..." value="{{$user->phone}}">
                                     @if ($errors->has('phone'))
                                       <p class="text-danger">{{$errors->first('phone')}}</p>
                                     @endif
@@ -47,7 +47,7 @@
                             <div class="col-lg-6">
                                 <div class="form-element">
                                     <label>Email <span class="base-color">**</span></label>
-                                    <input name="email" type="text" class="input-field" placeholder="Email Address..." value="{{$user->shipping_email}}">
+                                    <input name="email" type="text" class="input-field gray-bg" placeholder="Email Address..." value="{{$user->email}}" readonly>
                                     @if ($errors->has('email'))
                                       <p class="text-danger">{{$errors->first('email')}}</p>
                                     @endif
@@ -136,6 +136,8 @@
                         @foreach ($cartItems as $cart)
                           <li class="name" id="li{{$cart->product_id}}">
                               <div class="single-order-list">
+
+
                                   <a href="{{route('user.product.details', [$cart->product->slug, $cart->product->id])}}">{{strlen($cart->title) > 50 ? substr($cart->title, 0, 50) . '...' : $cart->title}}</a>
                                   <span class="right">
                                     @if ($cart->current_price)
@@ -144,6 +146,36 @@
                                       {{$gs->base_curr_symbol}} {{$cart->price*$cart->quantity}}
                                     @endif
                                   </span>
+
+                                  <br>
+                                @php
+                                $storedattr = json_decode($cart->attributes, true);
+                                @endphp
+                                @if (count($storedattr) > 0)
+                                    @php
+                                        $attrs = '';
+                                        $j=0;
+                                        foreach ($storedattr as $key => $values) {
+                                        $attrs .= "".str_replace('_', ' ', $key).": ";
+                                        $i = 0;
+                                        foreach ($values as $v) {
+                                            $attrs .= "$v";
+                                            if (count($values)-1 != $i) {
+                                            $attrs .= ", ";
+                                            } else {
+                                            $attrs .= " ";
+                                            }
+                                            $i++;
+                                        }
+                                        if (count($storedattr) - 1 != $j) {
+                                            $attrs .= ' | ';
+                                        }
+                                        $j++;
+                                        }
+                                    @endphp
+                                    {{$attrs}}
+                                @endif
+
                               </div>
                           </li>
                         @endforeach
@@ -169,7 +201,7 @@
                         <li class="shipping">
                             <div class="single-order-list title-bold">
                                 Shipping Charge
-                                <span class="right normal" id="shippingCharge"></span>
+                            <span class="right normal" id="shippingCharge">{{$gs->shipping_charge}}</span>
                             </div>
                         </li>
                         <li>
@@ -229,15 +261,16 @@
                       </div> --}}
                       <br>
 
-                      {{-- <h5>Payment Method:</h5>
+                      <h5>Payment Method:</h5>
                       <div class="row">
                         <div class="col-md-12">
-                          <select class="form-control" name="payment_method" id="paymentMethod" onchange="calcTotal(this.value)">
+                          {{-- <select class="form-control" name="payment_method" id="paymentMethod" onchange="calcTotal(this.value)">
                             <option value="1" @if(!empty($pp->payment)) {{$pp->payment==1?'selected':''}} @else selected @endif>Cash on delivery</option>
                             <option value="2" @if(!empty($pp->payment)) {{$pp->payment==2?'selected':''}} @endif>Advance</option>
-                          </select>
+                          </select> --}}
+                          <p style="font-size: 20px"> Cash on delivery </p>
                         </div>
-                      </div> --}}
+                      </div>
                       <br>
                     </div>
                     {{-- <div class="checkbox-element account">
@@ -271,24 +304,24 @@
     var curr = "{{$gs->base_curr_symbol}}";
 
     $(document).ready(function() {
-      calcTotal(document.getElementById('paymentMethod').value);
+      calcTotal();
     });
 
-    function calcTotal(paymentMethod) {
-      var place;
-      var shippingmethod = document.getElementsByName('place');
-      for (var i = 0; i < shippingmethod.length; i++) {
-        if (shippingmethod[i].checked) {
-          place = shippingmethod[i].value;
-        }
-      }
+    function calcTotal() {
+    //   var place;
+    //   var shippingmethod = document.getElementsByName('place');
+    //   for (var i = 0; i < shippingmethod.length; i++) {
+    //     if (shippingmethod[i].checked) {
+    //       place = shippingmethod[i].value;
+    //     }
+    //   }
       // console.log(place);
       // console.log(paymentMethod);
       $.get(
         '{{route('cart.getTotal')}}',
         {
-          place: place,
-          paymentMethod: paymentMethod
+        //   place: place,
+        //   paymentMethod: paymentMethod
         },
         function(data) {
           console.log(data);

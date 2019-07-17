@@ -22,9 +22,9 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='profile') active @endif" href="{{route('user.profile')}}">Update Profile</a></li>
-                  {{-- <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='wishlist') active @endif" href="{{route('user.wishlist')}}">Wishlist</a></li>
+                  <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='wishlist') active @endif" href="{{route('user.wishlist')}}">Wishlist</a></li>
                   <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='orders') active @endif" href="{{route('user.orders')}}">Orders</a></li>
-                  <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='shipping') active @endif" href="{{route('user.shipping')}}">Shipping Address</a></li>
+                  {{-- <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='shipping') active @endif" href="{{route('user.shipping')}}">Shipping Address</a></li>
                   <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='billing') active @endif" href="{{route('user.billing')}}">Billing Address</a></li> --}}
                   <li class="list-group-item"><a class="sidebar-links @if(request()->path()=='changepassword') active @endif" href="{{route('user.changepassword')}}">Change Password</a></li>
                   <li class="list-group-item"><a class="sidebar-links" href="{{route('user.logout')}}">Logout</a></li>

@@ -171,8 +171,8 @@
                               <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('user.profile')}}">Profile</a>
                                     <a class="dropdown-item" href="{{route('user.wishlist')}}">Wishlist</a>
-                                    {{-- <a class="dropdown-item" href="{{route('user.orders')}}">Orders</a>
-                                    <a class="dropdown-item" href="{{route('user.shipping')}}">Shipping Address</a>
+                                    <a class="dropdown-item" href="{{route('user.orders')}}">Orders</a>
+                                    {{-- <a class="dropdown-item" href="{{route('user.shipping')}}">Shipping Address</a>
                                     <a class="dropdown-item" href="{{route('user.billing')}}">Billing Address</a> --}}
                                     <a class="dropdown-item" href="{{route('user.logout')}}">Logout</a>
                               </div>

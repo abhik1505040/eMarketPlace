@@ -412,7 +412,7 @@
     //    navbar navbar-area navbar-expand-lg navbar-light bg-light-blue home-6
         var st = $(this).scrollTop();
         var mainMenuTop = $('.navbar.navbar-area.navbar-expand-lg.navbar-light.bg-light-blue.home-6');
-        if ($(window).scrollTop() > 100) {
+        if ($(window).scrollTop() > 150) {
             // if (st > lastScrollTop) {
             //     // hide sticky menu on scrolldown
             //     mainMenuTop.removeClass('nav-fixed');

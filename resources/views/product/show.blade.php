@@ -147,7 +147,7 @@
                                       @endif
                                     @else
                                         {{-- <li><a href="#"><i id="heart" class="fas fa-heart"></i></a></li> --}}
-                                      <li><a href="{{route('login')}}"><i id="heart" class="fas fa-heart"></i></a></li>
+                                      <li><a href="{{route('user.product.detailsHearts', [$product->slug, $product->id])}}"><i id="heart" class="fas fa-heart"></i></a></li>
                                     @endif
 
                                       {{--<li><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}"><i class="fab fa-facebook-f"></i></a></li>
@@ -309,6 +309,7 @@
             $("#heart").removeClass('red');
             toastr["error"]("Removed from wishlist!");
           }
+
         }
       })
     }

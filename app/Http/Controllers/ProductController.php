@@ -80,6 +80,14 @@ class ProductController extends Controller
       return view('product.show', $data);
     }
 
+    public function showHearts($slug=null, $id) {
+        $today = new \Carbon\Carbon(Carbon::now());
+        $data['product'] = Product::find($id);
+        $data['sales'] = $data['product']->sales;
+        $data['rproducts'] = Product::where('subcategory_id', $data['product']->subcategory_id)->where('deleted', 0)->inRandomOrder()->limit(10)->get();
+        return view('product.show', $data);
+      }
+
     public function getcomments(Request $request) {
       $reviews = ProductReview::where('product_id', $request->product_id)->orderBy('id', 'DESC')->get();
       return $reviews;

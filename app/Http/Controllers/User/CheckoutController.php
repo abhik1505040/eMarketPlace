@@ -24,6 +24,8 @@ class CheckoutController extends Controller
       $gs = GS::first();
       if (Auth::check()) {
         $sessionid = Auth::user()->id;
+        // $tmp = session()->get('browserid');
+        // Cart::where('cart_id', '=', $tmp) ->update(['cart_id' => $sessionid]);
       } else {
         $sessionid = session()->get('browserid');
       }
@@ -152,17 +154,15 @@ class CheckoutController extends Controller
         'phone' => 'required',
         'email' => 'required',
         'address' => 'required',
-        'country' => 'required',
         'city' => 'required',
-        'state' => 'required',
-        'zip_code' => 'required',
-        'terms_helper' => [
-          function ($attribute, $value, $fail) use ($request) {
-              if (!$request->has('terms')) {
-                return $fail('You must accept our terms & conditions');
-              }
-          },
-        ]
+        'zip_code' => 'required'
+        // 'terms_helper' => [
+        //   function ($attribute, $value, $fail) use ($request) {
+        //       if (!$request->has('terms')) {
+        //         return $fail('You must accept our terms & conditions');
+        //       }
+        //   },
+        // ]
       ]);
 
       if (Cart::where('cart_id', Auth::user()->id)->count() == 0) {
@@ -171,50 +171,59 @@ class CheckoutController extends Controller
       }
 
       $gs = GS::first();
+
+      //updating user table
+      $user = User::find(Auth::user()->id);
+
+      $dat['first_name'] = $request->first_name;
+      $dat['last_name'] = $request->last_name;
+      $dat['phone'] = $request->phone;
+      $dat['email'] = $request->email;
+      $dat['address'] = $request->address;
+      $dat['city'] = $request->city;
+      $dat['zip_code'] = $request->zip_code;
+
+      $user->fill($dat)->save();
+
       // store in order table
       // $in = $request->except('_token', 'coupon_code', 'terms', 'terms_helper');
       $in['user_id'] = Auth::user()->id;
-      $in['first_name'] = $request->first_name;
-      $in['last_name'] = $request->last_name;
       $in['phone'] = $request->phone;
-      $in['email'] = $request->email;
       $in['address'] = $request->address;
-      $in['country'] = $request->country;
-      $in['state'] = $request->state;
       $in['city'] = $request->city;
       $in['zip_code'] = $request->zip_code;
       $in['order_notes'] = $request->order_notes;
       $in['subtotal'] = getSubTotal(Auth::user()->id);
       $in['total'] = getTotal(Auth::user()->id);
-      $in['place'] = $request->place;
-      $pm = $request->payment_method;
-      $place = $request->place;
+    //   $in['place'] = $request->place;
+    //   $pm = $request->payment_method;
+    //   $place = $request->place;
 
       // if payment method is cash on delivery
-      if ($pm == 1) {
-        if ($place == 'in') {
-          $scharge = $gs->in_cash_on_delivery;
-        } elseif ($place == 'around') {
-          $scharge = $gs->around_cash_on_delivery;
-        } else {
-          $scharge = $gs->world_cash_on_delivery;
-        }
-      }
-      // if payment method is cash on advance
-      else {
-        if ($place == 'in') {
-          $scharge = $gs->in_advanced;
-        } elseif ($place == 'around') {
-          $scharge = $gs->around_advanced;
-        } else {
-          $scharge = $gs->world_advanced;
-        }
-      }
+    //   if ($pm == 1) {
+    //     if ($place == 'in') {
+    //       $scharge = $gs->in_cash_on_delivery;
+    //     } elseif ($place == 'around') {
+    //       $scharge = $gs->around_cash_on_delivery;
+    //     } else {
+    //       $scharge = $gs->world_cash_on_delivery;
+    //     }
+    //   }
+    //   // if payment method is cash on advance
+    //   else {
+    //     if ($place == 'in') {
+    //       $scharge = $gs->in_advanced;
+    //     } elseif ($place == 'around') {
+    //       $scharge = $gs->around_advanced;
+    //     } else {
+    //       $scharge = $gs->world_advanced;
+    //     }
+    //   }
 
-      $in['shipping_charge'] = $scharge;
-      $in['tax'] = $gs->tax;
-      $in['payment_method'] = $pm;
-      $in['shipping_method'] = $place;
+    //   $in['shipping_charge'] = $gs->shipping_charge;
+    //   $in['tax'] = $gs->tax;
+    //   $in['payment_method'] = $pm;
+    //   $in['shipping_method'] = $place;
       $order = Order::create($in);
       $order->unique_id = $order->id + 100000;
       $order->save();
@@ -236,67 +245,79 @@ class CheckoutController extends Controller
 
         $op->attributes = $cart->attributes;
 
-        if (session()->has('coupon_code') && Coupon::where('coupon_code', session('coupon_code'))->count()==1) {
-          $csession = session('coupon_code');
-          $coupon = Coupon::where('coupon_code', $csession)->first();
+        $cartItemCoupon = 0;
+        $producttotal = 0;
+        // if (session()->has('coupon_code') && Coupon::where('coupon_code', session('coupon_code'))->count()==1) {
+        //   $csession = session('coupon_code');
+        //   $coupon = Coupon::where('coupon_code', $csession)->first();
 
 
-          if ($coupon->coupon_type=='percentage') {
-            // if coupon type is percentage
+        //   if ($coupon->coupon_type=='percentage') {
+        //     // if coupon type is percentage
 
-            if (empty($cart->current_price)) {
-              // if the product has no offer...
-              $cartItemTotal = $cart->quantity*$cart->price;
-              $cartItemCoupon = ($cartItemTotal*$coupon->coupon_amount)/100;
-              $producttotal = $cartItemTotal - $cartItemCoupon;
-            } else {
-              // if the product has offer...
-              $cartItemTotal = $cart->quantity*$cart->current_price;
-              $cartItemCoupon = ($cartItemTotal*$coupon->coupon_amount)/100;
-              $producttotal = $cartItemTotal - $cartItemCoupon;
-            }
+        //     if (empty($cart->current_price)) {
+        //       // if the product has no offer...
+        //       $cartItemTotal = $cart->quantity*$cart->price;
+        //       $cartItemCoupon = ($cartItemTotal*$coupon->coupon_amount)/100;
+        //       $producttotal = $cartItemTotal - $cartItemCoupon;
+        //     } else {
+        //       // if the product has offer...
+        //       $cartItemTotal = $cart->quantity*$cart->current_price;
+        //       $cartItemCoupon = ($cartItemTotal*$coupon->coupon_amount)/100;
+        //       $producttotal = $cartItemTotal - $cartItemCoupon;
+        //     }
 
-          }
-          else {
-            // if coupon type is fixed
+        //   }
+        //   else {
+        //     // if coupon type is fixed
 
-            $cartItems = Cart::where('cart_id', Auth::user()->id)->get();
-            $amo = 0;
-            foreach ($cartItems as $item) {
-              if (!empty($item->current_price)) {
-                $amo += $item->current_price*$item->quantity;
-              } else {
-                $amo += $item->price*$item->quantity;
-              }
-            }
+        //     $cartItems = Cart::where('cart_id', Auth::user()->id)->get();
+        //     $amo = 0;
+        //     foreach ($cartItems as $item) {
+        //       if (!empty($item->current_price)) {
+        //         $amo += $item->current_price*$item->quantity;
+        //       } else {
+        //         $amo += $item->price*$item->quantity;
+        //       }
+        //     }
 
-            $charpertaka = $coupon->coupon_amount/$amo;
+        //     $charpertaka = $coupon->coupon_amount/$amo;
 
 
-            if (empty($cart->current_price)) {
-              $cartItemTotal = $cart->quantity*$cart->price;
-              $cartItemCoupon = $cartItemTotal*$charpertaka;
-              $producttotal = $cartItemTotal-$cartItemCoupon;
-            } else {
-              $cartItemTotal = $cart->quantity*$cart->current_price;
-              $cartItemCoupon = $cartItemTotal*$charpertaka;
-              $producttotal = $cartItemTotal-$cartItemCoupon;
-            }
+        //     if (empty($cart->current_price)) {
+        //       $cartItemTotal = $cart->quantity*$cart->price;
+        //       $cartItemCoupon = $cartItemTotal*$charpertaka;
+        //       $producttotal = $cartItemTotal-$cartItemCoupon;
+        //     } else {
+        //       $cartItemTotal = $cart->quantity*$cart->current_price;
+        //       $cartItemCoupon = $cartItemTotal*$charpertaka;
+        //       $producttotal = $cartItemTotal-$cartItemCoupon;
+        //     }
 
-          }
-        } else {
-          if (empty($cart->current_price)) {
+        //   }
+        // } else {
+        //   if (empty($cart->current_price)) {
+        //     // if cart item has no offer
+
+        //     $producttotal = $cart->price*$cart->quantity;
+        //     $cartItemCoupon = 0;
+        //   } else {
+        //     // if cart item has offer
+
+        //     $producttotal = $cart->current_price*$cart->quantity;
+        //     $cartItemCoupon = 0;
+        //   }
+        // }
+
+        if (empty($cart->current_price)) {
             // if cart item has no offer
-
             $producttotal = $cart->price*$cart->quantity;
             $cartItemCoupon = 0;
           } else {
             // if cart item has offer
-
             $producttotal = $cart->current_price*$cart->quantity;
             $cartItemCoupon = 0;
           }
-        }
 
         $op->quantity = $cart->quantity;
         $op->product_total = $producttotal;
@@ -305,26 +326,35 @@ class CheckoutController extends Controller
       }
 
 
-      if ($request->payment_method == 1) {
-        // clear coupon from session
-        session()->forget('coupon_code');
+    //   if ($request->payment_method == 1) {
+    //     // clear coupon from session
+    //     session()->forget('coupon_code');
+    //     // clear cart...
+    //     Cart::where('cart_id', Auth::user()->id)->delete();
+    //     // clear conditions (shipping)...
+    //     PlacePayment::where('cart_id', Auth::user()->id)->delete();
+
+    //     $message = "Your order has been placed successfully! Our agent will contact with you later. <br><strong>Order ID: </strong> " . $order->unique_id ."<p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>";
+
+    //     send_email( $order->user->email, $order->user->first_name, "Order placed", $message);
+    //    // send_sms( $order->user->phone, $message);
+
+    //     Session::flash('success', 'Order placed successfully! Our agent will contact with you later.');
+    //     return redirect()->route('user.orders');
+    //   } elseif ($request->payment_method == 2) {
+    //     // redirect to payment gateway page
+    //     return redirect()->route('user.gateways', $order->id);
+    //     // after payment clear Cart and redirect to success page
+    //   }
+
         // clear cart...
         Cart::where('cart_id', Auth::user()->id)->delete();
-        // clear conditions (shipping)...
-        PlacePayment::where('cart_id', Auth::user()->id)->delete();
-
-        $message = "Your order has been placed successfully! Our agent will contact with you later. <br><strong>Order ID: </strong> " . $order->unique_id ."<p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>";
-
-        send_email( $order->user->email, $order->user->first_name, "Order placed", $message);
-       // send_sms( $order->user->phone, $message);
-
-        Session::flash('success', 'Order placed successfully! Our agent will contact with you later.');
+        // $message = "Your order has been placed successfully! Our agent will contact with you later. <br><strong>Order ID: </strong> " . $order->unique_id ."<p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>";
+        // send_email( $order->user->email, $order->user->first_name, "Order placed", $message);
+        Session::flash('success', 'Order placed successfully! We will contact you soon.');
         return redirect()->route('user.orders');
-      } elseif ($request->payment_method == 2) {
-        // redirect to payment gateway page
-        return redirect()->route('user.gateways', $order->id);
-        // after payment clear Cart and redirect to success page
-      }
+
+
     }
 
     public function success() {
