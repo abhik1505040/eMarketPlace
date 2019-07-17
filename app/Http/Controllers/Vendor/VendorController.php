@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use App\Orderedproduct as OP;
 use App\Product;
-// use App\Order;
-// use App\Orderedproduct;
+use App\Order;
+use App\Orderedproduct;
 use App\Vendor;
 // use App\ProductReview;
 // use App\Transaction;
 use DB;
 use Auth;
-// use App\Category;
-// use App\Subcategory;
+use App\Category;
+use App\Subcategory;
 use Carbon\Carbon;
 //use App\Ad;
 use Hash;
@@ -93,108 +93,108 @@ class VendorController extends Controller
 
 
 
-    // public function shoppage(Request $request, $vendorid, $category=null, $subcateogry=null) {
-    //   $data['vendor'] = Vendor::find($vendorid);
-    //   $productids = [];
-    //   $reqattrs = $request->except('maxprice', 'minprice', 'sort_by', 'page', 'term');
-    //   $count = 0;
-    //   if ($reqattrs) {
-    //     $data['reqattrs'] = $reqattrs;
-    //   } else {
-    //     $data['reqattrs'] = [];
-    //   }
+    public function shoppage(Request $request, $vendorid, $category=null, $subcateogry=null) {
+      $data['vendor'] = Vendor::find($vendorid);
+      $productids = [];
+      $reqattrs = $request->except('maxprice', 'minprice', 'sort_by', 'page', 'term');
+      $count = 0;
+      if ($reqattrs) {
+        $data['reqattrs'] = $reqattrs;
+      } else {
+        $data['reqattrs'] = [];
+      }
 
-    //   // foreach ($reqattrs as $key => $reqattr) {
-    //   //   return $reqattrs[$key]; // Array[2] 0:"M" 1:"L"
-    //   //   foreach ($reqattr as $key => $ra) {
-    //   //     return $ra; // M
-    //   //   }
-    //   // }
+      // foreach ($reqattrs as $key => $reqattr) {
+      //   return $reqattrs[$key]; // Array[2] 0:"M" 1:"L"
+      //   foreach ($reqattr as $key => $ra) {
+      //     return $ra; // M
+      //   }
+      // }
 
-    //   $products = Product::where('subcategory_id', $subcateogry)->get();
-    //   // return $products;
-    //   // return count($reqattrs);
+      $products = Product::where('subcategory_id', $subcateogry)->get();
+      // return $products;
+      // return count($reqattrs);
 
-    //   foreach ($products as $key => $product) {
-    //     $proattrs = json_decode($product->attributes, true);
-    //     $count = 0;
+      foreach ($products as $key => $product) {
+        $proattrs = json_decode($product->attributes, true);
+        $count = 0;
 
-    //     foreach ($proattrs as $key => $proattr) {
-    //       // return $proattrs[$key]; //Array[3] 0:"M" 1:"L" 2:"XL"
+        foreach ($proattrs as $key => $proattr) {
+          // return $proattrs[$key]; //Array[3] 0:"M" 1:"L" 2:"XL"
 
-    //       if (!empty($reqattrs[$key])) {
-    //         if (!empty(array_intersect($reqattrs[$key], $proattrs[$key]))) {
-    //           $count++;
-    //         }
-    //       }
-    //     }
+          if (!empty($reqattrs[$key])) {
+            if (!empty(array_intersect($reqattrs[$key], $proattrs[$key]))) {
+              $count++;
+            }
+          }
+        }
 
-    //     if ($count == count($reqattrs)) {
-    //       $productids[] = $product->id;
-    //     }
-    //   }
+        if ($count == count($reqattrs)) {
+          $productids[] = $product->id;
+        }
+      }
 
-    //   // return $productids;
+      // return $productids;
 
-    //   $category = $request->category;
-    //   $subcategory = $request->subcategory;
-    //   $minprice = $request->minprice;
-    //   $maxprice = $request->maxprice;
-    //   $sortby = $request->sort_by;
-    //   $data['sortby'] = $request->sort_by;
-    //   $term = $request->term;
-    //   $data['term'] = $request->term;
+      $category = $request->category;
+      $subcategory = $request->subcategory;
+      $minprice = $request->minprice;
+      $maxprice = $request->maxprice;
+      $sortby = $request->sort_by;
+      $data['sortby'] = $request->sort_by;
+      $term = $request->term;
+      $data['term'] = $request->term;
 
-    //   // return $category;
-    //   // return $subcategory;
+      // return $category;
+      // return $subcategory;
 
-    //   $data['minprice'] = Product::where('vendor_id', $vendorid)->min('price');
-    //   $data['maxprice'] = Product::where('vendor_id', $vendorid)->max('price');
+      $data['minprice'] = Product::where('vendor_id', $vendorid)->min('price');
+      $data['maxprice'] = Product::where('vendor_id', $vendorid)->max('price');
 
-    //   $data['products'] = Product::when($category, function ($query, $category) {
-    //                       return $query->where('category_id', $category);
-    //                   })
-    //                   ->when($subcategory, function ($query, $subcategory)  {
-    //                       return $query->where('subcategory_id', $subcategory);
-    //                   })
-    //                   ->when($minprice, function ($query, $minprice)  {
-    //                       return $query->where('price', '>=', $minprice);
-    //                   })
-    //                   ->when($maxprice, function ($query, $maxprice)  {
-    //                       return $query->where('price', '<=', $maxprice);
-    //                   })
-    //                   ->when($sortby, function ($query, $sortby)  {
-    //                     if ($sortby == 'date_desc') {
-    //                       return $query->orderBy('created_at', 'DESC');
-    //                     } elseif ($sortby == 'date_asc') {
-    //                       return $query->orderBy('created_at', 'ASC');
-    //                     } elseif ($sortby == 'price_desc') {
-    //                       return $query->orderBy('search_price', 'DESC');
-    //                     } elseif ($sortby == 'price_asc') {
-    //                       return $query->orderBy('search_price', 'ASC');
-    //                     } elseif ($sortby == 'sales_desc') {
-    //                       return $query->orderBy('sales', 'DESC');
-    //                     } elseif ($sortby == 'rate_desc') {
-    //                       return $query->orderBy('avg_rating', 'DESC');
-    //                     }
+      $data['products'] = Product::when($category, function ($query, $category) {
+                          return $query->where('category_id', $category);
+                      })
+                      ->when($subcategory, function ($query, $subcategory)  {
+                          return $query->where('subcategory_id', $subcategory);
+                      })
+                      ->when($minprice, function ($query, $minprice)  {
+                          return $query->where('price', '>=', $minprice);
+                      })
+                      ->when($maxprice, function ($query, $maxprice)  {
+                          return $query->where('price', '<=', $maxprice);
+                      })
+                      ->when($sortby, function ($query, $sortby)  {
+                        if ($sortby == 'date_desc') {
+                          return $query->orderBy('created_at', 'DESC');
+                        } elseif ($sortby == 'date_asc') {
+                          return $query->orderBy('created_at', 'ASC');
+                        } elseif ($sortby == 'price_desc') {
+                          return $query->orderBy('search_price', 'DESC');
+                        } elseif ($sortby == 'price_asc') {
+                          return $query->orderBy('search_price', 'ASC');
+                        } elseif ($sortby == 'sales_desc') {
+                          return $query->orderBy('sales', 'DESC');
+                        } elseif ($sortby == 'rate_desc') {
+                          return $query->orderBy('avg_rating', 'DESC');
+                        }
 
-    //                   })
-    //                   ->when($term, function ($query, $term)  {
-    //                       return $query->where('title', 'like', '%'.$term.'%');
-    //                   })
-    //                   ->when($productids, function ($query, $productids)  {
-    //                       return $query->whereIn('id', $productids);
-    //                   })
-    //                   ->where('deleted', 0)->where('vendor_id', $vendorid)->paginate(12);
+                      })
+                      ->when($term, function ($query, $term)  {
+                          return $query->where('title', 'like', '%'.$term.'%');
+                      })
+                      ->when($productids, function ($query, $productids)  {
+                          return $query->whereIn('id', $productids);
+                      })
+                      ->where('deleted', 0)->where('vendor_id', $vendorid)->paginate(12);
 
-    //   $data['categories'] = Category::where('status', 1)->get();
+      $data['categories'] = Category::where('status', 1)->get();
 
-    //   $data['vendorid'] = $vendorid;
+      $data['vendorid'] = $vendorid;
 
     //   $data['shopad'] = Ad::where('size', 3)->inRandomOrder()->first();
 
-    //   return view('vendor.shop_page', $data);
-    // }
+      return view('vendor.shop_page', $data);
+    }
 
 
     // public function transactions() {

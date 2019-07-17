@@ -30,21 +30,21 @@ class User extends Authenticatable
     //   return $this->hasMany('App\Orderpayment');
     // }
 
-    // public function orderedproducts() {
-    //   return $this->hasMany('App\Orderedproduct');
-    // }
+    public function orderedproducts() {
+      return $this->hasMany('App\Orderedproduct');
+    }
 
-    // public function productreviews() {
-    //   return $this->hasMany('App\ProductReview');
-    // }
+    public function productreviews() {
+      return $this->hasMany('App\ProductReview');
+    }
 
     public function products() {
         return $this->belongsToMany('App\Product', 'favorits');
     }
 
-    // public function orders() {
-    //   return $this->hasMany('App\Order');
-    // }
+    public function orders() {
+      return $this->hasMany('App\Order');
+    }
 
 
 }

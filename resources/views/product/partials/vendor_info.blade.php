@@ -1,5 +1,5 @@
 <div class="item_review_content">
-    <h1 class="title">{{$product->vendor->shop_name}} &nbsp; <a href="#" class="btn btn-outline-success " role="button" aria-pressed="true">Visit shop</a></h1>
+    <h1 class="title">{{$product->vendor->shop_name}} &nbsp; <a href="{{route('vendor.shoppage', $product->vendor->id)}}" class="btn btn-outline-success " role="button" aria-pressed="true">Visit shop</a></h1>
     <ul class="product-specification"><!-- product specification -->
         <li>
             <div class="single-spec"><!-- single specification -->

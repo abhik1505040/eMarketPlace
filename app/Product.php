@@ -19,9 +19,9 @@ class Product extends Model
       return $this->hasMany('App\PreviewImage');
     }
 
-    // public function carts() {
-    //   return $this->hasMany('App\Cart');
-    // }
+    public function carts() {
+      return $this->hasMany('App\Cart');
+    }
 
     public function category() {
       return $this->belongsTo('App\Category');
@@ -35,13 +35,13 @@ class Product extends Model
       return $this->hasMany('App\Orderedproduct');
     }
 
-    // public function productreviews() {
-    //   return $this->hasMany('App\ProductReview');
-    // }
+    public function productreviews() {
+      return $this->hasMany('App\ProductReview');
+    }
 
-    // public function users() {
-    //     return $this->belongsToMany('App\User', 'favorits');
-    // }
+    public function users() {
+        return $this->belongsToMany('App\User', 'favorits');
+    }
 
     // public function flashinterval() {
     //   return $this->belongsTo('App\FlashInterval');

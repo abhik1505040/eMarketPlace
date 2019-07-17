@@ -118,9 +118,9 @@
                                   @endforeach
                                 @endif
 
-                                  <li>Shop Name:  <span class="right"><a href="#" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li>
+                                  {{-- <li>Shop Name:  <span class="right"><a href="#" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li> --}}
 
-                                  {{-- <li>Shop Name:  <span class="right"><a href="{{route('vendor.shoppage', $product->vendor->id)}}" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li> --}}
+                                  <li>Shop Name:  <span class="right"><a href="{{route('vendor.shoppage', $product->vendor->id)}}" style="color:#{{$gs->base_color_code}};font-weight:700;">{{$product->vendor->shop_name}}</a> </span></li>
                                   <p class="text-danger" id="errattr"></p>
                               </ul>
 

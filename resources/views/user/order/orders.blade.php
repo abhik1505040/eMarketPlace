@@ -88,8 +88,8 @@
                                       @endif
                                     </td>
                                     <td class="padding-top-40">
-                                      {{-- <a class="btn btn-primary" href="{{route('user.orderdetails', $order->id)}}" target="_blank"><i class="fa fa-eye"></i> view</a> --}}
-                                      <a class="btn btn-primary" href="#" target="_blank"><i class="fa fa-eye"></i> view</a>
+                                      <a class="btn btn-primary" href="{{route('user.orderdetails', $order->id)}}" target="_blank"><i class="fa fa-eye"></i> view</a>
+                                      {{-- <a class="btn btn-primary" href="#" target="_blank"><i class="fa fa-eye"></i> view</a> --}}
                                     </td>
                                 </tr>
 

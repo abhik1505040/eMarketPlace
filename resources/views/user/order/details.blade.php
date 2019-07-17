@@ -39,10 +39,10 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-header base-bg">
-                <h6 class="white-txt no-margin">Payment / Shipping Method</h6>
+                <h6 class="white-txt no-margin">Shipping/Payment Details</h6>
               </div>
               <div class="card-body">
-                <p>
+                {{-- <p>
                   <strong>Shipping Method: </strong>
                   @if ($order->shipping_method == 'around')
                     Arround {{$gs->main_city}}
@@ -51,15 +51,7 @@
                   @elseif ($order->shipping_method == 'in')
                     In {{$gs->main_city}}
                   @endif
-                </p>
-                <p>
-                  <strong>Payment Method: </strong>
-                  @if ($order->payment_method == 1)
-                    Cash on delivery
-                  @elseif ($order->payment_method == 2)
-                    Advance Paid via <strong>{{$order->orderpayment->gateway->name}}</strong>
-                  @endif
-                </p>
+                </p> --}}
                 @if ($order->approve != -1)
                   <p>
                     <strong>Shipping Status: </strong>
@@ -72,12 +64,22 @@
                     @endif
                   </p>
                 @endif
+
+                <p>
+                        <strong>Payment Method: </strong>
+                        Cash on Delivery
+                        {{-- @if ($order->payment_method == 1)
+                          Cash on delivery
+                        @elseif ($order->payment_method == 2)
+                          Advance Paid via <strong>{{$order->orderpayment->gateway->name}}</strong>
+                        @endif --}}
+                </p>
               </div>
             </div>
           </div>
         </div>
         <div class="row mb-4">
-          @if (!empty($order->user->billing_last_name))
+          {{-- @if (!empty($order->user->billing_last_name))
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header base-bg">
@@ -105,22 +107,36 @@
                 </div>
               </div>
             </div>
-          @endif
+          @endif --}}
           <div class="col-md-6">
             <div class="card">
               <div class="card-header base-bg">
                 <h6 class="white-txt no-margin">Shipping Details</h6>
               </div>
               <div class="card-body">
-                <p><strong>{{$order->first_name}} {{$order->last_name}}</strong></p>
-                <p><strong>Email: </strong>{{$order->email}}</p>
+                <p><strong>{{$order->user->first_name}} {{$order->user->last_name}}</strong></p>
+                <p><strong>Email: </strong>{{$order->user->email}}</p>
                 <p><strong>Phone: </strong>{{$order->phone}}</p>
                 <p><strong>Address: </strong>{{$order->address}}</p>
               </div>
             </div>
           </div>
+
+          @if(!empty($order->order_notes))
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header base-bg">
+                        <h6 class="white-txt no-margin">Order Note</h6>
+                    </div>
+                <div class="card-body">
+                  <p>{{$order->order_notes}}</p>
+              </div>
+            </div>
+          </div>
+         @endif
         </div>
-        @if (!empty($order->order_notes))
+
+        {{-- @if (!empty($order->order_notes))
         <div class="row mb-4">
           <div class="col-md-6">
             <div class="card">
@@ -133,7 +149,7 @@
             </div>
           </div>
         </div>
-        @endif
+        @endif --}}
           <div class="row">
               <div class="col-xl-9">
                   <div class="seller-product-wrapper">
@@ -303,7 +319,7 @@
                       @endif
                       <li><span class="left">SUBTOTAL</span> <span class="right">{{$gs->base_curr_symbol}} {{$order->subtotal}}</span></li>
                       <li><span class="left">TAX</span> <span class="right">{{$gs->base_curr_symbol}} {{$order->subtotal*($gs->tax/100)}}</span></li>
-                      <li><span class="left">SHIPPING COST</span> <span class="right">{{$gs->base_curr_symbol}} {{$order->shipping_charge}}</span></li>
+                      <li><span class="left">SHIPPING COST</span> <span class="right">{{$gs->base_curr_symbol}} {{$gs->shipping_charge}}</span></li>
                       <li class="li-total"><span class="left total">TOTAL</span> <span class="right total">{{$gs->base_curr_symbol}} {{$order->total}}</span></li>
                     </ul>
                   </div>

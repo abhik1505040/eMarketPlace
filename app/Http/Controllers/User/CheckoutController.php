@@ -174,16 +174,18 @@ class CheckoutController extends Controller
 
       //updating user table
       $user = User::find(Auth::user()->id);
+      if (empty($user->first_name)) {
+        $dat['first_name'] = $request->first_name;
+        $dat['last_name'] = $request->last_name;
+        // $dat['phone'] = $request->phone;
+        // $dat['email'] = $request->email;
+        $dat['address'] = $request->address;
+        $dat['city'] = $request->city;
+        $dat['zip_code'] = $request->zip_code;
 
-      $dat['first_name'] = $request->first_name;
-      $dat['last_name'] = $request->last_name;
-      $dat['phone'] = $request->phone;
-      $dat['email'] = $request->email;
-      $dat['address'] = $request->address;
-      $dat['city'] = $request->city;
-      $dat['zip_code'] = $request->zip_code;
+        $user->fill($dat)->save();
+      }
 
-      $user->fill($dat)->save();
 
       // store in order table
       // $in = $request->except('_token', 'coupon_code', 'terms', 'terms_helper');
