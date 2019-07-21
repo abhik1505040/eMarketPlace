@@ -78,8 +78,8 @@ li.page-item {
                                               <td class="padding-top-40">{{$product->sales}}</td>
                                               <td class="padding-top-40">
                                                   <ul class="action">
-                                                      {{-- <li><a  href="{{route('user.product.details', [$product->slug,$product->id])}}"><i class="far fa-eye"></i></a></li> --}}
-                                                      <li><a href="{{route('vendor.product.individualproductshow', $product->id)}}"><i class="far fa-eye"></i></a></li>
+                                                      <li><a  href="{{route('user.product.details', [$product->slug,$product->id])}}"><i class="far fa-eye"></i></a></li>
+                                                      {{-- <li><a href="{{route('vendor.product.individualproductshow', $product->id)}}"><i class="far fa-eye"></i></a></li> --}}
                                                       <li><a href="{{route('vendor.product.edit', $product->id)}}"><i class="fas fa-pencil-alt"></i></a></li>
                                                       <li class="sp-close-btn"><a href="#" onclick="delproduct(event, {{$product->id}})"><i class="fas fa-times"></i></a></li>
                                                   </ul>

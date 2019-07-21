@@ -118,6 +118,15 @@
       e.preventDefault();
       console.log(vendorid);
       var fd = new FormData();
+
+      swal({
+        title: "Checking...",
+        text: "Please wait",
+        icon: "{{asset('assets/user/img/ajax-loading.gif')}}",
+        buttons: false,
+        closeOnClickOutside: false
+      });
+
       fd.append('vendorid', vendorid);
       $.ajax({
         url: '{{route('admin.vendors.accept')}}',
