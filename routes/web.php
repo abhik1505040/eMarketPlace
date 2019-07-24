@@ -105,7 +105,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
     // Attribute Value Management...
 	Route::get('/options/{id}/index', 'Admin\OptionController@index')->name('admin.options.index');
 	Route::post('/options/store', 'Admin\OptionController@store')->name('admin.options.store');
-	Route::post('/options/update', 'Admin\OptionController@update')->name('admin.options.update');
+    Route::post('/options/update', 'Admin\OptionController@update')->name('admin.options.update');
+
+    // Order Routes...
+	Route::get('/orders/all', 'Admin\OrderController@all')->name('admin.orders.all');
+	Route::get('/orders/confirmation/pending', 'Admin\OrderController@cPendingOrders')->name('admin.orders.cPendingOrders');
+	Route::get('/orders/confirmation/accepted', 'Admin\OrderController@cAcceptedOrders')->name('admin.orders.cAcceptedOrders');
+	Route::get('/orders/confirmation/rejected', 'Admin\OrderController@cRejectedOrders')->name('admin.orders.cRejectedOrders');
+	Route::get('/orders/delivery/pending', 'Admin\OrderController@pendingDelivery')->name('admin.orders.pendingDelivery');
+	Route::get('/orders/delivery/inprocess', 'Admin\OrderController@pendingInprocess')->name('admin.orders.pendingInprocess');
+	Route::get('/orders/delivered', 'Admin\OrderController@delivered')->name('admin.orders.delivered');
+	Route::get('/{orderid}/orderdetails', 'Admin\OrderController@orderdetails')->name('admin.orderdetails');
+
+    Route::post('/shippingchange', 'Admin\OrderController@shippingchange')->name('admin.shippingchange');
+	Route::post('/cancelOrder', 'Admin\OrderController@cancelOrder')->name('admin.cancelOrder');
+	Route::post('/acceptOrder', 'Admin\OrderController@acceptOrder')->name('admin.acceptOrder');
+
 
 
 

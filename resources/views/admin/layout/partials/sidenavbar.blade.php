@@ -45,7 +45,7 @@
         <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-industry"></i><span class="app-menu__label">Vendor Requests @if($count > 0) <span class="badge badge-danger">{{$count}}</span> @endif </span><i class="treeview-indicator fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/all') active @endif" href="{{route('admin.vendors.all')}}"><i class="icon far fa-circle"></i> All</a></li>
-          <li><a class="treeview-item @if(request()->path() == 'admin/vendors/pending') active @endif" href="{{route('admin.vendors.pending')}}"><i class="icon far fa-circle"></i> Pending</a></li>
+          <li><a class="treeview-item @if(request()->path() == 'admin/vendors/pending') active @endif" href="{{route('admin.vendors.pending')}}"><i class="icon far fa-circle"></i> <span>Pending @if($count > 0) <span class="badge badge-danger">{{$count}}</span> @endif </span></a></li>
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/accepted') active @endif" href="{{route('admin.vendors.accepted')}}"><i class="icon far fa-circle"></i> Accepted</a></li>
           <li><a class="treeview-item @if(request()->path() == 'admin/vendors/rejected') active @endif" href="{{route('admin.vendors.rejected')}}"><i class="icon far fa-circle"></i> Rejected</a></li>
         </ul>
@@ -84,7 +84,7 @@
 
 
 
-    {{-- <li class="treeview
+    <li class="treeview
     @if(request()->path() == 'admin/orders/all')
       is-expanded
     @elseif(request()->path() == 'admin/orders/confirmation/pending')
@@ -99,24 +99,27 @@
         is-expanded
     @elseif(request()->path() == 'admin/orders/delivered')
         is-expanded
-    @elseif(request()->path() == 'admin/orders/cashondelivery')
+    {{-- @elseif(request()->path() == 'admin/orders/cashondelivery')
         is-expanded
     @elseif(request()->path() == 'admin/orders/advance')
-        is-expanded
+        is-expanded --}}
     @endif">
-      <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Orders</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+
+    @php
+       $pending = \App\Order::where('approve', 0)->count();
+    @endphp
+      <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Orders @if($pending > 0) <span class="badge badge-danger">{{$pending}}</span> @endif </span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">
         <li><a class="treeview-item @if(request()->path() == 'admin/orders/all') active @endif" href="{{route('admin.orders.all')}}"><i class="icon far fa-circle"></i> All</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/orders/confirmation/pending') active @endif" href="{{route('admin.orders.cPendingOrders')}}"><i class="icon far fa-circle"></i> Pending</a></li>
+        <li><a class="treeview-item @if(request()->path() == 'admin/orders/confirmation/pending') active @endif" href="{{route('admin.orders.cPendingOrders')}}"><i class="icon far fa-circle"></i><span> Pending @if($pending > 0) <span class="badge badge-danger">{{$pending}}</span> @endif </span></a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/orders/confirmation/accepted') active @endif" href="{{route('admin.orders.cAcceptedOrders')}}"><i class="icon far fa-circle"></i> Accepted</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/orders/confirmation/rejected') active @endif" href="{{route('admin.orders.cRejectedOrders')}}"><i class="icon far fa-circle"></i> Rejected</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/orders/delivery/pending') active @endif" href="{{route('admin.orders.pendingDelivery')}}"><i class="icon far fa-circle"></i> Delivery Pending</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/orders/delivery/inprocess') active @endif" href="{{route('admin.orders.pendingInprocess')}}"><i class="icon far fa-circle"></i> Delivery Inprocess</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/orders/delivered') active @endif" href="{{route('admin.orders.delivered')}}"><i class="icon far fa-circle"></i> Delivered</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/orders/cashondelivery') active @endif" href="{{route('admin.orders.cashOnDelivery')}}"><i class="icon far fa-circle"></i> Cash on Delivery</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/orders/advance') active @endif" href="{{route('admin.orders.advance')}}"><i class="icon far fa-circle"></i> Advance Paid</a></li>
+
       </ul>
-    </li> --}}
+    </li>
 
 
     {{-- <li class="treeview
