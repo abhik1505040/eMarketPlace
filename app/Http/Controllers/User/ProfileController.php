@@ -111,7 +111,7 @@ class ProfileController extends Controller
         $data['orders'] = Order::orderBy('id', 'DESC')->where('unique_id', $request->order_number)->paginate(10);
       } else {
         $data['on'] = '';
-        $data['orders'] = Order::orderBy('id', 'DESC')->paginate(10);
+        $data['orders'] = Order::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(10);
       }
 
       return view('user.order.orders', $data);

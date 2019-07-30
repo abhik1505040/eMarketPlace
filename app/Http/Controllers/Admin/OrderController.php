@@ -219,7 +219,7 @@ class OrderController extends Controller
       foreach ($order->orderedproducts as $key => $op) {
         if (!in_array($op->vendor->id, $sentVendors)) {
           $sentVendors[] = $op->vendor->id;
-          //send_email($op->vendor->email, $op->vendor->shop_name, 'Order accepted', "Order ID #".$order->unique_id." has been accepted.<p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
+          send_email($op->vendor->email, $op->vendor->shop_name, 'New Order', "Order ID #".$order->unique_id." has been accepted.<p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
         }
       }
       // sending mail to user
@@ -237,6 +237,7 @@ class OrderController extends Controller
       foreach ($order->orderedproducts as $key => $op) {
         if (!in_array($op->vendor->id, $sentVendors)) {
           $sentVendors[] = $op->vendor->id;
+          
           //send_email($op->vendor->email, $op->vendor->shop_name, 'Order rejected', "Order ID #".$order->unique_id." has been rejected.<p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
         }
       }
