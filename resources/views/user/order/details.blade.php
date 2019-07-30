@@ -224,8 +224,8 @@
                                               </td>
                                               @if ($orderedproduct->order->shipping_status == 2)
                                                 <td>
-                                                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#commentModal{{$orderedproduct->id}}">Comment</button>
-                                                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundModal{{$orderedproduct->id}}">Refund</button>
+                                                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#commentModal{{$orderedproduct->id}}">Feeback</button>
+                                                  {{-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundModal{{$orderedproduct->id}}">Refund</button> --}}
                                                 </td>
                                               @endif
                                           </tr>
@@ -244,15 +244,15 @@
                                                   <div class="modal-body">
                                                     <input id="opid{{$orderedproduct->id}}" type="hidden" name="opid" value="{{$orderedproduct->id}}">
                                                     <div class="form-group">
-                                                      <label for="" style="color:#000;"><strong>Comment Type: </strong></label>
+                                                      <label for="" style="color:#000;"><strong>Feedback Type: </strong></label>
                                                       <select id="comment_type{{$orderedproduct->id}}" class="form-control" name="comment_type">
-                                                        <option value="Complain" {{(empty($orderedproduct->comment_type) || $orderedproduct->comment_type=='Complain') ? 'selected' : ''}}>Complain</option>
+                                                        <option value="Complain" {{(empty($orderedproduct->comment_type) || $orderedproduct->comment_type=='Complain') ? 'selected' : ''}}>Complaint</option>
                                                         <option value="Suggestion" {{$orderedproduct->comment_type=='Suggestion' ? 'selected' : ''}}>Suggestion</option>
                                                       </select>
                                                     </div>
                                                     <div class="form-group">
-                                                      <label for="" style="color:#000;"><strong>Comment: </strong></label>
-                                                      <textarea id="comment{{$orderedproduct->id}}" class="form-control" name="comment" rows="5" cols="80" placeholder="Please write your comment" {{!empty($orderedproduct->comment) ? 'readonly' : ''}} required>{{$orderedproduct->comment}}</textarea>
+                                                      <label for="" style="color:#000;"><strong>Feedback: </strong></label>
+                                                      <textarea id="comment{{$orderedproduct->id}}" class="form-control" name="comment" rows="5" cols="80" placeholder="Please write your feedback" {{!empty($orderedproduct->comment) ? 'readonly' : ''}} required>{{$orderedproduct->comment}}</textarea>
                                                     </div>
                                                   </div>
                                                   <div class="modal-footer">
@@ -268,7 +268,7 @@
 
 
                                           {{-- Renfund Modal --}}
-                                          <div class="modal fade" id="refundModal{{$orderedproduct->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          {{-- <div class="modal fade" id="refundModal{{$orderedproduct->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
@@ -293,7 +293,7 @@
 
                                               </div>
                                             </div>
-                                          </div>
+                                          </div> --}}
 
                                         @endforeach
                                       </tbody>

@@ -76,6 +76,7 @@
                   </thead>
                   <tbody>
                     @foreach ($orders as $key => $order)
+                    @if ((request()->path() == 'admin/orders/delivery/pending' && $order->approve != -1) || (request()->path() != 'admin/orders/delivery/pending'))
                       <tr>
                           <td class="padding-top-40">{{$order->unique_id}}</td>
                           <td class="padding-top-40">{{date('jS F, o', strtotime($order->created_at))}}</td>
@@ -84,25 +85,29 @@
                           <td class="padding-top-40">{{$order->user->email}}</td>
                           <td class="padding-top-40">{{$gs->base_curr_symbol}} {{$order->total}}</td>
                           <td class="padding-top-40">
+                           @if($order->approve != -1)
                             <div class="form-check form-check-inline">
-                              {{-- <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}1" value="0" onchange="shippingChange(event, this.value, {{$order->id}})" {{$order->shipping_status==0?'checked':''}} disabled> --}}
+                              <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}1" value="0" onchange="shippingChange(event, this.value, {{$order->id}}, {{$order->approve}})" {{$order->shipping_status==0?'checked':''}} disabled>
 
-                              <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}1" value="0" onchange="" {{$order->shipping_status==0?'checked':''}} disabled>
+                              {{-- <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}1" value="0" onchange="" {{$order->shipping_status==0?'checked':''}} disabled> --}}
 
                               <label class="form-check-label" for="inlineRadio{{$order->id}}1">Pending</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              {{-- <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}2" value="1" onchange="shippingChange(event, this.value, {{$order->id}})" {{$order->shipping_status==1?'checked':''}} {{$order->shipping_status==1 || $order->shipping_status==2?'disabled':''}}> --}}
+                              <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}2" value="1" onchange="shippingChange(event, this.value, {{$order->id}} , {{$order->approve}})" {{$order->shipping_status==1?'checked':''}} {{$order->shipping_status==1 || $order->shipping_status==2?'disabled':''}}>
 
-                              <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}2" value="1" onchange="" {{$order->shipping_status==1?'checked':''}} {{$order->shipping_status==1 || $order->shipping_status==2?'disabled':''}}>
+                              {{-- <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}2" value="1" onchange="" {{$order->shipping_status==1?'checked':''}} {{$order->shipping_status==1 || $order->shipping_status==2?'disabled':''}}> --}}
                               <label class="form-check-label" for="inlineRadio{{$order->id}}2">In-process</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              {{-- <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}3" value="2" onchange="shippingChange(event, this.value, {{$order->id}})" {{$order->shipping_status==2?'checked':''}} {{$order->shipping_status==2?'disabled':''}}> --}}
-                              <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}3" value="2" onchange="" {{$order->shipping_status==2?'checked':''}} {{$order->shipping_status==2?'disabled':''}}>
+                              <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}3" value="2" onchange="shippingChange(event, this.value, {{$order->id}} , {{$order->approve}})" {{$order->shipping_status==2?'checked':''}} {{$order->shipping_status==2?'disabled':''}}>
+                              {{-- <input class="form-check-input" type="radio" name="shipping{{$order->id}}" id="inlineRadio{{$order->id}}3" value="2" onchange="" {{$order->shipping_status==2?'checked':''}} {{$order->shipping_status==2?'disabled':''}}> --}}
 
                               <label class="form-check-label" for="inlineRadio{{$order->id}}3">Delivered</label>
                             </div>
+                            @else
+                                No action available
+                           @endif
                           </td>
                           <td class="padding-top-40">
                             Cash On Delivery
@@ -112,21 +117,21 @@
                               &nbsp; &nbsp;
                               @if ($order->approve == 0)
                                 <span>
-                                    {{-- <a href="#" onclick="acceptOrder(event, {{$order->id}})" title="Accept Order">
+                                    <a href="#" onclick="acceptOrder(event, {{$order->id}})" title="Accept Order">
                                         <i class="fa fa-check-circle text-success action-icon"></i>
-                                    </a> --}}
-                                    <a href="#" onclick="" title="Accept Order">
+                                    </a>
+                                    {{-- <a href="#" onclick="" title="Accept Order">
                                             <i class="fa fa-check-circle text-success action-icon"></i>
-                                        </a>
+                                        </a> --}}
                                    &nbsp;&nbsp;
 
-                                  {{-- <a href="#" onclick="cancelOrder(event, {{$order->id}})" title="Reject Order">
-                                        <i class="fa fa-times-circle text-danger action-icon"></i>
-                                  </a> --}}
-
-                                  <a href="#" onclick="" title="Reject Order">
+                                  <a href="#" onclick="cancelOrder(event, {{$order->id}})" title="Reject Order">
                                         <i class="fa fa-times-circle text-danger action-icon"></i>
                                   </a>
+
+                                  {{-- <a href="#" onclick="" title="Reject Order">
+                                        <i class="fa fa-times-circle text-danger action-icon"></i>
+                                  </a> --}}
 
                                 </span>
                               @elseif ($order->approve == 1)
@@ -137,6 +142,7 @@
 
                           </td>
                       </tr>
+                      @endif
                     @endforeach
                   </tbody>
                 </table>
@@ -170,41 +176,65 @@
 
     });
 
-    function shippingChange(e, value, orderid) {
+    function shippingChange(e, value, orderid, status) {
 
       var fd = new FormData();
       fd.append('value', value);
       fd.append('orderid', orderid);
+      if(status != 1)
+      {
+            swal({
+                title: "Invalid action",
+                text: "You need to accept order first",
+                icon: "warning",
+                dangerMode: true,
+            }).then(function(){
+                window.location = '{{url()->current()}}';
+            });
 
-      swal({
-        title: "Are you sure?",
-        text: "Once shipping status changed e-mail will be sent to customer",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willChange) => {
+      }
+      else
+      {
+            swal({
+                title: "Are you sure?",
+                text: "Once shipping status changed e-mail will be sent to customer",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willChange) => {
 
-        if (willChange) {
-          $.ajax({
-            url: '{{route('admin.shippingchange')}}',
-            type: 'POST',
-            data: fd,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-              console.log(data);
-              if (data == "success") {
-                e.target.disabled = true;
-                toastr["success"]("<strong>Success!</strong> Shipping status updated successfully!");
-              }
+                if (willChange) {
+                            swal({
+                title: "Checking...",
+                text: "Please wait",
+                icon: "{{asset('assets/user/img/ajax-loading.gif')}}",
+                buttons: false,
+                closeOnClickOutside: false
+            });
+
+                $.ajax({
+                    url: '{{route('admin.shippingchange')}}',
+                    type: 'POST',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                    console.log(data);
+                    if (data == "success") {
+                        e.target.disabled = true;
+                        toastr["success"]("<strong>Success!</strong> Shipping status updated successfully!");
+                        window.location = '{{url()->current()}}';
+                    }
+                    }
+                });
+
+                } else {
+                    window.location = '{{url()->current()}}';
+                }
             }
-          });
-
-        } else {
-          window.location = '{{url()->current()}}';
-        }
-      });
+        );
+      }
 
     }
 
@@ -224,6 +254,13 @@
       })
       .then((willDelete) => {
         if (willDelete) {
+            swal({
+        title: "Checking...",
+        text: "Please wait",
+        icon: "{{asset('assets/user/img/ajax-loading.gif')}}",
+        buttons: false,
+        closeOnClickOutside: false
+      });
           $.ajax({
             url: '{{route('admin.cancelOrder')}}',
             type: 'POST',
@@ -258,6 +295,13 @@
       })
       .then((willDelete) => {
         if (willDelete) {
+            swal({
+        title: "Checking...",
+        text: "Please wait",
+        icon: "{{asset('assets/user/img/ajax-loading.gif')}}",
+        buttons: false,
+        closeOnClickOutside: false
+      });
           $.ajax({
             url: '{{route('admin.acceptOrder')}}',
             type: 'POST',

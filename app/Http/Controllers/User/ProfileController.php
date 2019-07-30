@@ -138,7 +138,7 @@ class ProfileController extends Controller
       $op->comment_type = $request->comment_type;
       $op->comment = $request->comment;
       $op->save();
-      Session::flash('success', 'Complained successfully');
+      Session::flash('success', 'Thank you for your feedback.');
       return "success";
     }
 
