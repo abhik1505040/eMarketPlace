@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Vendor;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use App\Orderedproduct as OP;
+use App\Orderedproduct as OP;
 use App\Product;
 use App\Order;
 use App\Orderedproduct;
 use App\Vendor;
-// use App\ProductReview;
+use App\ProductReview;
 // use App\Transaction;
 use DB;
 use Auth;
@@ -25,31 +25,31 @@ use Session;
 class VendorController extends Controller
 {
     public function dashboard() {
-    //   $topSoldOps = OP::where('approve', 1)
-    //                    ->where('refunded', '<>', 1)
-    //                    ->select(DB::raw("sum(quantity) as sales, product_id"))
-    //                    ->groupBy('product_id')->orderBy('sales', 'DESC')->limit(10)->get();
-    //   $products = [];
-    //   foreach ($topSoldOps as $key => $topSoldOp) {
-    //     $products[] = Product::find($topSoldOp->product_id);
-    //   }
-    //   $data['products'] = $products;
-    //   $topAvgRatings = ProductReview::select(DB::raw('avg(rating) as rating, product_id'))->groupBy('product_id')->limit(10)->orderBy('rating', 'DESC')->get();
-    //   $topRatedPros = [];
-    //   foreach ($topAvgRatings as $key => $topAvgRating) {
-    //     $topRatedPros[] = Product::find($topAvgRating->product_id);
-    //   }
-    //   $data['topRatedPros'] = $topRatedPros;
+      $topSoldOps = OP::where('approve', 1)
+                       ->where('vendor_id', Auth::guard('vendor')->user()->id)
+                       ->select(DB::raw("sum(quantity) as sales, product_id"))
+                       ->groupBy('product_id')->orderBy('sales', 'DESC')->limit(10)->get();
+      $products = [];
+      foreach ($topSoldOps as $key => $topSoldOp) {
+        $products[] = Product::find($topSoldOp->product_id);
+      }
+      $data['products'] = $products;
+      $topAvgRatings = ProductReview::select(DB::raw('avg(rating) as rating, product_id'))->groupBy('product_id')->limit(10)->orderBy('rating', 'DESC')->get();
+      $topRatedPros = [];
+      foreach ($topAvgRatings as $key => $topAvgRating) {
+        $topRatedPros[] = Product::find($topAvgRating->product_id);
+      }
+      $data['topRatedPros'] = $topRatedPros;
 
-    //   $orderids = Order::join('orderedproducts', 'orders.id', '=', 'orderedproducts.order_id')->select('orders.id')->groupBy('orders.id')->where('vendor_id', Auth::guard('vendor')->user()->id)->orderBy('id', 'DESC')->limit(10)->get();
-    //   $orderidarr = [];
-    //   foreach ($orderids as $key => $orderid) {
-    //     $orderidarr[] = $orderid->id;
-    //   }
-    //   $data['lorders'] = Order::whereIn('id', $orderidarr)->orderBy('id', 'DESC')->paginate(10);
+      $orderids = Order::join('orderedproducts', 'orders.id', '=', 'orderedproducts.order_id')->select('orders.id')->groupBy('orders.id')->where('vendor_id', Auth::guard('vendor')->user()->id)->orderBy('id', 'DESC')->limit(10)->get();
+      $orderidarr = [];
+      foreach ($orderids as $key => $orderid) {
+        $orderidarr[] = $orderid->id;
+      }
+      $data['lorders'] = Order::whereIn('id', $orderidarr)->whereIn('approve', [0,1])->orderBy('id', 'DESC')->paginate(10);
 
       //dummy data
-      $data = array();
+    //   $data = array();
 
       return view('vendor.dashboard', $data);
     }

@@ -56,16 +56,6 @@ class RegController extends Controller
           $user->email_sent = 0;
         }
 
-        // if ($gs->sms_verification == 0) {
-        //   $code = $user->sms_ver_code;
-        //   $to = $user->phone;
-        //   $message = "Your verification code is: " . $code;
-        //    send_sms( $to, $message);
-        //    $user->vsent = time();
-        //   $user->sms_sent = 1;
-        // } else {
-        //   $user->sms_sent = 0;
-        // }
         $user->save();
 
         if (Auth::attempt([

@@ -33,24 +33,7 @@ class VerificationController extends Controller
       return redirect()->route('user.home');
     }
 
-    // public function showSmsVerForm() {
-    //     if(Auth::check() && Auth::user()->sms_verified == 0) {
-    //       // sending verification code in email...
-    //       if (Auth::user()->sms_sent == 0) {
-    //         $to = Auth::user()->phone;
-    //         $message = "Your verification code is: " . Auth::user()->sms_ver_code;
-    //         send_sms( $to, $message);
 
-    //         // making the 'email_sent' 1 after sending mail...
-    //         $user = User::find(Auth::user()->id);
-    //         $user->sms_sent = 1;
-    //         $user->save();
-    //       }
-    //       return view('user.verification.smsVerification');
-
-    //     }
-    //     return redirect()->route('user.home');
-    // }
 
     public function emailVerification(Request $request) {
       $messages = [
@@ -70,23 +53,7 @@ class VerificationController extends Controller
       return redirect()->back();
     }
 
-    // public function smsVerification(Request $request) {
-    //   $messages = [
-    //     'sms_ver_code.required' => 'SMS verification code is required',
-    //   ];
-    //   $validatedData = $request->validate([
-    //       'sms_ver_code' => 'required',
-    //   ],$messages);
-    //   $user = User::find(Auth::user()->id);
-    //   if($user->sms_ver_code == $request->sms_ver_code) {
-    //     $user->sms_sent = 0;
-    //     $user->sms_verified = 1;
-    //     $user->save();
-    //     return redirect()->route('user.home');
-    //   }
-    //   Session::flash('error', "Verification code didn't match!");
-    //   return redirect()->back();
-    // }
+
 
     public function sendVcode(Request $request)
    {
@@ -113,11 +80,6 @@ class VerificationController extends Controller
                send_email($user->email, $user->username, 'Verification Code', $msg);
                return back()->with('success', 'Email verification code sent succesfully');
            }
-        //    elseif(isset($mobile))
-        //    {
-        //        send_sms($user->mobile, $msg);
-        //        return back()->with('success', 'SMS verification code sent succesfully');
-        //    }
            else
            {
                return back()->with('alert', 'Sending Failed');

@@ -13,15 +13,6 @@
   <div class="sellers-product-content-area">
       <div class="container">
         <div class="row mb-2">
-            @if (session()->has('message'))
-
-                <div class="col-lg-12 alert alert-success alert-dismissible fade show" role="alert" style="padding: 40px;font-size: 20px;">
-                  <strong>Order Complete! &nbsp; &nbsp;</strong> {{session('message')}}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              @endif
           <div class="col-md-12">
             <h2 style="font-size: 32px;margin-bottom: 28px;" class="order-heading">Order Information</h2>
           </div>
@@ -51,6 +42,16 @@
                 <h6 class="white-txt no-margin">Shipping/Payment Details</h6>
               </div>
               <div class="card-body">
+                {{-- <p>
+                  <strong>Shipping Method: </strong>
+                  @if ($order->shipping_method == 'around')
+                    Arround {{$gs->main_city}}
+                  @elseif ($order->shipping_method == 'world')
+                    Arround the World
+                  @elseif ($order->shipping_method == 'in')
+                    In {{$gs->main_city}}
+                  @endif
+                </p> --}}
                 @if ($order->approve != -1)
                   <p>
                     <strong>Shipping Status: </strong>
@@ -67,13 +68,46 @@
                 <p>
                         <strong>Payment Method: </strong>
                         Cash on Delivery
+                        {{-- @if ($order->payment_method == 1)
+                          Cash on delivery
+                        @elseif ($order->payment_method == 2)
+                          Advance Paid via <strong>{{$order->orderpayment->gateway->name}}</strong>
+                        @endif --}}
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div class="row mb-4">
-
+          {{-- @if (!empty($order->user->billing_last_name))
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header base-bg">
+                  <h6 class="white-txt no-margin">Biling Details</h6>
+                </div>
+                <div class="card-body">
+                  <p><strong>{{$order->first_name}} {{$order->user->billing_last_name}}</strong></p>
+                  <p><strong>Email: </strong>{{$order->user->billing_email}}</p>
+                  <p><strong>Phone: </strong>{{$order->user->billing_phone}}</p>
+                  <p><strong>Address: </strong>{{$order->user->billing_address}}</p>
+                </div>
+              </div>
+            </div>
+          @else
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header base-bg">
+                  <h6 class="white-txt no-margin">Biling Details</h6>
+                </div>
+                <div class="card-body">
+                  <p><strong>{{$order->first_name}} {{$order->last_name}}</strong></p>
+                  <p><strong>Email: </strong>{{$order->email}}</p>
+                  <p><strong>Phone: </strong>{{$order->phone}}</p>
+                  <p><strong>Address: </strong>{{$order->address}}</p>
+                </div>
+              </div>
+            </div>
+          @endif --}}
           <div class="col-md-6">
             <div class="card">
               <div class="card-header base-bg">
@@ -107,7 +141,20 @@
          @endif
         </div>
 
-
+        {{-- @if (!empty($order->order_notes))
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header base-bg">
+                <h6 class="white-txt no-margin">Order Note</h6>
+              </div>
+              <div class="card-body">
+                  <p>{{$order->order_notes}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endif --}}
           <div class="row">
               <div class="col-xl-9">
                   <div class="seller-product-wrapper">
@@ -180,78 +227,10 @@
                                                     <span>{{$gs->base_curr_symbol}} {{round($orderedproduct->product->price, 2)*$orderedproduct->quantity}}</span>
                                                 @endif
                                               </td>
-                                              @if ($orderedproduct->order->shipping_status == 2)
-                                                <td>
-                                                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#commentModal{{$orderedproduct->id}}">Feeback</button>
-                                                  {{-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundModal{{$orderedproduct->id}}">Refund</button> --}}
-                                                </td>
-                                              @endif
+
                                           </tr>
 
 
-                                          {{-- Comment Modal --}}
-                                          <div class="modal fade" id="commentModal{{$orderedproduct->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                              <div class="modal-content">
-                                                  <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">{{$orderedproduct->product->title}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                    <input id="opid{{$orderedproduct->id}}" type="hidden" name="opid" value="{{$orderedproduct->id}}">
-                                                    <div class="form-group">
-                                                      <label for="" style="color:#000;"><strong>Feedback Type: </strong></label>
-                                                      <select id="comment_type{{$orderedproduct->id}}" class="form-control" name="comment_type">
-                                                        <option value="Complain" {{(empty($orderedproduct->comment_type) || $orderedproduct->comment_type=='Complain') ? 'selected' : ''}}>Complaint</option>
-                                                        <option value="Suggestion" {{$orderedproduct->comment_type=='Suggestion' ? 'selected' : ''}}>Suggestion</option>
-                                                      </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                      <label for="" style="color:#000;"><strong>Feedback: </strong></label>
-                                                      <textarea id="comment{{$orderedproduct->id}}" class="form-control" name="comment" rows="5" cols="80" placeholder="Please write your feedback" {{!empty($orderedproduct->comment) ? 'readonly' : ''}} required>{{$orderedproduct->comment}}</textarea>
-                                                    </div>
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                    @if (empty($orderedproduct->comment))
-                                                      <button type="button" class="btn base-bg text-white" onclick="complain({{$orderedproduct->id}})">Submit</button>
-                                                    @endif
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                  </div>
-
-                                              </div>
-                                            </div>
-                                          </div>
-
-
-                                          {{-- Renfund Modal --}}
-                                          {{-- <div class="modal fade" id="refundModal{{$orderedproduct->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                              <div class="modal-content">
-                                                  <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">{{$orderedproduct->product->title}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                    <input id="opid{{$orderedproduct->id}}" type="hidden" name="opid" value="{{$orderedproduct->id}}">
-                                                    <div class="form-group">
-                                                      <label for="" style="color:#000;"><strong>Reason</strong></label>
-                                                      <textarea id="reason{{$orderedproduct->id}}" class="form-control" name="reason" rows="5" cols="80" placeholder="Please write your reason" required {{!empty($orderedproduct->refund->reason) ? 'readonly' : ''}}>{{!empty($orderedproduct->refund->reason) ? $orderedproduct->refund->reason : ''}}</textarea>
-                                                    </div>
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                    @if (empty($orderedproduct->refund->reason))
-                                                      <button type="button" class="btn base-bg text-white" onclick="refund({{$orderedproduct->id}})">Send Request</button>
-                                                    @endif
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                  </div>
-
-                                              </div>
-                                            </div>
-                                          </div> --}}
 
                                         @endforeach
                                       </tbody>
@@ -271,7 +250,7 @@
                     <ul>
                       <li><span class="left">CART AMOUNT</span> <span class="right">{{$gs->base_curr_symbol}} {{$order->subtotal + $ccharge}}</span></li>
                       @if ($ccharge > 0)
-                        <li><span class="left">COUPON (Discount)</span> <span class="right">- {{$gs->base_curr_symbol}} {{round($ccharge, 2)}}</span></li>
+                        <li><span class="left">COUPON (Discount)</span> <span class="right">- {{$gs->base_curr_symbol}} {{round($ccharge, 0)}}</span></li>
                       @else
                         <li><span class="left">COUPON (Discount)</span> <span class="right">- {{$gs->base_curr_symbol}} 0.00</span></li>
                       @endif
@@ -290,59 +269,3 @@
 
 
 @endsection
-
-
-@push('scripts')
-  <script>
-    function complain(id) {
-      var opid = $("#opid" + id).val();
-      var comment = $("#comment" + id).val();
-      var comment_type = $("#comment_type" + id).val();
-
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-      $.ajax({
-        url: '{{route('user.complain')}}',
-        type: 'POST',
-        data: {
-          'opid': opid,
-          'comment': comment,
-          'comment_type': comment_type,
-        },
-        success: function(data) {
-          if (data == "success") {
-            window.location = '{{url()->current()}}';
-          }
-        }
-      });
-    }
-
-    function refund(id) {
-      var opid = $("#opid" + id).val();
-      var reason = $("#reason" + id).val();
-      console.log(opid);
-      console.log(reason);
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-      $.ajax({
-        url: '{{route('user.refund')}}',
-        type: 'POST',
-        data: {
-          'opid': opid,
-          'reason': reason,
-        },
-        success: function(data) {
-          if (data == "success") {
-            window.location = '{{url()->current()}}';
-          }
-        }
-      });
-    }
-  </script>
-@endpush

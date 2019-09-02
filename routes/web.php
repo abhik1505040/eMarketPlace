@@ -58,6 +58,10 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth:vendor']], function (
     Route::post('/delete', 'Vendor\ProductController@delete')->name('vendor.product.delete');
     Route::get('/product/manage/{id}', 'Vendor\ProductController@individualproductshow')->name('vendor.product.individualproductshow')->middleware('bannedVendor');
 
+    // Order Routes
+	Route::get('/orders', 'Vendor\OrderController@orders')->name('vendor.orders')->middleware('bannedVendor');
+	Route::get('/{orderid}/orderdetails', 'Vendor\OrderController@orderdetails')->name('vendor.orderdetails')->middleware('bannedVendor');
+
 
 });
 
@@ -119,16 +123,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
 
     Route::post('/shippingchange', 'Admin\OrderController@shippingchange')->name('admin.shippingchange');
 	Route::post('/cancelOrder', 'Admin\OrderController@cancelOrder')->name('admin.cancelOrder');
-	Route::post('/acceptOrder', 'Admin\OrderController@acceptOrder')->name('admin.acceptOrder');
+    Route::post('/acceptOrder', 'Admin\OrderController@acceptOrder')->name('admin.acceptOrder');
+
+    // Comment routes..
+	Route::get('/comments', 'Admin\CommentController@all')->name('admin.comments.all');
+	Route::get('/complains', 'Admin\CommentController@complains')->name('admin.complains');
+    Route::get('/suggestions', 'Admin\CommentController@suggestions')->name('admin.suggestions');
+    Route::post('/updateComment', 'Admin\CommentController@updateComment')->name('admin.updateComment');
 
 
-
+    // Coupon Routes
+	Route::get('/coupon/index', 'Admin\CouponController@index')->name('admin.coupon.index');
+	Route::get('/coupon/create', 'Admin\CouponController@create')->name('admin.coupon.create');
+	Route::post('/coupon/store', 'Admin\CouponController@store')->name('admin.coupon.store');
+	Route::get('/coupon/{id}/edit', 'Admin\CouponController@edit')->name('admin.coupon.edit');
+	Route::post('/coupon/update', 'Admin\CouponController@update')->name('admin.coupon.update');
+	Route::post('/coupon/delete', 'Admin\CouponController@delete')->name('admin.coupon.delete');
 
 
 
 
 });
-//***********************ROutes without any auth needed */
+//***********************Routes without any auth needed ****************/
 Route::get('/shop/{category?}/{subcategory?}', 'SearchController@search')->name('user.search');
 Route::get('/product/{slug}/{id}', 'ProductController@show')->name('user.product.details');
 Route::get('/shop_page/{vendor}/{category?}/{subcategory?}', 'Vendor\VendorController@shoppage')->name('vendor.shoppage');

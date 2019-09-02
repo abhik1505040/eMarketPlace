@@ -20,9 +20,9 @@
       </ul>
     </li> --}}
 
-    {{-- <li><a class="app-menu__item @if(request()->path() == 'admin/charge/index') active @endif" href="{{route('admin.charge.index')}}"><i class="app-menu__icon fas fa-money-bill-alt"></i><span class="app-menu__label">Charge Settings</span></a></li>
+    {{-- <li><a class="app-menu__item @if(request()->path() == 'admin/charge/index') active @endif" href="{{route('admin.charge.index')}}"><i class="app-menu__icon fas fa-money-bill-alt"></i><span class="app-menu__label">Charge Settings</span></a></li> --}}
 
-    <li><a class="app-menu__item @if(request()->path() == 'admin/coupon/index') active @endif" href="{{route('admin.coupon.index')}}"><i class="app-menu__icon fas fa-dollar-sign"></i><span class="app-menu__label">Coupon Settings</span></a></li> --}}
+    <li><a class="app-menu__item @if(request()->path() == 'admin/coupon/index') active @endif" href="{{route('admin.coupon.index')}}"><i class="app-menu__icon fas fa-dollar-sign"></i><span class="app-menu__label">Coupon Settings</span></a></li>
 
 
 
@@ -99,10 +99,7 @@
         is-expanded
     @elseif(request()->path() == 'admin/orders/delivered')
         is-expanded
-    {{-- @elseif(request()->path() == 'admin/orders/cashondelivery')
-        is-expanded
-    @elseif(request()->path() == 'admin/orders/advance')
-        is-expanded --}}
+
     @endif">
 
     @php
@@ -122,7 +119,11 @@
     </li>
 
 
-    {{-- <li class="treeview
+
+    @php
+        $unread = \App\OrderedProduct::where('comment_status', 1)->count();
+    @endphp
+    <li class="treeview
     @if(request()->path() == 'admin/comments')
       is-expanded
     @elseif(request()->path() == 'admin/complains')
@@ -130,13 +131,15 @@
     @elseif(request()->path() == 'admin/suggestions')
       is-expanded
     @endif">
-      <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments"></i><span class="app-menu__label">Comments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+
+      <a class="app-menu__item" href="#"  data-toggle="treeview"><i class="app-menu__icon fa fa-comments"></i><span class="app-menu__label">Feedbacks  @if($unread > 0) <span class="badge badge-danger">{{$unread}}</span> @endif</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+
       <ul class="treeview-menu">
         <li><a class="treeview-item @if(request()->path() == 'admin/comments') active @endif" href="{{route('admin.comments.all')}}"><i class="icon far fa-circle"></i> All</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/complains') active @endif" href="{{route('admin.complains')}}"><i class="icon far fa-circle"></i> Complains</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/suggestions') active @endif" href="{{route('admin.suggestions')}}"><i class="icon far fa-circle"></i> Suggestions</a></li>
       </ul>
-    </li> --}}
+    </li>
 
 
     {{-- <li class="treeview

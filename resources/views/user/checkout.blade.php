@@ -233,32 +233,7 @@
                             <p id="errcouponcode" class="text-danger em"></p>
                         </div>
                       </form>
-                      {{-- @php
-                        if (Auth::check()) {
-                          $sessionid = Auth::user()->id;
-                        } else {
-                          $sessionid = session()->get('browserid');
-                        }
-                        $pp = \App\PlacePayment::where('cart_id', $sessionid)->first();
-                      @endphp --}}
 
-                      {{-- <h5>Select a Shipping Method:</h5>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="place" value="in" onchange="calcTotal(document.getElementById('paymentMethod').value)" @if(!empty($pp->place)) {{$pp->place=='in'?'checked':''}} @endif>
-                            <label class="form-check-label" for="inlineCheckbox1">In {{$gs->main_city}}</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox2" name="place" value="around" onchange="calcTotal(document.getElementById('paymentMethod').value)" @if(!empty($pp->place)) {{$pp->place=='around'?'checked':''}} @endif>
-                            <label class="form-check-label" for="inlineCheckbox2">Around {{$gs->main_city}}</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox3" name="place" value="world" onchange="calcTotal(document.getElementById('paymentMethod').value)" @if(!empty($pp->place)) {{$pp->place=='world'?'checked':''}} @else checked @endif>
-                            <label class="form-check-label" for="inlineCheckbox3">Other Places</label>
-                          </div>
-                        </div>
-                      </div> --}}
                       <br>
 
                       <h5>Payment Method:</h5>
@@ -353,29 +328,34 @@
             for (var i = 0; i < em.length; i++) {
               em[i].innerHTML = '';
             }
-            if(typeof data.error != 'undefined') {
-              if (typeof data.coupon_code != 'undefined') {
-                document.getElementById('errcouponcode').innerHTML = data.coupon_code[0];
-              }
-            } else {
-              toastr["success"]("Coupon applied!");
-              document.getElementById('couponCodeIn').value = '';
-              $("#subtotal").html(curr + " " + data.subtotal);
-              $("#total").html(curr + " " + data.total);
-              if (data.ctotal > 0) {
-                $("#licoupon").removeClass('d-none');
-                $("#licoupon").addClass('d-block');
-                $("#liamount").removeClass('d-none');
-                $("#liamount").addClass('d-block');
-                $("#coupon").html('- ' + curr + " " + data.ctotal);
-              } else {
-                $("#licoupon").removeClass('d-block');
-                $("#licoupon").addClass('d-none');
-                $("#liamount").removeClass('d-block');
-                $("#liamount").addClass('d-nonw');
-              }
-
+            if(data == "Applied"){
+                toastr["error"]("You already applied this coupon once!");
             }
+            else {
+                if(typeof data.error != 'undefined') {
+                    if (typeof data.coupon_code != 'undefined') {
+                        document.getElementById('errcouponcode').innerHTML = data.coupon_code[0];
+                    }
+                } else {
+                toastr["success"]("Coupon applied!");
+                document.getElementById('couponCodeIn').value = '';
+                $("#subtotal").html(curr + " " + data.subtotal);
+                $("#total").html(curr + " " + data.total);
+                if (data.ctotal > 0) {
+                    $("#licoupon").removeClass('d-none');
+                    $("#licoupon").addClass('d-block');
+                    $("#liamount").removeClass('d-none');
+                    $("#liamount").addClass('d-block');
+                    $("#coupon").html('- ' + curr + " " + data.ctotal);
+                } else {
+                    $("#licoupon").removeClass('d-block');
+                    $("#licoupon").addClass('d-none');
+                    $("#liamount").removeClass('d-block');
+                    $("#liamount").addClass('d-nonw');
+                }
+
+                }
+          }
         }
       });
     }

@@ -52,6 +52,7 @@
                                     <th>Payment Method</th>
                                     <th>Order Status</th>
                                     <th>Shipping Status</th>
+
                                     <th></th>
                                 </tr>
                             </thead>

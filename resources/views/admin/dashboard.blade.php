@@ -17,32 +17,41 @@
     </div>
 
     <div class="row">
-      {{-- <div class="col-md-6 col-lg-4">
+      <div class="col-md-4 col-lg-4">
         <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-          <a class="info" href="{{route('admin.allUsers')}}">
-            <h4>TOTAL USERS</h4>
-            <p><b>{{\App\User::count()}}</b></p>
+          <a class="info" href="#">
+            <h4>TOTAL VERIFIED USERS</h4>
+            <p><b>{{\App\User::where('email_verified', 1)->count()}}</b></p>
           </a>
         </div>
       </div>
-      <div class="col-md-6 col-lg-4">
+      {{-- <div class="col-md-6 col-lg-4">
         <div class="widget-small info coloured-icon"><i class="icon fa fa-times fa-3x"></i>
-          <a class="info" href="{{route('admin.bannedUsers')}}">
-            <h4>BANNED USERS</h4>
-            <p><b>{{\App\User::where('status', 'blocked')->count()}}</b></p>
+          <a class="info" href="#">
+            <h4>TOTAL VENDORS</h4>
+            <p><b>{{\App\Vendor::count()}}</b></p>
           </a>
         </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
+      </div> --}}
+      <div class="col-md-4 col-lg-4">
         <div class="widget-small warning coloured-icon"><i class="icon fa fa-check fa-3x"></i>
-          <a class="info" href="{{route('admin.verifiedUsers')}}">
-            <h4>VERIFIED USERS</h4>
-            <p><b>{{\App\User::where('email_verified', 1)->where('sms_verified', 1)->count()}}</b></p>
+          <a class="info" href="#">
+            <h4>TOTAL VERIFIED VENDORS</h4>
+            <p><b>{{\App\Vendor::where('approved', 1)->count()}}</b></p>
           </a>
         </div>
-      </div>
+     </div>
+
+        <div class="col-md-6 col-lg-4">
+                <div class="widget-small danger coloured-icon"><i class="icon fa fa-mobile fa-3x"></i>
+                <a class="info" href="#">
+                    <h4>TOTAL ORDERS DELIVERED</h4>
+                    <p><b>{{\App\Order::where('shipping_status', 2)->count()}}</b></p>
+                </a>
+                </div>
+        </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-md-6 col-lg-4">
         <div class="widget-small danger coloured-icon"><i class="icon fa fa-mobile fa-3x"></i>
           <a class="info" href="{{route('admin.mobileUnverifiedUsers')}}">
@@ -61,16 +70,16 @@
       </div>
 
     </div> --}}
-    {{-- <div class="row">
+    <div class="row">
            <div class="col-md-12">
                <div class="tile">
-                   <h3 class="tile-title">Product Upload Chart (Monthly)</h3>
+                   <h3 class="tile-title">Monthly Order Info</h3>
                    <div class="embed-responsive embed-responsive-16by9">
                        <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
                    </div>
                </div>
            </div>
-    </div> --}}
+    </div>
   </main>
 @endsection
 

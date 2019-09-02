@@ -239,46 +239,6 @@ class CartController extends Controller
 
       $gs = GS::first();
       $scharge = $gs->shipping_charge;
-    //   $pm = $request->paymentMethod;
-    //   $place = $request->place;
-
-    //   // if payment method is cash on delivery
-    //   if ($pm == 1) {
-    //     if ($place == 'in') {
-    //       $scharge = $gs->in_cash_on_delivery;
-    //     } elseif ($place == 'around') {
-    //       $scharge = $gs->around_cash_on_delivery;
-    //     } else {
-    //       $scharge = $gs->world_cash_on_delivery;
-    //     }
-    //   }
-    //   // if payment method is cash on advance
-    //   else {
-    //     if ($place == 'in') {
-    //       $scharge = $gs->in_advanced;
-    //     } elseif ($place == 'around') {
-    //       $scharge = $gs->around_advanced;
-    //     } else {
-    //       $scharge = $gs->world_advanced;
-    //     }
-    //   }
-
-      // if there is no existing place and payment for this cart then store it
-    //   $placePay = PlacePayment::where('cart_id', $sessionid);
-    //   if ($placePay->count() == 0) {
-    //     $newpp = new PlacePayment;
-    //     $newpp->cart_id = $sessionid;
-    //     $newpp->place = $place;
-    //     $newpp->payment = $pm;
-    //     $newpp->save();
-    //   }
-    //   // else update the cart with these place and payment
-    //   else {
-    //     $expp = $placePay->first();
-    //     $expp->place = $place;
-    //     $expp->payment = $pm;
-    //     $expp->save();
-    //   }
 
       // calculate total using tax and shipping charge...
       $total =  getTotal($sessionid);

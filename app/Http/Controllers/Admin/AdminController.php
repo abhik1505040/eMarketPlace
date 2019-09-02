@@ -9,7 +9,7 @@ use Session;
 use Hash;
 use Validator;
 use App\Admin;
-use App\Product;
+use App\Order;
 
 
 class AdminController extends Controller
@@ -83,7 +83,7 @@ class AdminController extends Controller
 
     public function dashboard(){
         $admin = Admin::find(Auth::guard('admin')->user()->id);
-        $sales =  Product::whereYear('created_at', '=', date('Y'))->get()->groupBy(function($d) {
+        $sales =  Order::whereYear('created_at', '=', date('Y'))->get()->groupBy(function($d) {
                   return $d->created_at->format('F');
                });
          $sold = [];
