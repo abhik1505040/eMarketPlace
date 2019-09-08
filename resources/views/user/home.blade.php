@@ -2,43 +2,36 @@
 
 @section('title', 'Home')
 
-@section('headertxt')
-  Home Page(To be completed....)
+@section('navbar')
+  @includeif('layout.partials.navbar')
 @endsection
 
 @section('headerarea')
   @includeif('layout.partials.headerarea')
 @endsection
 
-@section('content')
+ @section('content')
   <div id="home">
     <div class="body-overlay" id="body-overlay"></div>
-    <div class="search-popup" id="search-popup">
-        <form action="index.html" class="search-popup-form">
-            <div class="form-element">
-                    <input type="text"  class="input-field" placeholder="Search.....">
-            </div>
-            <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
+
 
     <!-- feature area home 6 start -->
-    {{-- <div class="feature-area-home-6">
+    <div class="feature-area-home-6">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                    <div class="img-wrapper">
-                        {!! show_ad(1) !!}
+                        {{-- {!! show_ad(1) !!} --}}
                    </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                    <div class="img-wrapper">
-                        {!! show_ad(1) !!}
+                        {{-- {!! show_ad(1) !!} --}}
                    </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                    <div class="img-wrapper">
-                        {!! show_ad(1) !!}
+                        {{-- {!! show_ad(1) !!} --}}
                    </div>
                 </div>
             </div>
@@ -46,7 +39,7 @@
     </div>
     <!-- feature area home 6 end -->
 
-    <div id="flashsaleContainer">
+    {{-- <div id="flashsaleContainer">
       @if (count($flashsales) > 0)
         <div class="trending-seller-area home-6" id="flashSale">
           <div class="container">
@@ -70,7 +63,7 @@
                                 <div class="col-lg-12">
 
 
-                                    <div class="recently-added-carousel flash-sale-carousel"><!-- recently added carousel -->
+                                     <div class="recently-added-carousel flash-sale-carousel"><!-- recently added carousel -->
                                       @foreach ($flashsales as $key => $flashsale)
                                         <div class="single-new-collection-item"><!-- single new collections -->
                                             <div class="thumb">
@@ -103,7 +96,7 @@
           </div>
         </div>
       @endif
-    </div>
+    </div> --}}
 
 
     <div class="trending-seller-area home-6">
@@ -344,7 +337,7 @@
   <!-- recently added end -->
 
   <!-- brand logo carousel area one start -->
-  <div class="brand-logo-carousel-area-one">
+  {{-- <div class="brand-logo-carousel-area-one">
       <div class="container-fluid">
           <div class="row">
               <div class="col-lg-12">
@@ -360,14 +353,14 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> --}}
   <!-- brand logo carousel area one end -->
- --}}
+
 
 @endsection
 
-
-  {{-- @section('js-scripts')
+{{--
+  @section('js-scripts')
 
     <script>
       var home = new Vue({

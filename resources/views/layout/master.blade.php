@@ -9,9 +9,9 @@
   <div id="app">
     @includeif('layout.partials.gennavbar')
 
-    @if (request()->path() == '/')
+    @if (request()->is('home'))
       @yield('headerarea')
-    @elseif (request()->is('shop_page/*'))
+    @elseif (request()->is('shop_page/*') || request()->is('shopPage/*'))
       <!-- breadcrumb area start -->
       <section class="breadcrumb-area breadcrumb-bg extra shop-page-breadcrumb">
           <div class="container">
@@ -23,7 +23,12 @@
                             <img class="shop-logo" src="{{asset('assets/user/img/shop-logo/'.$vendor->logo)}}" alt="">
                           </div>
                           <div class="shop-name-wrapper">
-                            <h3 class="shop-name text-white">{{$vendor->shop_name}}</h3>
+                            <h3 class="shop-name text-white">{{$vendor->shop_name}}
+                                &nbsp;
+                                @if(!request()->is('shopPage/*'))
+                                    <a href="{{route('vendor.reviews', $vendor->id)}}" class="btn btn-outline-light " role="button" aria-pressed="true">See reviews</a>
+                                @endif
+                            </h3>
                           </div>
                         </div>
                         <div class="right-shop-header">

@@ -121,11 +121,11 @@ class OrderController extends Controller
           foreach ($order->orderedproducts as $key => $op) {
             if (!in_array($op->vendor->id, $sentVendors)) {
               $sentVendors[] = $op->vendor->id;
-              send_email($op->vendor->email, $op->vendor->shop_name, 'Product delivery is in process', "Your products will reach the customer soon.<p><strong>Order number: </strong>".$order->unique_id."</p> <p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
+            //   send_email($op->vendor->email, $op->vendor->shop_name, 'Product delivery is in process', "Your products will reach the customer soon.<p><strong>Order number: </strong>".$order->unique_id."</p> <p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
             }
           }
           // sending mail to user
-        send_email($order->user->email, $order->user->first_name, 'Product delivery is in process', "You will receive your order very soon.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
+        // send_email($order->user->email, $order->user->first_name, 'Product delivery is in process', "You will receive your order very soon.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
 
         //}
         // if in around main city
@@ -186,12 +186,12 @@ class OrderController extends Controller
         foreach ($order->orderedproducts as $key => $op) {
           if (!in_array($op->vendor->id, $sentVendors)) {
             $sentVendors[] = $op->vendor->id;
-            send_email($op->vendor->email, $op->vendor->shop_name, 'Products delivered', "Your products have reached customer.<p><strong>Order number: </strong>".$order->unique_id."</p> <p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
+            // send_email($op->vendor->email, $op->vendor->shop_name, 'Products delivered', "Your products have reached customer.<p><strong>Order number: </strong>".$order->unique_id."</p> <p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
           }
         }
 
         // sending mail to user
-        send_email($order->user->email, $order->user->first_name, 'Products delivered', "Please leave a feedback on the order.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
+        // send_email($order->user->email, $order->user->first_name, 'Products delivered', "Please leave a feedback on the order.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
 
       }
 
@@ -219,11 +219,11 @@ class OrderController extends Controller
       foreach ($order->orderedproducts as $key => $op) {
         if (!in_array($op->vendor->id, $sentVendors)) {
           $sentVendors[] = $op->vendor->id;
-          send_email($op->vendor->email, $op->vendor->shop_name, 'New Order', "Order ID #".$order->unique_id." has been accepted.<p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
+        //   send_email($op->vendor->email, $op->vendor->shop_name, 'New Order', "Order ID #".$order->unique_id." has been accepted.<p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
         }
       }
       // sending mail to user
-      send_email($order->user->email, $order->user->first_name, 'Order accepted', "Your order has been accepted.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
+    //   send_email($order->user->email, $order->user->first_name, 'Order accepted', "Your order has been accepted.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
       return "success";
     }
 
@@ -237,12 +237,12 @@ class OrderController extends Controller
       foreach ($order->orderedproducts as $key => $op) {
         if (!in_array($op->vendor->id, $sentVendors)) {
           $sentVendors[] = $op->vendor->id;
-          
+
           //send_email($op->vendor->email, $op->vendor->shop_name, 'Order rejected', "Order ID #".$order->unique_id." has been rejected.<p><strong>Order details: </strong><a href='".url('/')."/vendor"."/".$order->id."/orderdetails'>".url('/')."/vendor"."/".$order->id."/orderdetails"."</a></p>");
         }
       }
       // sending mail to user
-      send_email($order->user->email, $order->user->first_name, 'Order rejected', "Your order has been rejected.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
+    //   send_email($order->user->email, $order->user->first_name, 'Order rejected', "Your order has been rejected.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
       return "success";
     }
 

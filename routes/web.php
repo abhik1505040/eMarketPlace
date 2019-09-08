@@ -138,7 +138,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
 	Route::post('/coupon/store', 'Admin\CouponController@store')->name('admin.coupon.store');
 	Route::get('/coupon/{id}/edit', 'Admin\CouponController@edit')->name('admin.coupon.edit');
 	Route::post('/coupon/update', 'Admin\CouponController@update')->name('admin.coupon.update');
-	Route::post('/coupon/delete', 'Admin\CouponController@delete')->name('admin.coupon.delete');
+    Route::post('/coupon/delete', 'Admin\CouponController@delete')->name('admin.coupon.delete');
+
+    // Interface Routes
+    Route::get('/interfaceControl/slider/index', 'Admin\InterfaceControl\SliderController@index')->name('admin.slider.index');
+	Route::post('/interfaceControl/slider/store', 'Admin\InterfaceControl\SliderController@store')->name('admin.slider.store');
+	Route::post('/interfaceControl/slider/delete', 'Admin\InterfaceControl\SliderController@delete')->name('admin.slider.delete');
 
 
 
@@ -158,8 +163,10 @@ Route::post('/stock/check', 'CartController@stockcheck')->name('stock.check');
 Route::post('/cart/update', 'CartController@update')->name('cart.update');
 Route::get('/cart/getTotal', 'CartController@getTotal')->name('cart.getTotal');
 Route::get('/{id}/productratings', 'ProductController@productratings')->name('user.productratings');
+Route::get('/productratings/{vendor}', 'ProductController@vendorProductratings')->name('vendor.productratings');
 Route::get('/{id}/avgrating', 'ProductController@avgrating')->name('user.avgrating');
 Route::get('/shop_page/{vendor}/{category?}/{subcategory?}', 'Vendor\VendorController@shoppage')->name('vendor.shoppage');
+Route::get('/shopPage/{id}/reviews', 'Vendor\VendorController@viewReviews')->name('vendor.reviews');
 
 //*************User routes************* */
 Route::get('/home', 'User\PagesController@home')->name('user.home')->middleware('emailVerification', 'bannedUser');

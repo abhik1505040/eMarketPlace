@@ -162,8 +162,12 @@
                             <a class="nav-link" href="{{route('user.contact')}}">Contact</a>
                         </li> --}}
                         @if (!Auth::check() && !Auth::guard('vendor')->check())
-                           <li class="nav-item">
-                              <a class="nav-link" href="{{route('login')}}">Login</a>
+                           <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Login</a>
+                              <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{route('login')}}">As User</a>
+                                    <a class="dropdown-item" href="{{route('vendor.login')}}">As Vendor</a>
+                              </div>
                           </li>
                         @elseif (Auth::check())
                           <li class="nav-item dropdown">
@@ -210,14 +214,14 @@
         <!-- navbar area end -->
 
         <div class="body-overlay" id="body-overlay"></div>
-    {{-- <div class="search-popup" id="search-popup">
+    <div class="search-popup" id="search-popup">
         <form action="index.html" class="search-popup-form">
             <div class="form-element">
                     <input type="text"  class="input-field" placeholder="Search.....">
             </div>
             <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
         </form>
-    </div> --}}
+    </div>
     <!-- slide sidebar area start -->
     <div class="slide-sidebar-area" id="slide-sidebar-area">
         <div class="top-content"><!-- top content -->

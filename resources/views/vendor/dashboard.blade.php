@@ -78,7 +78,7 @@
                                   <div class="latest-order">
                                           <div class="table-panel">
                                           <div class="card-header">
-                                              latest orders
+                                              Latest Orders
                                           </div>
                                           <div class="card-body">
                                               <table class="table table-responsive seller-dashboard-table">

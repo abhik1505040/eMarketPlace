@@ -20,7 +20,9 @@ use Carbon\Carbon;
 use Hash;
 use Validator;
 use Session;
-
+// use DebugBar\DebugBar;
+// use DebugBar\DebugBar as DebugBarDebugBar;
+use Symfony\Component\Debug\Debug;
 
 class VendorController extends Controller
 {
@@ -197,6 +199,40 @@ class VendorController extends Controller
 
       return view('vendor.shop_page', $data);
     }
+
+
+    public function viewReviews(Request $request, $vendorid) {
+        $data['vendorid'] = $vendorid;
+        $data['vendor'] = Vendor::find($vendorid);
+        $data['term'] = $request->term;
+        // $data['products'] = Products::join('product_reviews', 'products.id', '=', 'product_reviews.product_id')->select('products.id')->groupBy('products.id')->where('vendor_id', Auth::guard('vendor')->user()->id)->orderBy('id', 'DESC')->paginate(10);
+
+        $ids = ProductReview::join('products', 'product_reviews.product_id', '=', 'products.id')->where('products.vendor_id', $vendorid)->orderBy('products.id', 'DESC')->select('product_reviews.id')->get();
+
+        // return $ids;
+
+        $reviewIDs=[];
+        foreach($ids as $key => $reviewID){
+            $reviewIDs[] = $reviewID->id;
+        }
+        // return $reviewIDs;
+        $data['reviews'] = ProductReview::whereIn('id', $reviewIDs)->orderBy('created_at', 'DESC');
+
+
+        $ids = ProductReview::all('id')->toArray();
+        $data['ids'] = $ids;
+        // return $ids;
+
+
+        \Debugbar::enable();
+        return view('vendor.reviews',$data);
+    }
+
+
+
+
+
+
 
 
     // public function transactions() {

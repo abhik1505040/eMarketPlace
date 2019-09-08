@@ -129,6 +129,19 @@ class ProductController extends Controller
       return $prs;
     }
 
+    public function vendorProductratings($vid){
+        $ids = ProductReview::join('products', 'product_reviews.product_id', '=', 'products.id')->where('products.vendor_id', $vid)->orderBy('products.id', 'DESC')->select('product_reviews.id')->get();
+
+        $reviewIDs=[];
+        foreach($ids as $key => $reviewID){
+            $reviewIDs[] = $reviewID->id;
+        }
+
+        $reviews = ProductReview::whereIn('id', $reviewIDs)->get();
+        // return $reviews->count();
+        return $reviews;
+    }
+
     public function avgrating($pid) {
       $avgrating = ProductReview::where('product_id', $pid)->avg('rating');
       if (empty($avgrating)) {

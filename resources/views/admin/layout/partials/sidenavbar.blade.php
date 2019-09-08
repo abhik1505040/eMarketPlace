@@ -267,8 +267,8 @@
 
     <li><a class="app-menu__item @if(request()->path() == 'admin/trxlog') active @endif" href="{{route('admin.trxLog')}}"><i class="app-menu__icon fas fa-exchange-alt"></i><span class="app-menu__label">Transaction Log</span></a></li>
  --}}
-
-    {{-- <li class="treeview
+{{--
+    <li class="treeview
     @if (request()->path() == 'admin/interfaceControl/logoIcon/index')
       is-expanded
     @elseif (request()->path() == 'admin/interfaceControl/partner/index')
@@ -287,7 +287,8 @@
       is-expanded
     @elseif (request()->path() == 'admin/interfaceControl/registertext/index')
       is-expanded
-    @endif"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-desktop"></i><span class="app-menu__label">Interface Control</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+    @endif">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-desktop"></i><span class="app-menu__label">Interface Control</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">
         <li><a class="treeview-item @if(request()->path() == 'admin/interfaceControl/logoIcon/index') active @endif" href="{{route('admin.logoIcon.index')}}"><i class="icon far fa-circle"></i> Logo+Icon Setting</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/interfaceControl/support/index') active @endif" href="{{route('admin.support.index')}}"><i class="icon far fa-circle"></i> Support Informations</a></li>
@@ -299,8 +300,10 @@
         <li><a class="treeview-item @if(request()->path() == 'admin/interfaceControl/registertext/index') active @endif" href="{{route('admin.registertext.index')}}"><i class="icon far fa-circle"></i> Register Text</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/interfaceControl/footer/index') active @endif" href="{{route('admin.footer.index')}}"><i class="icon far fa-circle"></i> Footer Text</a></li>
       </ul>
-    </li>
- --}}
+    </li> --}}
+
+    <li><a class="app-menu__item @if(request()->path() == 'admin/interfaceControl/slider/index') active @endif" href="{{route('admin.slider.index')}}"><i class="app-menu__icon fa fa-desktop"></i><span class="app-menu__label">Interface Control</span></a></li>
+
 
     {{-- <li class="treeview
     @if(request()->path() == 'admin/policy/refund/index')

@@ -167,6 +167,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
 
 
+
     ],
 
     /*

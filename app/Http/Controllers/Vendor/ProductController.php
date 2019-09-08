@@ -35,6 +35,7 @@ class ProductController extends Controller
         }
         $data['imgs'] = PreviewImage::where('product_id',$id)->get();
         return view('vendor.product.individualproductshow', $data);
+
     }
 
     public function create() {
