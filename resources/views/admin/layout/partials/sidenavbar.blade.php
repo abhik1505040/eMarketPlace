@@ -162,7 +162,7 @@
     </li> --}}
 
 
-    {{-- <li class="treeview
+    <li class="treeview
     @if (request()->path() == 'admin/userManagement/allUsers')
       is-expanded
     @elseif (request()->path() == 'admin/userManagement/bannedUsers')
@@ -196,9 +196,9 @@
         <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/emailUnverifiedUsers' || request()->path() == 'admin/userManagement/emailUnverifiedUsersSearchResult') active @endif" href="{{route('admin.emailUnverifiedUsers')}}"><i class="icon far fa-circle"></i> Email Unverified Users</a></li>
       </ul>
     </li>
- --}}
 
-    {{-- <li class="treeview
+
+    <li class="treeview
     @if (request()->path() == 'admin/vendorManagement/allVendors')
       is-expanded
     @elseif (request()->path() == 'admin/vendorManagement/bannedVendors')
@@ -216,7 +216,7 @@
         <li><a class="treeview-item @if(request()->path() == 'admin/vendorManagement/allVendors' || request()->path() == 'admin/vendorManagement/allVendorsSearchResult') active @endif" href="{{route('admin.allVendors')}}"><i class="icon far fa-circle"></i> All Vendors</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/vendorManagement/bannedVendors' || request()->path() == 'admin/vendorManagement/bannedVendorsSearchResult') active @endif" href="{{route('admin.bannedVendors')}}"><i class="icon far fa-circle"></i> Banned Vendors</a></li>
       </ul>
-    </li> --}}
+    </li>
 
     {{-- <li><a class="app-menu__item @if(request()->path() == 'admin/subscribers') active @endif" href="{{route('admin.subscribers')}}"><i class="app-menu__icon fas fa-newspaper"></i><span class="app-menu__label">Subscribers</span></a></li>
 

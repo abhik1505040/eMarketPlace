@@ -6259,6 +6259,8 @@ ul {
   .contact-form-area .contact_form .form-element .input-field {
     border: none;
     background-color: #fff; }
+    .contact-form-area .contact_form .form-element .input-field.gray-bg {
+        background-color: #fafafd; }
     .contact-form-area .contact_form .form-element .input-field.textarea {
       min-height: 300px; }
   .contact-form-area .contact_form .btn-wrapper {

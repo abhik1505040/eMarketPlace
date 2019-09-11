@@ -165,7 +165,7 @@
                 <div class="thumb">
                         <img src="{{asset('assets/user/img/products/'.$productreview->product->previewimages()->first()->image)}}" alt="seller product image">
                     </div>
-                <h3>{{ $productreview->user->username }} {{\Carbon\Carbon::now()}}</h3>
+                <h3>{{ $productreview->user->username }}</h3>
 
                     <div class="content" style="padding-top:0px;">
                         <h6><b>Product Link: </b> <a href="{{route('user.product.details', [$productreview->product->slug, $productreview->product->id])}}" target="_blank">{{strlen($productreview->product->title) > 25 ? substr($productreview->product->title, 0, 25) . '...' : $productreview->product->title}}</a></h6>

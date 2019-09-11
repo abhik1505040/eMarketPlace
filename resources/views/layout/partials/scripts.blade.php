@@ -28,23 +28,7 @@
 <script src="{{ asset('assets/user/js/owl.carousel2.thumbs.js') }}" type="text/javascript"></script>
 <!-- main -->
 <script src="{{asset('assets/user/js/main.js')}}"></script>
-{{-- <script>
-    $(document).ready(function() {
 
-  $(window).scroll(function () {
-      //if you hard code, then use console
-      //.log to determine when you want the
-      //nav bar to stick.
-      console.log($(window).scrollTop())
-    if ($(window).scrollTop() > 280) {
-      $('.navbar-area').addClass('navbar-fixed');
-    }
-    if ($(window).scrollTop() < 281) {
-      $('.navbar-area').removeClass('navbar-fixed');
-    }
-  });
-});
-</script> --}}
 
 {{-- Tostr options --}}
 <script type="text/javascript">

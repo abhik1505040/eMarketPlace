@@ -22,11 +22,7 @@ class CartController extends Controller
       } else {
         $sessionid = session()->get('browserid');
       }
-    //   if (empty($gs->coupon_code)) {
-    //     if (CartCoupon::where('cart_id', $sessionid)->count() > 0) {
-    //       CartCoupon::where('cart_id', $sessionid)->first()->delete();
-    //     }
-    //   }
+
       return view('cart.index');
     }
 

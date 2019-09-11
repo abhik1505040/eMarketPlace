@@ -35,9 +35,10 @@
                                           <th>Order id</th>
                                           <th>Order Date</th>
                                           <th>Total</th>
-                                          <th>Shipping Status</th>
-                                          <th>Order Status</th>
                                           <th>Payment Method</th>
+                                          <th>Order Status</th>
+                                          <th>Shipping Status</th>
+
                                           <th>Action</th>
                                       </tr>
                                     </thead>

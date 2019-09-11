@@ -35,20 +35,22 @@
                                         </div>
                                     </form>
                                 </div>
+
+
                             </li>
 
-                            {{--<li>
+                            {{-- <li>
                                 <div class="single-support-info-item">
                                     <div class="icon">
                                             <i class="fas fa-envelope"></i>
                                     </div>
                                     <div class="content">
                                         <h4 class="title">Email Us</h4>
-                                        <span class="details">{{$gs->support_email}}</span>
+                                        <span class="details">radnin2@gmail.com</span>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <div class="single-support-info-item">
                                     <div class="icon">
                                             <i class="fas fa-phone"></i>
@@ -58,7 +60,7 @@
                                         <span class="details">{{$gs->support_phone}}</span>
                                     </div>
                                 </div>
-                            </li>--}}
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -101,6 +103,7 @@
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('vendor.dashboard')}}">Dashboard</a>
                           </li>
+
                           {{-- <li class="nav-item">
                               <a class="nav-link" href="{{route('package.index')}}">Packages</a>
                           </li>
@@ -109,7 +112,7 @@
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('vendor.withdrawMoney')}}">Withdraw</a>
-                          </li>
+                          </li> --}}
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('vendor.orders')}}">Orders</a>
                           </li>
@@ -119,7 +122,13 @@
                                   <a href="{{route('vendor.product.manage')}}" class="dropdown-item">Manage Products</a>
                                   <a href="{{route('vendor.product.create')}}" class="dropdown-item">Upload Product</a>
                               </div>
-                          </li> --}}
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{route('vendor.reviews', Auth::guard('vendor')->user()->id)}}">Reviews</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.contact')}}">Contact Us</a>
+                        </li>
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::guard('vendor')->user()->shop_name}}</a>
                               <div class="dropdown-menu">
@@ -154,11 +163,11 @@
                                   </div>
                             </div>
                         </li><!-- mega menu end -->
-                {{--    <li class="nav-item">
+                   <li class="nav-item">
                             <a class="nav-link" href="{{route('user.bestsellers')}}">Best Sellers</a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{route('user.contact')}}">Contact</a>
                         </li> --}}
                         @if (!Auth::check() && !Auth::guard('vendor')->check())
@@ -170,6 +179,9 @@
                               </div>
                           </li>
                         @elseif (Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.contact')}}">Contact Us</a>
+                        </li>
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->username}}</a>
                               <div class="dropdown-menu">
@@ -181,6 +193,7 @@
                                     <a class="dropdown-item" href="{{route('user.logout')}}">Logout</a>
                               </div>
                           </li>
+
                         @endif
                         @endif
                     </ul>

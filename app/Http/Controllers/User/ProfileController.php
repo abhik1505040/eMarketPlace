@@ -8,7 +8,6 @@ use App\User;
 use App\Favorit;
 use App\Order;
 use App\Orderedproduct;
-// use App\Refund;
 use Auth;
 use Hash;
 use Validator;
@@ -42,15 +41,7 @@ class ProfileController extends Controller
       $in['city'] = $request->city;
       $in['zip_code'] = $request->zip_code;
       $in['address'] = $request->address;
-    //   if (empty($user->shipping_first_name)) {
-    //     $in['shipping_first_name'] = $request->first_name;
-    //   }
-    //   if (empty($user->shipping_last_name)) {
-    //     $in['shipping_last_name'] = $request->last_name;
-    //   }
-    //   if (empty($user->shipping_phone)) {
-    //     $in['shipping_phone'] = $request->phone;
-    //   }
+
       $user->fill($in)->save();
 
       Session::flash('success', 'Informations updated successfully');
@@ -143,19 +134,7 @@ class ProfileController extends Controller
       return "success";
     }
 
-    // public function refund(Request $request) {
-    //   $request->validate([
-    //     'reason' => 'required'
-    //   ]);
 
-    //   $refund = new Refund;
-    //   $refund->orderedproduct_id = $request->opid;
-    //   $refund->status = 0;
-    //   $refund->reason = $request->reason;
-    //   $refund->save();
-    //   Session::flash('success', 'Refund request sent successfully');
-    //   return "success";
-    // }
 
 
 
