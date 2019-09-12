@@ -61,7 +61,8 @@ class VendorController extends Controller
       $vendor->save();
       Session::flash('success', 'Request accepted successfully');
 
-      send_email( $vendor->email, $vendor->shop_name, "Request accepted", "Congratulations, your vendor request has been accepted");
+      $url = url('/')."/vendor"."/login";
+      send_email( $vendor->email, $vendor->shop_name, "Request accepted", "Congratulations, your vendor request has been accepted", $url, "Your account");
 
       return "success";
     }
@@ -72,7 +73,8 @@ class VendorController extends Controller
       $vendor->save();
       Session::flash('alert', 'Request rejected successfully');
 
-      send_email( $vendor->email, $vendor->shop_name, "Request rejected", "Sorry, your vendor request has been rejected");
+      $url = url('/')."/vendor"."/login";
+      send_email( $vendor->email, $vendor->shop_name, "Request rejected", "Sorry, your vendor request has been rejected", $url, "Your account");
 
       return "success";
     }

@@ -33,13 +33,13 @@ class ForgotPasswordController extends Controller
               $name = $user->name;
               $subject = 'Password Reset';
               $code = str_random(30);
-              $message = 'Use This Link to Reset Password: '.url('/').'/'.'reset/'.$code;
+              $message = 'Click on the following link to reset password';
 
               DB::table('password_resets')->insert(
                   ['email' => $to, 'token' => $code, 'status' => 0, 'created_at' => date("Y-m-d h:i:s")]
               );
 
-              send_email($to, $name, $subject, $message);
+              send_email($to, $name, $subject, $message, url('/').'/'.'reset/'.$code, "Reset Password");
 
               return back()->with('message', 'Password Reset Email Sent Succesfully');
 

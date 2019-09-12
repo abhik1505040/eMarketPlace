@@ -57,20 +57,20 @@ class OrderController extends Controller
       return "success";
     }
 
-    public function acceptOrder(Request $request) {
-      $order = Order::find($request->orderid);
-      $order->approve = 1;
-      $order->save();
-      send_email($order->user->email, $order->user->first_name, 'Order accepted', "Your order has been accepted.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
-      return "success";
-    }
+    // public function acceptOrder(Request $request) {
+    //   $order = Order::find($request->orderid);
+    //   $order->approve = 1;
+    //   $order->save();
+    //   send_email($order->user->email, $order->user->first_name, 'Order accepted', "Your order has been accepted.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
+    //   return "success";
+    // }
 
-    public function cancelOrder(Request $request) {
-      $order = Order::find($request->orderid);
-      $order->approve = -1;
-      $order->save();
-      send_email($order->user->email, $order->user->first_name, 'Order rejected', "Your order has been rejected.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
-      return "success";
-    }
+    // public function cancelOrder(Request $request) {
+    //   $order = Order::find($request->orderid);
+    //   $order->approve = -1;
+    //   $order->save();
+    //   send_email($order->user->email, $order->user->first_name, 'Order rejected', "Your order has been rejected.<p><strong>Order Number: </strong>$order->unique_id</p><p><strong>Order details: </strong><a href='".url('/')."/".$order->id."/orderdetails'>".url('/')."/".$order->id."/orderdetails"."</a></p>");
+    //   return "success";
+    // }
 
 }

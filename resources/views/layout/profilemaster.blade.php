@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    {{-- @includeif('layout.partials.footer') --}}
+    @includeif('layout.partials.footer')
 
     @includeif('layout.partials.preloader_bt')
 

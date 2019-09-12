@@ -28,7 +28,7 @@
       $email = Auth::user()->email;
   }
   if(Auth::guard('vendor')->check()){
-      $name = Auth::guard('vendor')->user()->shop_name;
+      $name = Auth::guard('vendor')->user()->shop_name ." Shop";
       $email = Auth::guard('vendor')->user()->email;
   }
 @endphp

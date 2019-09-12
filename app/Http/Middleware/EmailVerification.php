@@ -25,7 +25,8 @@ class EmailVerification
            $name = Auth::user()->name;
            $subject = "Email verification code";
            $message = "Your verification code is: " . Auth::user()->email_ver_code;
-           send_email( $to, $name, $subject, $message);
+           $url = url('/')."/profile";
+          send_email( $to, $name, $subject, $message, $url, "Your account");
 
            // making the 'email_sent' 1 after sending mail...
            $seek = User::find(Auth::user()->id);

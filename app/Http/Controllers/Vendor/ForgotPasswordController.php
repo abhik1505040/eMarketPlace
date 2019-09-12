@@ -32,13 +32,13 @@ class ForgotPasswordController extends Controller
               $name = $vendor->name;
               $subject = 'Password Reset';
               $code = str_random(30);
-              $message = 'Use This Link to Reset Password: '.url('/').'/vendor/reset/'.$code;
+              $message = 'Click on the following button to Reset Password';
 
               DB::table('vendor_password_resets')->insert(
                   ['email' => $to, 'token' => $code, 'status' => 0, 'created_at' => date("Y-m-d h:i:s")]
               );
 
-              send_email($to, $name, $subject, $message);
+              send_email($to, $name, $subject, $message, url('/').'/vendor/reset/'.$code, "Reset Password") ;
 
               return back()->with('message', 'Password Reset Email Sent Succesfully');
 

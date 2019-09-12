@@ -46,7 +46,8 @@ class RegController extends Controller
           $name = $user->username;
           $subject = "Verification Code";
           $message = "Your verification code is: " . $code;
-          send_email( $to, $name, $subject, $message);
+          $url = url('/')."/profile";
+          send_email( $to, $name, $subject, $message, $url, "Your account");
           $user->vsent = time();
           $user->email_sent = 1;
         } else {

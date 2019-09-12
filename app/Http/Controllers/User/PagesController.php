@@ -70,15 +70,38 @@ class PagesController extends Controller
       $subject = $request->subject;
       $name = $request->name;
       $message = nl2br($request->message . "<br /><br />From <strong>" . $name . "</strong>");
+    //   $message = $request->message;
+
+    //   $headers = "From: $name <$from> \r\n";
+    //   $headers .= "Reply-To: $name <$from> \r\n";
+    //   $headers .= "MIME-Version: 1.0\r\n";
+    //   $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
 
-      $headers = "From: $name <$from> \r\n";
-      $headers .= "Reply-To: $name <$from> \r\n";
-      $headers .= "MIME-Version: 1.0\r\n";
-      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    //    mail($to, $subject, $message, $headers);
+    // $data = array("from"=> $from, "to" => $to, "name" => $name, "subject" => $subject, 'message'=> $message);
+
+    $topText = "New Client Query";
+    $data = array(    "from"=> $from,
+                      "to" => $to,
+                      "name" => $name,
+                      "subject" => $subject,
+                      'messageText'=> $message,
+                      'topText' => $topText,
+                      'displayButton' => "display:none;",
+                      'buttonLink' => "",
+                      'buttonText' => ""
+                     );
 
 
-       mail($to, $subject, $message, $headers);
+    \Mail::send('emails', $data, function ($message) use ($data){
+        $message->from($data['from'], $data['name']);
+        $message->sender($data['from'], $data['name']);
+        $message->to($data['to']);
+        $message->subject($data['subject']);
+    });
+
+
       Session::flash('success', 'Mail sent successfully!');
       return redirect()->back();
     }
