@@ -1,9 +1,9 @@
 @extends('layout.master')
 
-@section('title', 'Login')
+@section('title', 'User Login')
 
 @section('headertxt')
-  Login
+  User Login
 @endsection
 
 @section('content')
