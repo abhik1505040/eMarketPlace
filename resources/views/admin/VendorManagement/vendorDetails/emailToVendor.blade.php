@@ -28,7 +28,7 @@
   <main class="app-content">
      <div class="app-title">
         <div>
-           <h1><i class="fa fa-envelope"></i> SEND EMAIL TO USER</h1>
+           <h1><i class="fa fa-envelope"></i> SEND EMAIL TO VENDOR</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -42,16 +42,16 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header bg-primary">
-                    <h4 style="color:white;"><i class="fa fa-envelope"></i> SEND EMAIL TO {{$vendor->username}}</h4>
+                    <h4 style="color:white;"><i class="fa fa-envelope"></i> SEND EMAIL TO {{$vendor->shop_name}}</h4>
                   </div>
                   <div class="card-body">
-                    <form class="" action="{{route('admin.sendEmailToVendor')}}" method="post">
+                    <form class="" action="{{route('admin.sendEmailToVendor')}}" autocomplete="off" method="post">
                       {{csrf_field()}}
                       <input type="hidden" name="vendorID" value="{{$vendor->id}}">
                       <div class="row">
                         <div class="col-md-12">
                           <label for=""><strong>SUBJECT</strong></label>
-                          <input type="text" class="form-control" name="subject" value="{{old('subject')}}">
+                          <input type="text" class="form-control" name="subject" >
                           @if ($errors->has('subject'))
                             <p style="margin:0px;" class="text-danger">{{ $errors->first('subject') }}</p>
                           @endif
@@ -59,7 +59,6 @@
                       </div><br>
                       <div class="row">
                         <div class="col-md-12">
-                          <label for=""><strong>MESSAGE </strong>NB: EMAIL WILL SENT USING EMAIL TEMPLATE</label>
                           <textarea id="message" name="message" rows="8" style="width:100%;">{{old('message')}}</textarea>
                           @if ($errors->has('message'))
                             <p style="margin:0px;" class="text-danger">{{ $errors->first('message') }}</p>

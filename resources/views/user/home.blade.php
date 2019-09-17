@@ -117,7 +117,7 @@
                                                  <a class="nav-link" id="trendeseller-tab" data-toggle="tab" href="#trendeseller" role="tab" aria-controls="trendeseller" aria-selected="false">Top Rated</a>
                                              </li>
                                              <li class="nav-item">
-                                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Special</a>
+                                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Offers</a>
                                              </li>
                                          </ul>
                                  </div>

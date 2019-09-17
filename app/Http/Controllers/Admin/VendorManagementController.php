@@ -62,38 +62,6 @@ class VendorManagementController extends Controller
       // return $request->all();
     }
 
-    public function updateVendorBalance(Request $request) {
-      $validatedData = $request->validate([
-          'amount' => 'required',
-      ]);
-
-      $vendor = Vendor::find($request->vendorID);
-      $balance = $vendor->balance;
-      // if add money operation is selected then add the amount...
-      if ($request->has('operation')) {
-        $balance = $balance + $request->amount;
-        $successMessage = 'Amount has been added successfully!';
-      } else {
-        $balance = $balance - $request->amount;
-        $successMessage = 'Amount has been subtracted successfully!';
-      }
-      if($request->has('message')) {
-        $name = $vendor->shop_name;
-        $subject = 'Balance updated in your account';
-        $message = $request->message;
-        send_email( $vendor->email, $name, $subject, $message);
-      }
-
-      $vendor->balance = $balance;
-      $vendor->save();
-      Session::flash('success', $successMessage);
-      return redirect()->back();
-    }
-
-    public function addSubtractBalance($vendorID) {
-      $data['vendor'] = Vendor::find($vendorID);
-      return view('admin.VendorManagement.vendorDetails.addSubtractBalance', $data);
-    }
 
     public function emailToVendor($vendorID) {
       $data['vendor'] = Vendor::find($vendorID);
@@ -110,29 +78,11 @@ class VendorManagementController extends Controller
       $name = $vendor->shop_name;
       $subject = $request->subject;
       $message = $request->message;
-       send_email( $to, $name, $subject, $message);
+      $url = url('/')."vendor/profile";
+      send_email($vendor->email, $vendor->shop_name, 'Verification Code', $message, $url, "Your account");
       Session::flash('success', 'Mail sent successfully!');
       return redirect()->back();
     }
 
-    public function depositLog($empID) {
-        $data['deposits'] = Deposit::where('employee_id', $empID)->where('status', 1)->paginate(15);
-        return view('admin.deposit.depositLog', $data);
-    }
 
-    public function jobs(Request $request, $empId) {
-      if (empty($request->term)) {
-        $data['term'] = '';
-        $data['jobs'] = Job::where('employee_id', $empId)->latest()->paginate(9);
-      } else {
-        $data['term'] = $request->term;
-        $data['jobs'] = Job::where('employee_id', $empId)->where('title', 'like', '%'.$request->term.'%')->latest()->paginate(9);
-      }
-      return view('admin.job.index', $data);
-    }
-
-    public function trxlog($empId) {
-      $data['trs'] = Transaction::where('employee_id', $empId)->latest()->paginate(15);
-      return view('admin.trxlog', $data);
-    }
 }

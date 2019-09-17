@@ -32,6 +32,10 @@
                     <h3 style="color:white;"><i class="fa fa-user"></i> PROFILE</h3>
                   </div>
                   <div class="card-body">
+                        <div class="card border-primary">
+                                <img style="width:100%;" src="{{asset('assets/user/img/about/user.png')}}" alt="">
+                        </div>
+                        <br>
                     <div class="text-center">
                       <h3>{{$user->username}}</h3><br>
                       <h4>{{$user->email}}</h4><br>
@@ -44,7 +48,7 @@
               <div class="col-md-9">
                 <div class="card">
                   <div class="card-header bg-primary">
-                    <h3 style="color:white;"><i class="fa fa-cog"></i> UPDATE PROFILE</h3>
+                    <h3 style="color:white;"><i class="fa fa-cog"></i>PROFILE Info</h3>
                   </div>
                   <div class="card-body">
                     <form class="" action="{{route('admin.updateUserDetails')}}" method="post">
@@ -54,7 +58,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for=""><strong>First Name</strong></label>
-                            <input class="form-control" type="text" name="first_name" value="{{$user->first_name}}">
+                            <input class="form-control" type="text" name="first_name" value="{{$user->first_name}}" readonly>
                             @if ($errors->has('first_name'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('first_name')}}</p>
                            @endif
@@ -63,7 +67,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for=""><strong>Last Name</strong></label>
-                            <input class="form-control" type="text" name="last_name" value="{{$user->last_name}}">
+                            <input class="form-control" type="text" name="last_name" value="{{$user->last_name}}" readonly>
                             @if ($errors->has('last_name'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('last_name')}}</p>
                            @endif
@@ -75,7 +79,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for=""><strong>Email</strong></label>
-                            <input class="form-control" type="text" name="email" value="{{$user->email}}">
+                            <input class="form-control" type="text" name="email" value="{{$user->email}}" readonly>
                             @if ($errors->has('email'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('email')}}</p>
                            @endif
@@ -84,7 +88,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for=""><strong>Phone</strong></label>
-                            <input class="form-control" type="text" name="phone" value="{{$user->phone}}">
+                            <input class="form-control" type="text" name="phone" value="{{$user->phone}}" readonly>
                             @if ($errors->has('phone'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('phone')}}</p>
                            @endif
@@ -92,13 +96,38 @@
                         </div>
                       </div>
                       <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for=""><strong>City</strong></label>
+                                <input class="form-control" type="text" value="{{$user->city}}" readonly>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for=""><strong>Zip Code</strong></label>
+                                <input class="form-control" type="text"  value="{{$user->zip_code}}" readonly>
+                              </div>
+                            </div>
+                          </div>
+
+                     <div class="row">
+                         <div class="col-md-12">
+                            <div class="form-group">
+                                    <label for=""><strong>Address</strong></label>
+                                    <input class="form-control" type="text" value="{{$user->address}}" readonly>
+                                  </div>
+                         </div>
+                     </div>
+                     {{-- @if ($user->email_verified == 1)
+                      <div class="row">
                         <div class="col-md-4">
-                           <label><strong>Status</strong></label>
+                           <label><strong>Account Status</strong></label>
                            <input data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                               data-width="100%" type="checkbox" data-on="ACTIVE" data-off="BLOCKED"
                               name="status" {{$user->status=='active'?'checked':''}}>
                         </div>
-                        <div class="col-md-4">
+
+                         <div class="col-md-4">
                            <label><strong>Email Verification</strong></label>
                            <input data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                               data-width="100%" type="checkbox" data-on="VERIFIED" data-off="NOT VERIFIED"
@@ -117,6 +146,7 @@
                           <button type="submit" class="btn btn-info btn-block" name="button">UPDATE</button>
                         </div>
                       </div>
+                      @endif --}}
                     </form>
                   </div>
                 </div>

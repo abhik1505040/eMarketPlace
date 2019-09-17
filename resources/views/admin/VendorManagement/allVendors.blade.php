@@ -1,6 +1,5 @@
 @extends('admin.layout.master')
 
-
 @section('content')
   <main class="app-content">
      <div class="app-title">
@@ -44,7 +43,7 @@
                          <th scope="col">Email</th>
                          <th scope="col">Shop Name</th>
                          <th scope="col">Mobile</th>
-                         <th scope="col">Balance</th>
+                         <th scope="col">No. of Products</th>
                          <th scope="col">Details</th>
                       </tr>
                    </thead>
@@ -54,7 +53,7 @@
                         <td data-label="Email">{{$vendor->email}}</td>
                         <td data-label="Username"><a target="_blank" href="{{route('admin.vendorDetails', $vendor->id)}}">{{$vendor->shop_name}}</a></td>
                         <td data-label="Mobile">{{$vendor->phone}}</td>
-                        <td data-label="Balance">{{round($vendor->balance, $gs->dec_pt)}} {{$gs->base_curr_text}}</td>
+                     <td data-label="Balance">{{\App\Product::where('vendor_id', $vendor->id)->count()}}</td>
                         <td  data-label="Details">
                            <a href="{{route('admin.vendorDetails', $vendor->id)}}"
                               class="btn btn-outline-primary ">

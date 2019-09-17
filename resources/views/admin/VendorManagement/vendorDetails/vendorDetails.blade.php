@@ -36,14 +36,17 @@
                     <h3 style="color:white;"><i class="fa fa-user"></i> PROFILE</h3>
                   </div>
                   <div class="card-body">
+                    {{-- <div class="card border-primary">
+                      <img style="width:100%;" src="{{asset('assets/user/img/shop_logo/1560173302.jpg')}}" alt="">
+                    </div> --}}
                     <div class="card border-primary">
-                      <img style="width:100%;" src="{{asset('assets/user/img/shop_logo/'.$vendor->logo)}}" alt="">
+                            <img style="width:100%;" src="{{asset('assets/user/img/about/user.png')}}" alt="">
                     </div>
                     <br>
                     <div class="text-center">
                       <h3>{{$vendor->shop_name}}</h3><br>
                       <h4>{{$vendor->email}}</h4><br>
-                      <h3>Balance: {{$vendor->balance}} {{$gs->base_curr_text}}</h3><br>
+                      <a href="{{route('admin.emailToVendor', $vendor->id)}}" style="color:white;" class="btn btn-danger btn-block"><i class="fa fa-envelope"></i> SEND MAIL</a>
                     </div>
 
                   </div>
@@ -58,10 +61,10 @@
                     <div class="row">
                       <div class="col-md-4">
                         <div class="widget-small info coloured-icon"><i class="icon fab fa-product-hunt fa-3x" aria-hidden="true"></i>
-                          <a class="info" href="{{route('admin.trxLog', $vendor->id)}}">
-                            <h4>Transactions</h4>
-                            <p><b>{{\App\Transaction::where('vendor_id', $vendor->id)->count()}}</b></p>
-                          </a>
+                          <div class="info" href="#">
+                            <h4>No.of Products</h4>
+                            <p><b>{{\App\Product::where('vendor_id', $vendor->id)->count()}}</b></p>
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -86,21 +89,6 @@
 
                 <br>
 
-                <div class="card">
-                  <div class="card-header bg-primary">
-                    <h3 style="color:white;"><i class="fa fa-cog"></i> OPERATIONS</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <a href="{{route('admin.vendor.addSubtractBalance', $vendor->id)}}" style="color:white;" class="btn btn-info btn-block"><i class="fa fa-money"></i> ADD / SUBTRACT BALANCE</a>
-                      </div>
-                      <div class="col-md-6">
-                        <a href="{{route('admin.emailToVendor', $vendor->id)}}" style="color:white;" class="btn btn-danger btn-block"><i class="fa fa-envelope"></i> SEND MAIL</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
                 <br>
 
@@ -116,7 +104,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label for=""><strong>Shop Name</strong></label>
-                            <input class="form-control" type="text" name="shop_name" value="{{$vendor->shop_name}}">
+                            <input class="form-control" type="text" name="shop_name" value="{{$vendor->shop_name}}" readonly>
                             @if ($errors->has('shop_name'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('shop_name')}}</p>
                            @endif
@@ -128,7 +116,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for=""><strong>Email</strong></label>
-                            <input class="form-control" type="text" name="email" value="{{$vendor->email}}">
+                            <input class="form-control" type="text" name="email" value="{{$vendor->email}}" readonly>
                             @if ($errors->has('email'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('email')}}</p>
                            @endif
@@ -137,27 +125,37 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for=""><strong>Phone</strong></label>
-                            <input class="form-control" type="text" name="phone" value="{{$vendor->phone}}">
+                            <input class="form-control" type="text" name="phone" value="{{$vendor->phone}}" readonly>
                             @if ($errors->has('phone'))
                              <p class="text-danger" style="margin:0px;">{{$errors->first('phone')}}</p>
                            @endif
                           </div>
                         </div>
                       </div>
+
                       <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for=""><strong>Address</strong></label>
+                                <input class="form-control" type="text" value="{{$vendor->address}}" readonly>
+                              </div>
+                            </div>
+                          </div>
+                      {{-- <div class="row">
                         <div class="col-md-4">
                            <label><strong>Status</strong></label>
                            <input data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                               data-width="100%" type="checkbox" data-on="ACTIVE" data-off="BLOCKED"
                               name="status" {{$vendor->status=='active'?'checked':''}}>
                         </div>
-                      </div>
+                      </div> --}}
+
                       <br>
-                      <div class="row">
+                      {{-- <div class="row">
                         <div class="col-md-12">
                           <button type="submit" class="btn btn-info btn-block" name="button">UPDATE</button>
                         </div>
-                      </div>
+                      </div> --}}
                     </form>
                   </div>
                 </div>

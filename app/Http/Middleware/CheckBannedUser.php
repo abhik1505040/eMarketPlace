@@ -23,6 +23,7 @@ class checkBannedUser
                  return redirect()->route('user.logout', Auth::user()->id);
              }
          }
+
          return $next($request);
      }
 }

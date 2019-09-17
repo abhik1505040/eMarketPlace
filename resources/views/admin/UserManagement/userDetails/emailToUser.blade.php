@@ -41,7 +41,7 @@
                     <h4 style="color:white;"><i class="fa fa-envelope"></i> SEND EMAIL TO {{$user->username}}</h4>
                   </div>
                   <div class="card-body">
-                    <form class="" action="{{route('admin.sendEmailToUser')}}" method="post">
+                    <form class="" action="{{route('admin.sendEmailToUser')}}" autocomplete="off" method="post">
                       {{csrf_field()}}
                       <input type="hidden" name="userID" value="{{$user->id}}">
                       <div class="row">
@@ -55,7 +55,6 @@
                       </div><br>
                       <div class="row">
                         <div class="col-md-12">
-                          <label for=""><strong>MESSAGE </strong>NB: EMAIL WILL SENT USING EMAIL TEMPLATE</label>
                           <textarea id="message" name="message" rows="8" style="width:100%;">{{old('message')}}</textarea>
                           @if ($errors->has('message'))
                             <p style="margin:0px;" class="text-danger">{{ $errors->first('message') }}</p>

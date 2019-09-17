@@ -169,8 +169,6 @@
       is-expanded
     @elseif (request()->path() == 'admin/userManagement/verifiedUsers')
       is-expanded
-    @elseif (request()->path() == 'admin/userManagement/mobileUnverifiedUsers')
-      is-expanded
     @elseif (request()->path() == 'admin/userManagement/emailUnverifiedUsers')
       is-expanded
     @elseif (request()->is('admin/userManagement/userDetails/*'))
@@ -183,17 +181,17 @@
       is-expanded
     @elseif (request()->path() == 'admin/userManagement/verUsersSearchResult')
       is-expanded
-    @elseif (request()->path() == 'admin/userManagement/mobileUnverifiedUsersSearchResult')
-      is-expanded
+
     @elseif (request()->path() == 'admin/userManagement/emailUnverifiedUsersSearchResult')
       is-expanded
     @endif"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Users Management</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">
-        <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/allUsers' || request()->path() == 'admin/userManagement/allUsersSearchResult') active @endif" href="{{route('admin.allUsers')}}"><i class="icon far fa-circle"></i> All Users</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/bannedUsers' || request()->path() == 'admin/userManagement/bannedUsersSearchResult') active @endif" href="{{route('admin.bannedUsers')}}"><i class="icon far fa-circle"></i> Banned Users</a></li>
         <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/verifiedUsers' || request()->path() == 'admin/userManagement/verUsersSearchResult') active @endif" href="{{route('admin.verifiedUsers')}}"><i class="icon far fa-circle"></i> Verified Users</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/mobileUnverifiedUsers' || request()->path() == 'admin/userManagement/mobileUnverifiedUsersSearchResult') active @endif" href="{{route('admin.mobileUnverifiedUsers')}}"><i class="icon far fa-circle"></i> Mobile Unverified Users</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/emailUnverifiedUsers' || request()->path() == 'admin/userManagement/emailUnverifiedUsersSearchResult') active @endif" href="{{route('admin.emailUnverifiedUsers')}}"><i class="icon far fa-circle"></i> Email Unverified Users</a></li>
+
+        <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/emailUnverifiedUsers' || request()->path() == 'admin/userManagement/emailUnverifiedUsersSearchResult') active @endif" href="{{route('admin.emailUnverifiedUsers')}}"><i class="icon far fa-circle"></i>Unverified Users</a></li>
+
+        <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/allUsers' || request()->path() == 'admin/userManagement/allUsersSearchResult') active @endif" href="{{route('admin.allUsers')}}"><i class="icon far fa-circle"></i> All Users</a></li>
+        {{-- <li><a class="treeview-item @if(request()->path() == 'admin/userManagement/bannedUsers' || request()->path() == 'admin/userManagement/bannedUsersSearchResult') active @endif" href="{{route('admin.bannedUsers')}}"><i class="icon far fa-circle"></i> Banned Users</a></li> --}}
       </ul>
     </li>
 
@@ -205,8 +203,6 @@
       is-expanded
     @elseif (request()->is('admin/vendorManagement/emailToVendor/*'))
       is-expanded
-    @elseif (request()->is('admin/vendorManagement/addSubtractBalance/*'))
-      is-expanded
     @elseif (request()->path() == 'admin/vendorManagement/allVendorsSearchResult')
       is-expanded
     @elseif (request()->path() == 'admin/vendorManagement/bannedVendorsSearchResult')
@@ -214,7 +210,7 @@
     @endif"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Vendors Management</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">
         <li><a class="treeview-item @if(request()->path() == 'admin/vendorManagement/allVendors' || request()->path() == 'admin/vendorManagement/allVendorsSearchResult') active @endif" href="{{route('admin.allVendors')}}"><i class="icon far fa-circle"></i> All Vendors</a></li>
-        <li><a class="treeview-item @if(request()->path() == 'admin/vendorManagement/bannedVendors' || request()->path() == 'admin/vendorManagement/bannedVendorsSearchResult') active @endif" href="{{route('admin.bannedVendors')}}"><i class="icon far fa-circle"></i> Banned Vendors</a></li>
+        {{-- <li><a class="treeview-item @if(request()->path() == 'admin/vendorManagement/bannedVendors' || request()->path() == 'admin/vendorManagement/bannedVendorsSearchResult') active @endif" href="{{route('admin.bannedVendors')}}"><i class="icon far fa-circle"></i> Banned Vendors</a></li> --}}
       </ul>
     </li>
 
