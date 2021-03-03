@@ -76,7 +76,7 @@ The _eMarketPlace_ software is an e-commerce website. This website will provide 
 
 ## Searching and Ordering of Products
  
-Basic Path
+The basic path of this feature is described below:
 1.  User types the url address of the eMarketPlace website.
 2.  User sees the home page for eMarketPlace.
 3.  Then user can choose a product in one of the following ways:
@@ -96,8 +96,28 @@ Basic Path
 10. In the checkout page, the user sees the necessary delivery information if they were provided before. If there is any information missing, he/she has to fill them up. He can also edit existing delivery address. After that if he/she knows any available coupon code then he/she can write the coupon code in the text box beside the “Apply Coupon” button. If the code is correct, then, after clicking on the “Apply Coupon” button, it will be obvious to the user in the order details. If it is incorrect, a warning prompt will be shown.
 11. Then he/she clicks on the “Place Your Order” button which will navigate him/her to the orders list page.
 
+# Home Page
+
 ![image](https://user-images.githubusercontent.com/37974385/109806695-32b64a00-7c4f-11eb-8f03-23dbb56178c9.png)
 ![image](https://user-images.githubusercontent.com/37974385/109806727-3cd84880-7c4f-11eb-830d-945fa29b0c42.png)
 ![image](https://user-images.githubusercontent.com/37974385/109806764-482b7400-7c4f-11eb-8669-434c6afe0544.png)
 
+# Searching a Product
 
+![image](https://user-images.githubusercontent.com/37974385/109807291-e0c1f400-7c4f-11eb-926f-a3318d7ccb89.png)
+
+# Adding to Cart
+
+![image](https://user-images.githubusercontent.com/37974385/109807630-59c14b80-7c50-11eb-8e4f-8d5184ea06d2.png)
+![image](https://user-images.githubusercontent.com/37974385/109807692-6cd41b80-7c50-11eb-81cc-2bffe1ba26a1.png)
+
+# Checkout Page
+
+![image](https://user-images.githubusercontent.com/37974385/109807782-912ff800-7c50-11eb-9fe1-f47a11c320f7.png)
+
+# Orders List
+
+![image](https://user-images.githubusercontent.com/37974385/109807891-ab69d600-7c50-11eb-8819-bd85cfeec707.png)
+
+
+The paths of some other features are in Documentation/Software Requirement Specification.docx file. The design methodologies and diagrams, user guide and other specifications are described in Documentation/software_documentation.pdf file.
