@@ -74,7 +74,7 @@ The _eMarketPlace_ software is an e-commerce website. This website will provide 
 2.	Allow customers to search and order products of different categories and prices easily, review and rate products when they are delivered
 3.	Allow vendors to provide advertise for their products, control their products’ price and see the reviews of their products
 
-**Searching and Ordering of Products
+## Searching and Ordering of Products
  
 Basic Path
 1.  User types the url address of the eMarketPlace website.
