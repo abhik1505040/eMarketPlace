@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/37974385/109809304-5af37800-7c52-11eb-812b-e961db1f97eb.png)
 
-## About Project
+# About Project
 
 The _eMarketPlace_ software is an e-commerce website. This website will provide customers with facilities to search and order desirable products and provide reviews on consumed products. It will allow vendors to add new product and advertise their products. The main objectives of this website are:
 
@@ -8,7 +8,7 @@ The _eMarketPlace_ software is an e-commerce website. This website will provide 
 2.	Allow customers to search and order products of different categories and prices easily, review and rate products when they are delivered
 3.	Allow vendors to provide advertise for their products, control their products’ price and see the reviews of their products
 
-## Searching and Ordering of Products
+# Searching and Ordering of Products
  
 The basic path of this feature is described below:
 1.  User types the url address of the eMarketPlace website.
@@ -30,28 +30,37 @@ The basic path of this feature is described below:
 10. In the checkout page, the user sees the necessary delivery information if they were provided before. If there is any information missing, he/she has to fill them up. He can also edit existing delivery address. After that if he/she knows any available coupon code then he/she can write the coupon code in the text box beside the “Apply Coupon” button. If the code is correct, then, after clicking on the “Apply Coupon” button, it will be obvious to the user in the order details. If it is incorrect, a warning prompt will be shown.
 11. Then he/she clicks on the “Place Your Order” button which will navigate him/her to the orders list page.
 
-# Home Page
+## Home Page
 
 ![image](https://user-images.githubusercontent.com/37974385/109806695-32b64a00-7c4f-11eb-8f03-23dbb56178c9.png)
 ![image](https://user-images.githubusercontent.com/37974385/109806727-3cd84880-7c4f-11eb-830d-945fa29b0c42.png)
 ![image](https://user-images.githubusercontent.com/37974385/109806764-482b7400-7c4f-11eb-8669-434c6afe0544.png)
 
-# Searching a Product
+## Searching a Product
 
 ![image](https://user-images.githubusercontent.com/37974385/109807291-e0c1f400-7c4f-11eb-926f-a3318d7ccb89.png)
 
-# Adding to Cart
+## Adding to Cart
 
 ![image](https://user-images.githubusercontent.com/37974385/109807630-59c14b80-7c50-11eb-8e4f-8d5184ea06d2.png)
 ![image](https://user-images.githubusercontent.com/37974385/109807692-6cd41b80-7c50-11eb-81cc-2bffe1ba26a1.png)
 
-# Checkout Page
+## Checkout Page
 
 ![image](https://user-images.githubusercontent.com/37974385/109807782-912ff800-7c50-11eb-9fe1-f47a11c320f7.png)
 
-# Orders List
+## Orders List
 
 ![image](https://user-images.githubusercontent.com/37974385/109807891-ab69d600-7c50-11eb-8819-bd85cfeec707.png)
+
+
+# Order Management by Admin
+
+After an order has been placed by a customer, the administrator(s) can update the status of that order in the respective module. There are different pages to see the pending orders and all orders.
+
+![image](https://user-images.githubusercontent.com/37974385/109812429-3f8a6c00-7c56-11eb-9fd5-77b6699ef307.png)
+![image](https://user-images.githubusercontent.com/37974385/109812502-57fa8680-7c56-11eb-80a6-50f9331d7b04.png)
+![image](https://user-images.githubusercontent.com/37974385/109812578-71033780-7c56-11eb-9860-b86c0b660ff2.png)
 
 
 The paths of some other features are in Documentation/Software Requirement Specification.docx file. The design methodologies and diagrams, user guide and other specifications are described in Documentation/software_documentation.pdf file.
