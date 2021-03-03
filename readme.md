@@ -49,18 +49,51 @@ The basic path of this feature is described below:
 
 ![image](https://user-images.githubusercontent.com/37974385/109807782-912ff800-7c50-11eb-9fe1-f47a11c320f7.png)
 
+## Login/Registration Page
+
+![image](https://user-images.githubusercontent.com/37974385/109817957-b0cd1d80-7c5c-11eb-9cdc-fbad4e10ced3.png)
+![image](https://user-images.githubusercontent.com/37974385/109817987-b9255880-7c5c-11eb-9bf7-8d5245d626a1.png)
+
+
 ## Orders List
 
 ![image](https://user-images.githubusercontent.com/37974385/109807891-ab69d600-7c50-11eb-8819-bd85cfeec707.png)
 
 
-# Order Management by Admin
+# Admin Module
 
-After an order has been placed by a customer, the administrator(s) can update the status of that order in the respective module. There are different pages to see the pending orders and all orders.
+After logging in, the administrator(s) can overview the monthly order info, total verified users, completed orders in the Dashboard.
+
+![image](https://user-images.githubusercontent.com/37974385/109817396-17057080-7c5c-11eb-80c3-2769004094af.png)
+
+They can also add new product attributes or remove old attributes.
+
+![image](https://user-images.githubusercontent.com/37974385/109817660-5d5acf80-7c5c-11eb-8288-d04ea753a5ab.png)
+
+
+## Order Management by Admin
+
+After an order has been placed by a customer, the administrator(s) can update the status of that order in the respective module. There are different pages to see the pending orders and all orders, as shown below.
 
 ![image](https://user-images.githubusercontent.com/37974385/109812429-3f8a6c00-7c56-11eb-9fd5-77b6699ef307.png)
 ![image](https://user-images.githubusercontent.com/37974385/109812502-57fa8680-7c56-11eb-80a6-50f9331d7b04.png)
 ![image](https://user-images.githubusercontent.com/37974385/109812578-71033780-7c56-11eb-9860-b86c0b660ff2.png)
+
+
+# Vendors
+
+After logging in, one vendor can see the total order count from his/her shop as well as the inventory count and sold products' count in the dashboard.
+
+![image](https://user-images.githubusercontent.com/37974385/109818282-086b8900-7c5d-11eb-88c5-a60d3dc67b24.png)
+![image](https://user-images.githubusercontent.com/37974385/109818309-0e616a00-7c5d-11eb-86a8-d30a4c908f01.png)
+
+## Product Addition by Vendor
+
+A vendor can upload a new product, add necessary description and attributes of the product as shown below.
+
+![image](https://user-images.githubusercontent.com/37974385/109818573-52ed0580-7c5d-11eb-951d-e4805f71251d.png)
+![image](https://user-images.githubusercontent.com/37974385/109818604-5bddd700-7c5d-11eb-84fa-64f563ccf846.png)
+
 
 
 The paths of some other features are in Documentation/Software Requirement Specification.docx file. The design methodologies and diagrams, user guide and other specifications are described in Documentation/software_documentation.pdf file.
