@@ -96,3 +96,8 @@ Basic Path
 10. In the checkout page, the user sees the necessary delivery information if they were provided before. If there is any information missing, he/she has to fill them up. He can also edit existing delivery address. After that if he/she knows any available coupon code then he/she can write the coupon code in the text box beside the “Apply Coupon” button. If the code is correct, then, after clicking on the “Apply Coupon” button, it will be obvious to the user in the order details. If it is incorrect, a warning prompt will be shown.
 11. Then he/she clicks on the “Place Your Order” button which will navigate him/her to the orders list page.
 
+![image](https://user-images.githubusercontent.com/37974385/109806695-32b64a00-7c4f-11eb-8f03-23dbb56178c9.png)
+![image](https://user-images.githubusercontent.com/37974385/109806727-3cd84880-7c4f-11eb-830d-945fa29b0c42.png)
+![image](https://user-images.githubusercontent.com/37974385/109806764-482b7400-7c4f-11eb-8669-434c6afe0544.png)
+
+
