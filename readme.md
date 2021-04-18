@@ -97,3 +97,7 @@ A vendor can upload a new product, add necessary description and attributes of t
 
 
 The paths of some other features are in Documentation/Software Requirement Specification.docx file. The design methodologies and diagrams, user guide and other specifications are described in Documentation/software_documentation.pdf file.
+
+## License
+Contents of this repository are licensed under [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). 
+
